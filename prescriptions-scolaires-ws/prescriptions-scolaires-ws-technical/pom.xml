@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- =============================================================== -->
+  <!-- PROJECT INFORMATIONS -->
+  <!-- =============================================================== -->
+
+  <!-- ===== Parent Maven Projet ===== -->
+  <parent>
+    <groupId>fr.brucella.projects</groupId>
+    <artifactId>prescriptions-scolaires-ws</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+  <!-- ===== Maven Informations ===== -->
+  <artifactId>prescriptions-scolaires-ws-technical</artifactId>
+
+  <!-- ===== General Informations ===== -->
+  <name>${projectName} - Technical</name>
+
+  <!-- =============================================================== -->
+  <!-- DEPENDENCIES -->
+  <!-- =============================================================== -->
+  <dependencies>
+
+    <!-- ===== Modules ===== -->
+
+    <!-- ===== Third party libraries ===== -->
+    <!-- Apache commons logging -->
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+    </dependency>
+
+    <!-- Apache Log4j 2 -->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-jcl</artifactId>
+    </dependency>
+
+    <!-- Apache Commons Lang -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+    </dependency>
+
+    <!-- Spring-context -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+    </dependency>
+
+  </dependencies>
+
+</project>
