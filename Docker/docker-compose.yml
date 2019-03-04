@@ -1,0 +1,43 @@
+version: '3.1'
+services:
+  database:
+    image: postgres:11.2-alpine
+    container_name: prescriptions-scolaires-database
+    restart: always
+    hostname: 127.0.0.1
+    volumes:
+      - ../Database scripts/database_creation.sql:/docker-entrypoint-initdb.d/01.sql
+      - ../Database scripts/database_data_creation.sql:/docker-entrypoint-initdb.d/02.sql
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=presco
+      - POSTGRES_USER=adm_presco
+      - POSTGRES_PASSWORD=adm_presco
+  web-service:
+    image: tomcat:9.0.16-jre8-alpine
+    container_name: prescriptions-scolaires-ws
+    restart: always
+    hostname: 127.0.0.1
+    volumes:
+      - ./prescriptions-scolaires-ws/prescriptions-scolaires-ws-services.war:/usr/local/tomcat/webapps/prescriptions-scolaires-ws-services.war
+    ports:
+      - 8080:8080
+  web-libraires:
+    image: tomcat:9.0.16-jre8-alpine
+    container_name: prescriptions-scolaires-web-libraires
+    restart: always
+    hostname: 127.0.0.1
+    volumes:
+      - ./prescriptions-scolaires-web-libraires/prescriptions-scolaires-web-libraires.war:/usr/local/tomcat/webapps/prescriptions-scolaires-web-libraires.war
+    ports:
+      - 8081:8080
+  web-enseignants:
+    image: tomcat:9.0.16-jre8-alpine
+    container_name: prescriptions-scolaires-web-libraires
+    restart: always
+    hostname: 127.0.0.1
+    volumes:
+      - ./prescriptions-scolaires-web-enseignants/prescriptions-scolaires-web-enseignants.war:/usr/local/tomcat/webapps/prescriptions-scolaires-web-enseignants.war
+    ports:
+      - 8082:8080
