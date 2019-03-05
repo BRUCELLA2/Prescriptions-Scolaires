@@ -8,9 +8,13 @@ import com.openpojo.validation.Validator;
 import com.openpojo.validation.ValidatorBuilder;
 import com.openpojo.validation.test.impl.GetterTester;
 import com.openpojo.validation.test.impl.SetterTester;
-import com.openpojo.validation.test.impl.ToStringTester;
 import org.junit.Test;
 
+/**
+ * User unit test.
+ *
+ * @author BRUCELLA2
+ */
 public class UserTest {
 
   /**
@@ -18,11 +22,14 @@ public class UserTest {
    */
   @Test
   public void validateSettersAndGetters() {
-    PojoClass UserPojo = PojoClassFactory.getPojoClass(User.class);
+    PojoClass userPojo = PojoClassFactory.getPojoClass(User.class);
     Validator validator = ValidatorBuilder.create().with(new SetterTester(), new GetterTester()).build();
-    validator.validate(UserPojo);
+    validator.validate(userPojo);
   }
 
+  /**
+   * ToString testing.
+   */
   @Test
   public void validateToString() {
     ToStringVerifier.forClass(User.class).withClassName(NameStyle.SIMPLE_NAME).verify();
