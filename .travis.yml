@@ -5,6 +5,7 @@ sudo: false
 services:
   - docker
 before_script:
+  - sudo /etc/init.d/postgresql stop
   - docker-compose -f Docker/docker-compose.yml up -d database
 script:
   - mvn --file ./prescriptions-scolaires-ws/pom.xml clean jacoco:prepare-agent package jacoco:report coveralls:report -P test-consumer,test-business
