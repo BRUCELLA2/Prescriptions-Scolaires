@@ -11,7 +11,7 @@ import com.openpojo.validation.test.impl.SetterTester;
 import org.junit.Test;
 
 /**
- * User unit test.
+ * User unit tests.
  *
  * @author BRUCELLA2
  */

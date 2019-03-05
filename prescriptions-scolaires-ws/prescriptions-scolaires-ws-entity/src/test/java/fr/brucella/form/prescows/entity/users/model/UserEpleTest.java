@@ -11,20 +11,20 @@ import com.openpojo.validation.test.impl.SetterTester;
 import org.junit.Test;
 
 /**
- * Role unit tests.
+ * UserEple unit tests.
  *
  * @author BRUCELLA2
  */
-public class RoleTest {
+public class UserEpleTest {
 
   /**
    * Getters and setters testing.
    */
   @Test
   public void validateSettersAndGetters() {
-    PojoClass rolePojo = PojoClassFactory.getPojoClass(Role.class);
+    PojoClass userEplePojo = PojoClassFactory.getPojoClass(UserEple.class);
     Validator validator = ValidatorBuilder.create().with(new SetterTester(), new GetterTester()).build();
-    validator.validate(rolePojo);
+    validator.validate(userEplePojo);
   }
 
   /**
@@ -32,6 +32,6 @@ public class RoleTest {
    */
   @Test
   public void validateToString() {
-    ToStringVerifier.forClass(Role.class).withClassName(NameStyle.SIMPLE_NAME).verify();
+    ToStringVerifier.forClass(UserEple.class).withClassName(NameStyle.SIMPLE_NAME).verify();
   }
 }
