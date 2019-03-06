@@ -17,13 +17,20 @@ import org.junit.Test;
  */
 public class UserEpleTest {
 
+  // ===== Constructor =====
+
+  /** Default Constructor */
+  public UserEpleTest() {
+    // This constructor is intentionally empty. Nothing special is needed here.
+  }
+
   /**
    * Getters and setters testing.
    */
   @Test
   public void validateSettersAndGetters() {
-    PojoClass userEplePojo = PojoClassFactory.getPojoClass(UserEple.class);
-    Validator validator = ValidatorBuilder.create().with(new SetterTester(), new GetterTester()).build();
+    final PojoClass userEplePojo = PojoClassFactory.getPojoClass(UserEple.class);
+    final Validator validator = ValidatorBuilder.create().with(new SetterTester(), new GetterTester()).build();
     validator.validate(userEplePojo);
   }
 

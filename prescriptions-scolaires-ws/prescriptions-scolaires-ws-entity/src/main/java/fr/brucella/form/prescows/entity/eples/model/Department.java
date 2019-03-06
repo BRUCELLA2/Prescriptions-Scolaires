@@ -48,7 +48,7 @@ public class Department {
    *
    * @param departmentId the id of the department.
    */
-  public void setDepartmentId(Integer departmentId) {
+  public void setDepartmentId(final Integer departmentId) {
     this.departmentId = departmentId;
   }
 
@@ -66,7 +66,7 @@ public class Department {
    *
    * @param code the code of the department.
    */
-  public void setCode(String code) {
+  public void setCode(final String code) {
     this.code = code;
   }
 
@@ -84,7 +84,7 @@ public class Department {
    *
    * @param departmentName the name of the department.
    */
-  public void setDepartmentName(String departmentName) {
+  public void setDepartmentName(final String departmentName) {
     this.departmentName = departmentName;
   }
 

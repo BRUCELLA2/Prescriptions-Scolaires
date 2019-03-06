@@ -1,4 +1,4 @@
-package fr.brucella.form.prescows.entity.eples.model;
+package fr.brucella.form.prescows.entity.prescriptions.model;
 
 
 import com.jparams.verifier.tostring.NameStyle;
@@ -12,27 +12,30 @@ import com.openpojo.validation.test.impl.SetterTester;
 import org.junit.Test;
 
 /**
- * Eple unit tests.
+ * BookStatus unit tests.
  *
  * @author BRUCELLA2
  */
-public class EpleTest {
+public class BookStatusTest {
+
 
   // ===== Constructor =====
 
   /** Default Constructor */
-  public EpleTest() {
+  public BookStatusTest() {
     // This constructor is intentionally empty. Nothing special is needed here.
   }
 
+
+  // ===== Methods =====
   /**
    * Getters and setters testing.
    */
   @Test
   public void validateSettersAndGetters() {
-    final PojoClass eplePojo = PojoClassFactory.getPojoClass(Eple.class);
+    final PojoClass bookStatusPojo = PojoClassFactory.getPojoClass(BookStatus.class);
     final Validator validator = ValidatorBuilder.create().with(new SetterTester(), new GetterTester()).build();
-    validator.validate(eplePojo);
+    validator.validate(bookStatusPojo);
   }
 
   /**
@@ -40,7 +43,7 @@ public class EpleTest {
    */
   @Test
   public void validateToString() {
-    ToStringVerifier.forClass(Eple.class).withClassName(NameStyle.SIMPLE_NAME).verify();
+    ToStringVerifier.forClass(BookStatus.class).withClassName(NameStyle.SIMPLE_NAME).verify();
   }
 
 }

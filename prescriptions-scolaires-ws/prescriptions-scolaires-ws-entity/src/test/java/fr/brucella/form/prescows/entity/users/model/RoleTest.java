@@ -17,13 +17,20 @@ import org.junit.Test;
  */
 public class RoleTest {
 
+  // ===== Constructor =====
+
+  /** Default Constructor */
+  public RoleTest() {
+    // This constructor is intentionally empty. Nothing special is needed here.
+  }
+
   /**
    * Getters and setters testing.
    */
   @Test
   public void validateSettersAndGetters() {
-    PojoClass rolePojo = PojoClassFactory.getPojoClass(Role.class);
-    Validator validator = ValidatorBuilder.create().with(new SetterTester(), new GetterTester()).build();
+    final PojoClass rolePojo = PojoClassFactory.getPojoClass(Role.class);
+    final Validator validator = ValidatorBuilder.create().with(new SetterTester(), new GetterTester()).build();
     validator.validate(rolePojo);
   }
 

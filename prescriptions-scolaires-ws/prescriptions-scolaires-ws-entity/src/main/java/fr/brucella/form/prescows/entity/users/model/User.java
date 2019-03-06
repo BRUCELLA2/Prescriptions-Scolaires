@@ -178,7 +178,7 @@ public class User {
    *
    * @param roleId the role id of the user.
    */
-  public void setRoleId(Integer roleId) {
+  public void setRoleId(final Integer roleId) {
     this.roleId = roleId;
   }
 

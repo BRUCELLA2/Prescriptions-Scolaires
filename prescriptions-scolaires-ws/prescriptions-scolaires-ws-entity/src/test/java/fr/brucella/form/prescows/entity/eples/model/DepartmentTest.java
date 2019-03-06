@@ -17,13 +17,20 @@ import org.junit.Test;
  */
 public class DepartmentTest {
 
+  // ===== Constructor =====
+
+  /** Default Constructor */
+  public DepartmentTest() {
+    // This constructor is intentionally empty. Nothing special is needed here.
+  }
+
   /**
    * Getters and setters testing.
    */
   @Test
   public void validateSettersAndGetters() {
-    PojoClass departmentPojo = PojoClassFactory.getPojoClass(Department.class);
-    Validator validator = ValidatorBuilder.create().with(new SetterTester(), new GetterTester()).build();
+    final PojoClass departmentPojo = PojoClassFactory.getPojoClass(Department.class);
+    final Validator validator = ValidatorBuilder.create().with(new SetterTester(), new GetterTester()).build();
     validator.validate(departmentPojo);
   }
 
