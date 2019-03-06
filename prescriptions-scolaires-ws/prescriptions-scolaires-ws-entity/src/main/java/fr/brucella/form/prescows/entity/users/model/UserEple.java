@@ -68,7 +68,7 @@ public class UserEple {
 
   // ===== Methods =====
 
-
+  /** {@inheritDoc} **/
   @Override
   public String toString() {
     final StringBuilder sb = new StringBuilder("UserEple{");
