@@ -30,7 +30,7 @@ public class UserEple {
 
 
   /**
-   * Give the id of the user.
+   * Gives the id of the user.
    *
    * @return the id of the user.
    */
@@ -48,7 +48,7 @@ public class UserEple {
   }
 
   /**
-   * Give the id of the eple.
+   * Gives the id of the eple.
    *
    * @return the id of the eple.
    */

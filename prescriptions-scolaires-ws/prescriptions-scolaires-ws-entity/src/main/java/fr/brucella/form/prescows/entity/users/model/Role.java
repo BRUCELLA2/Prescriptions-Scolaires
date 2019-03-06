@@ -29,7 +29,7 @@ public class Role {
   // ===== Getters and Setters =====
 
   /**
-   * Get the role id  of the role.
+   * Gives the role id  of the role.
    *
    * @return the role id of the role.
    */
@@ -47,7 +47,7 @@ public class Role {
   }
 
   /**
-   * Give the name of the role.
+   * Gives the name of the role.
    *
    * @return the name of the role.
    */

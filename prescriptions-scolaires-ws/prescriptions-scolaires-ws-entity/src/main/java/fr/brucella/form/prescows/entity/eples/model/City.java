@@ -40,7 +40,7 @@ public class City {
   // ===== Getters and Setters =====
 
   /**
-   * Give the id of the city.
+   * Gives the id of the city.
    *
    * @return the id of the city.
    */
@@ -58,7 +58,7 @@ public class City {
   }
 
   /**
-   * Give the zip code of the city.
+   * Gives the zip code of the city.
    *
    * @return the zip code of the city.
    */
@@ -76,7 +76,7 @@ public class City {
   }
 
   /**
-   * Give the name of the city.
+   * Gives the name of the city.
    *
    * @return the name of the city.
    */
@@ -94,7 +94,7 @@ public class City {
   }
 
   /**
-   * Give the id of the department.
+   * Gives the id of the department.
    *
    * @return the id of the department.
    */

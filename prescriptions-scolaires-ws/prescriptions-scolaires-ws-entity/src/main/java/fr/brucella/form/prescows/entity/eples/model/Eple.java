@@ -14,16 +14,16 @@ public class Eple {
   /** id of the eple. */
   private Integer epleId;
 
-  /** code rne (répertoire national des établissements) of the eple. */
+  /** code rne (répertoire national des établissements) of the eple. Can't be empty. */
   @NotEmpty(message = "{eple.rne.empty}")
   @Size(min = 8, max = 8, message = "{eple.rne.size}")
   private String rne;
 
-  /** id of the department. */
+  /** id of the department. Can't be null. */
   @NotNull(message = "{eple.departmentId.null}")
   private Integer departmentId;
 
-  /** id of the city. */
+  /** id of the city. Can't be null. */
   @NotNull(message = "{eple.cityId.null}")
   private Integer cityId;
 
@@ -39,7 +39,7 @@ public class Eple {
   // ===== Getters and Setters =====
 
   /**
-   * Give the id of the eple.
+   * Gives the id of the eple.
    *
    * @return the id of the eple.
    */
@@ -57,7 +57,7 @@ public class Eple {
   }
 
   /**
-   * Give the code rne of the eple.
+   * Gives the code rne of the eple.
    *
    * @return the code rne of the eple.
    */
@@ -75,7 +75,7 @@ public class Eple {
   }
 
   /**
-   * Give the id of the department.
+   * Gives the id of the department.
    *
    * @return the id of the department.
    */
@@ -93,7 +93,7 @@ public class Eple {
   }
 
   /**
-   * Give the id of the city.
+   * Gives the id of the city.
    *
    * @return the id of the city.
    */

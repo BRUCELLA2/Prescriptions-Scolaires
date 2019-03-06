@@ -35,7 +35,7 @@ public class Department {
   // ===== Getters and Setters =====
 
   /**
-   * Give the id of the department.
+   * Gives the id of the department.
    *
    * @return the id of the department.
    */
@@ -53,7 +53,7 @@ public class Department {
   }
 
   /**
-   * Give the code of the department.
+   * Gives the code of the department.
    *
    * @return the code of the department.
    */
@@ -71,7 +71,7 @@ public class Department {
   }
 
   /**
-   * Give the name of the department.
+   * Gives the name of the department.
    *
    * @return the name of the department.
    */

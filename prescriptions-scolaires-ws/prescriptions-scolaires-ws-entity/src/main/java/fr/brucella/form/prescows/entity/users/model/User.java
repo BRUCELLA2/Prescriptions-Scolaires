@@ -57,7 +57,7 @@ public class User {
   // ===== Getters and Setters =====
 
   /**
-   * Give the id of the user.
+   * Gives the id of the user.
    *
    * @return id of the user.
    */
@@ -75,7 +75,7 @@ public class User {
   }
 
   /**
-   * Give the login of the user.
+   * Gives the login of the user.
    *
    * @return the login of the user.
    */
@@ -93,7 +93,7 @@ public class User {
   }
 
   /**
-   * Give the password of the user.
+   * Gives the password of the user.
    *
    * @return the password of the user.
    */
@@ -111,7 +111,7 @@ public class User {
   }
 
   /**
-   * Give the last name of the user.
+   * Gives the last name of the user.
    *
    * @return the last name of the user.
    */
@@ -129,7 +129,7 @@ public class User {
   }
 
   /**
-   * Give the first name of the user.
+   * Gives the first name of the user.
    *
    * @return the first name of the user.
    */
@@ -147,7 +147,7 @@ public class User {
   }
 
   /**
-   * Give the email of the user.
+   * Gives the email of the user.
    *
    * @return the email of the user.
    */
@@ -165,7 +165,7 @@ public class User {
   }
 
   /**
-   * Give the role id of the user.
+   * Gives the role id of the user.
    *
    * @return the role id of the user.
    */
