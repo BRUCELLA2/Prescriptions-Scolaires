@@ -19,6 +19,11 @@ public class Eple {
   @Size(min = 8, max = 8, message = "{eple.rne.size}")
   private String rne;
 
+  /** name of the eple. */
+  @NotEmpty(message = "{eple.epleName.empty}")
+  @Size(min = 1, max = 100, message = "{eple.epleName.size}")
+  private String epleName;
+
   /** id of the department. Can't be null. */
   @NotNull(message = "{eple.departmentId.null}")
   private Integer departmentId;
@@ -75,6 +80,24 @@ public class Eple {
   }
 
   /**
+   * Gives the name of the eple.
+   *
+   * @return the name of the eple.
+   */
+  public String getEpleName() {
+    return epleName;
+  }
+
+  /**
+   * Set the name of the eple.
+   *
+   * @param epleName the name of the eple.
+   */
+  public void setEpleName(final String epleName) {
+    this.epleName = epleName;
+  }
+
+  /**
    * Gives the id of the department.
    *
    * @return the id of the department.
@@ -119,6 +142,7 @@ public class Eple {
     final StringBuilder sb = new StringBuilder("Eple{");
     sb.append("epleId=").append(epleId);
     sb.append(", rne='").append(rne).append('\'');
+    sb.append(", epleName='").append(epleName).append('\'');
     sb.append(", departmentId=").append(departmentId);
     sb.append(", cityId=").append(cityId);
     sb.append('}');

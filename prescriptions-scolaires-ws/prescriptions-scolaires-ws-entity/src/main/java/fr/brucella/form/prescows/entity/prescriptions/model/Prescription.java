@@ -32,6 +32,14 @@ public class Prescription {
   @NotNull(message = "{prescription.purchaseDeadline.null}")
   private LocalDateTime purchaseDeadline;
 
+  /** validationStatus. True if all books of the prescription are available, false else. Can't be null. */
+  @NotNull(message = "{prescription.validationStatus.null}")
+  private Boolean validationStatus;
+
+  /** id of the eple associated to the prescription. Can't be null. */
+  @NotNull(message = "{prescription.epleId.null}")
+  private Integer epleId;
+
 
   // ===== Constructor =====
 
@@ -133,6 +141,41 @@ public class Prescription {
     this.purchaseDeadline = purchaseDeadline;
   }
 
+  /**
+   * Gives the validation status.
+   *
+   * @return the validation status.
+   */
+  public Boolean getValidationStatus() {
+    return validationStatus;
+  }
+
+  /**
+   * Set the validation status.
+   *
+   * @param validationStatus the validation status.
+   */
+  public void setValidationStatus(final Boolean validationStatus) {
+    this.validationStatus = validationStatus;
+  }
+
+  /**
+   * Gives the id of the eple.
+   *
+   * @return the id of the eple.
+   */
+  public Integer getEpleId() {
+    return epleId;
+  }
+
+  /**
+   * Set the id of the eple.
+   *
+   * @param epleId the id of the eple.
+   */
+  public void setEpleId(final Integer epleId) {
+    this.epleId = epleId;
+  }
 
   // ===== Methods =====
 
@@ -145,6 +188,8 @@ public class Prescription {
     sb.append(", creationDate=").append(creationDate);
     sb.append(", userId=").append(userId);
     sb.append(", purchaseDeadline=").append(purchaseDeadline);
+    sb.append(", validationStatus=").append(validationStatus);
+    sb.append(", epleId=").append(epleId);
     sb.append('}');
     return sb.toString();
   }
