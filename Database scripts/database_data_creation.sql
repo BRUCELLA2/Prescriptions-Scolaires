@@ -9,9 +9,9 @@ INSERT INTO public.city (zip_code, city_name, department_id)
 		('29200', 'Brest', 1);
 
 /* INSERT INTO eple */
-INSERT INTO public.eple (rne, department_id, city_id) 
+INSERT INTO public.eple (rne, department_id, city_id, eple_name) 
 	VALUES
-		('0292047T', 1, 1);
+		('0292047T', 1, 1, 'Lycée Champollion');
 
 
 /* INSERT INTO role */
@@ -33,9 +33,9 @@ INSERT INTO public.users_eple (user_id, eple_id)
 
 
 /* INSERT INTO prescription */
-INSERT INTO public.prescription (prescription_name, creation_date, user_id, purchase_deadline) 
+INSERT INTO public.prescription (prescription_name, creation_date, user_id, purchase_deadline, validation_status, eple_id) 
 	VALUES
-		('Cours japonais débutant', '2019-01-15 09:15:00', 2, '2019-09-01 00:00:00');
+		('Cours japonais débutant', '2019-01-15 09:15:00', 2, '2019-09-01 00:00:00', false, 1);
 
 /* INSERT INTO processing_prescription */
 INSERT INTO public.processing_prescription (user_id, prescription_id, processing_status) 
@@ -52,7 +52,7 @@ INSERT INTO public.book_status (book_status_name)
 
 
 /* INSERT INTO book */
-INSERT INTO public.book (ean, titre, author, comments, email_teacher_send, email_send_date, book_status_id, prescription_id) 
+INSERT INTO public.book (ean, title, author, comments, email_teacher_send, email_send_date, book_status_id, prescription_id) 
 	VALUES
 		('9782720012006', 'Kanji & Kana', 'Pierre Durmous', null, false, null, 1, 1);
 
