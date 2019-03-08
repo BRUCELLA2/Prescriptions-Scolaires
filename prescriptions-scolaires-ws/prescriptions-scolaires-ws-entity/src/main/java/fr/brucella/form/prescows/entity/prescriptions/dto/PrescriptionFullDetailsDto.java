@@ -103,6 +103,23 @@ public class PrescriptionFullDetailsDto extends Prescription {
     this.departmentName = departmentName;
   }
 
+  /**
+   * Gives the list of the ProcessingPrescription associated to the prescription.
+   *
+   * @return the list of the ProcessingPrescription associated to the prescription.
+   */
+  public List<ProcessingPrescription> getProcessingPrescriptionList() {
+    return processingPrescriptionList;
+  }
+
+  /**
+   * Set the list of the ProcessingPrescription associated to the prescription.
+   *
+   * @param processingPrescriptionList the list of the ProcessingPrescription associated to the prescription.
+   */
+  public void setProcessingPrescriptionList(final List<ProcessingPrescription> processingPrescriptionList) {
+    this.processingPrescriptionList = processingPrescriptionList;
+  }
 
   // ===== Methods =====
 

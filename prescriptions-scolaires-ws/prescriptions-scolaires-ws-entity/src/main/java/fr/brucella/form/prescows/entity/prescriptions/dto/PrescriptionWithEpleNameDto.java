@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
  *
  * @author BRUCELLA2
  */
-public class PrescriptionWithRneNameDto extends Prescription {
+public class PrescriptionWithEpleNameDto extends Prescription {
 
   /** name of the eple. */
   @NotEmpty(message = "{eple.epleName.empty}")
@@ -22,7 +22,7 @@ public class PrescriptionWithRneNameDto extends Prescription {
   // ===== Constructor =====
 
   /** Default Constructor */
-  public PrescriptionWithRneNameDto() {
+  public PrescriptionWithEpleNameDto() {
     super();
   }
 
@@ -53,7 +53,7 @@ public class PrescriptionWithRneNameDto extends Prescription {
 
   @Override
   public String toString() {
-    final StringBuilder sb = new StringBuilder("PrescriptionWithRneNameDto{");
+    final StringBuilder sb = new StringBuilder("PrescriptionWithEpleNameDto{");
     sb.append("epleName='").append(epleName).append('\'');
     sb.append(super.toString());
     sb.append('}');

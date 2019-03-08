@@ -51,7 +51,7 @@ public class BookFullDetailsDto extends Book {
    *
    * @param bookStatusName the name of the bookStatus.
    */
-  public void setBookStatusName(String bookStatusName) {
+  public void setBookStatusName(final String bookStatusName) {
     this.bookStatusName = bookStatusName;
   }
 
@@ -69,14 +69,14 @@ public class BookFullDetailsDto extends Book {
    *
    * @param processingBookList the list of processingBook associated to the book.
    */
-  public void setProcessingBookList(List<ProcessingBook> processingBookList) {
+  public void setProcessingBookList(final List<ProcessingBook> processingBookList) {
     this.processingBookList = processingBookList;
   }
 
 
   // ===== Methods =====
 
-
+  /** {@inheritDoc} **/
   @Override
   public String toString() {
     final StringBuilder sb = new StringBuilder("BookFullDetailsDto{");

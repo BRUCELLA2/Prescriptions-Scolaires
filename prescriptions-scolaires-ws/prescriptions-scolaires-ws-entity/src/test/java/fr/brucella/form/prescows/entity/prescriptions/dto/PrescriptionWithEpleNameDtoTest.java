@@ -12,16 +12,16 @@ import com.openpojo.validation.test.impl.SetterTester;
 import org.junit.Test;
 
 /**
- * PrescriptionWithRneNameDto unit tests.
+ * PrescriptionWithEpleNameDto unit tests.
  *
  * @author BRUCELLA2
  */
-public class PrescriptionWithRneNameDtoTest {
+public class PrescriptionWithEpleNameDtoTest {
 
   // ===== Constructor =====
 
   /** Default Constructor */
-  public PrescriptionWithRneNameDtoTest() {
+  public PrescriptionWithEpleNameDtoTest() {
     // This constructor is intentionally empty. Nothing special is needed here.
   }
 
@@ -30,9 +30,9 @@ public class PrescriptionWithRneNameDtoTest {
    */
   @Test
   public void validateSettersAndGetters() {
-    final PojoClass prescriptionWithRneNamePojo = PojoClassFactory.getPojoClass(PrescriptionWithRneNameDto.class);
+    final PojoClass prescriptionWithEpleNamePojo = PojoClassFactory.getPojoClass(PrescriptionWithEpleNameDto.class);
     final Validator validator = ValidatorBuilder.create().with(new SetterTester(), new GetterTester()).build();
-    validator.validate(prescriptionWithRneNamePojo);
+    validator.validate(prescriptionWithEpleNamePojo);
   }
 
   /**
@@ -40,6 +40,6 @@ public class PrescriptionWithRneNameDtoTest {
    */
   @Test
   public void validateToString() {
-    ToStringVerifier.forClass(PrescriptionWithRneNameDto.class).withClassName(NameStyle.SIMPLE_NAME).verify();
+    ToStringVerifier.forClass(PrescriptionWithEpleNameDto.class).withClassName(NameStyle.SIMPLE_NAME).verify();
   }
 }
