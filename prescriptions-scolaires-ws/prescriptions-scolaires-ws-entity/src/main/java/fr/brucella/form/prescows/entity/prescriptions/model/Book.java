@@ -1,9 +1,11 @@
 package fr.brucella.form.prescows.entity.prescriptions.model;
 
+import fr.brucella.form.prescows.entity.adapters.LocalDateWithTimeAdapter;
 import java.time.LocalDateTime;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * Represents a Book.
@@ -172,6 +174,7 @@ public class Book {
    *
    * @return the date of sending the email.
    */
+  @XmlJavaTypeAdapter(value = LocalDateWithTimeAdapter.class)
   public LocalDateTime getEmailSendDate() {
     return emailSendDate;
   }

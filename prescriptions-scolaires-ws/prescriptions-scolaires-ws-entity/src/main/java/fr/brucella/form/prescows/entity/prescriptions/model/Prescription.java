@@ -1,9 +1,11 @@
 package fr.brucella.form.prescows.entity.prescriptions.model;
 
+import fr.brucella.form.prescows.entity.adapters.LocalDateWithTimeAdapter;
 import java.time.LocalDateTime;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * Represents a prescription.
@@ -92,6 +94,7 @@ public class Prescription {
    *
    * @return the creation date of the prescription.
    */
+  @XmlJavaTypeAdapter(value = LocalDateWithTimeAdapter.class)
   public LocalDateTime getCreationDate() {
     return creationDate;
   }
@@ -128,6 +131,7 @@ public class Prescription {
    *
    * @return the books purchase deadline.
    */
+  @XmlJavaTypeAdapter(value = LocalDateWithTimeAdapter.class)
   public LocalDateTime getPurchaseDeadline() {
     return purchaseDeadline;
   }
