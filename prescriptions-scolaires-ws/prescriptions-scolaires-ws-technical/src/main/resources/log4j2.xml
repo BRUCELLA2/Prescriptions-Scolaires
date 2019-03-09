@@ -13,7 +13,7 @@
       <PatternLayout
         pattern="%highlight{%-5level} [%t] %c : %m%n"/>
     </File>
-    <File name="libraryws"
+    <File name="prescows"
       fileName="${sys:catalina.home}/logs/prescows.log" append="true">
       <PatternLayout
         pattern="%highlight{%-5level} [%t] %c : %m%n"/>
