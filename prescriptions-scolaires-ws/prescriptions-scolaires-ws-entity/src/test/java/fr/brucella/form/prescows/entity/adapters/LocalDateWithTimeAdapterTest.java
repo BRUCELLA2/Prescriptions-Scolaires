@@ -4,6 +4,11 @@ import java.time.LocalDateTime;
 import junit.framework.Assert;
 import org.junit.Test;
 
+/**
+ * LocalDateWithTimeAdapter unit test.
+ *
+ * @author BRUCELLA2
+ */
 public class LocalDateWithTimeAdapterTest {
 
 
