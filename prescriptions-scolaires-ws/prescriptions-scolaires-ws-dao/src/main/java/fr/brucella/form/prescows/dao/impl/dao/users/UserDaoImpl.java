@@ -113,7 +113,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 
     // Get eples informations
 
-    sql = "SELECT * from users_eple INNER JOIN users ON users.user_id = users_eple.user_id WHERE users.user_id = :userId";
+    sql = "select * from eple inner join users_eple on users_eple.eple_id = eple.eple_id inner join users ON users.user_id = users_eple.user_id WHERE users.user_id = :userId;";
 
     final MapSqlParameterSource eplesParameterSource = new MapSqlParameterSource();
     eplesParameterSource.addValue("userId", userDetailsDto.getUserId());
