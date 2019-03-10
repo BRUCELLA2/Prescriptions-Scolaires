@@ -1,6 +1,7 @@
 package fr.brucella.form.prescows.dao.impl;
 
 import fr.brucella.form.prescows.dao.contracts.dao.DaoFactory;
+import fr.brucella.form.prescows.dao.contracts.dao.eples.CityDao;
 import fr.brucella.form.prescows.dao.contracts.dao.users.RoleDao;
 import fr.brucella.form.prescows.dao.contracts.dao.users.UserDao;
 import fr.brucella.form.prescows.dao.contracts.dao.users.UserEpleDao;
@@ -23,6 +24,9 @@ public class DaoFactoryImpl implements DaoFactory {
 
   /** UserEple Data Access Object. */
   @Autowired private UserEpleDao userEpleDao;
+
+  /** City Data Access Object. */
+  @Autowired private CityDao cityDao;
 
   // ===== Constructor =====
 
@@ -68,5 +72,17 @@ public class DaoFactoryImpl implements DaoFactory {
   @Override
   public void setUserEpleDao(final UserEpleDao userEpleDao) {
     this.userEpleDao = userEpleDao;
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  public CityDao getCity() {
+    return cityDao;
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  public void setCityDao(final CityDao cityDao) {
+    this.cityDao = cityDao;
   }
 }

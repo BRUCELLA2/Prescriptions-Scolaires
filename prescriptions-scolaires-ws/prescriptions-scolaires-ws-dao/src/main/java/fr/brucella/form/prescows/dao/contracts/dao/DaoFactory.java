@@ -1,5 +1,6 @@
 package fr.brucella.form.prescows.dao.contracts.dao;
 
+import fr.brucella.form.prescows.dao.contracts.dao.eples.CityDao;
 import fr.brucella.form.prescows.dao.contracts.dao.users.RoleDao;
 import fr.brucella.form.prescows.dao.contracts.dao.users.UserDao;
 import fr.brucella.form.prescows.dao.contracts.dao.users.UserEpleDao;
@@ -52,4 +53,18 @@ public interface DaoFactory {
    * @param userEpleDao the UserEple Data Access Object.
    */
   void setUserEpleDao(final UserEpleDao userEpleDao);
+
+  /**
+   * Gives the City Data Access Object.
+   *
+   * @return  the City Data Access Object.
+   */
+  CityDao getCity();
+
+  /**
+   * Set the City Data Access Object.
+   *
+   * @param cityDao the City Data Access Object.
+   */
+  void setCityDao(final CityDao cityDao);
 }
