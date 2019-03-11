@@ -4,6 +4,7 @@ import fr.brucella.form.prescows.dao.contracts.dao.DaoFactory;
 import fr.brucella.form.prescows.dao.contracts.dao.eples.CityDao;
 import fr.brucella.form.prescows.dao.contracts.dao.eples.DepartmentDao;
 import fr.brucella.form.prescows.dao.contracts.dao.eples.EpleDao;
+import fr.brucella.form.prescows.dao.contracts.dao.prescriptions.BookStatusDao;
 import fr.brucella.form.prescows.dao.contracts.dao.users.RoleDao;
 import fr.brucella.form.prescows.dao.contracts.dao.users.UserDao;
 import fr.brucella.form.prescows.dao.contracts.dao.users.UserEpleDao;
@@ -35,6 +36,9 @@ public class DaoFactoryImpl implements DaoFactory {
 
   /** Eple Data Access Object. */
   @Autowired private EpleDao epleDao;
+
+  /** BookStatus Data Access Object. */
+  @Autowired private BookStatusDao bookStatusDao;
 
   // ===== Constructor =====
 
@@ -116,5 +120,17 @@ public class DaoFactoryImpl implements DaoFactory {
   @Override
   public void setEpleDao(EpleDao epleDao) {
     this.epleDao = epleDao;
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  public BookStatusDao getBookStatusDao() {
+    return bookStatusDao;
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  public void setBookStatusDao(BookStatusDao bookStatusDao) {
+    this.bookStatusDao = bookStatusDao;
   }
 }

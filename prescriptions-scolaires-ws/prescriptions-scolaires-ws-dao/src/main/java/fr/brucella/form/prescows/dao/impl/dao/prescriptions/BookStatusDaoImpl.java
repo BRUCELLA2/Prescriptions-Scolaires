@@ -1,11 +1,11 @@
-package fr.brucella.form.prescows.dao.impl.dao.eples;
+package fr.brucella.form.prescows.dao.impl.dao.prescriptions;
 
-import fr.brucella.form.prescows.dao.contracts.dao.eples.EpleDao;
+import fr.brucella.form.prescows.dao.contracts.dao.prescriptions.BookStatusDao;
 import fr.brucella.form.prescows.dao.impl.dao.AbstractDao;
-import fr.brucella.form.prescows.dao.impl.rowmapper.eples.model.EpleRM;
-import fr.brucella.form.prescows.entity.eples.model.Eple;
+import fr.brucella.form.prescows.dao.impl.rowmapper.prescriptions.model.BookStatusRM;
 import fr.brucella.form.prescows.entity.exceptions.NotFoundException;
 import fr.brucella.form.prescows.entity.exceptions.TechnicalException;
+import fr.brucella.form.prescows.entity.prescriptions.model.BookStatus;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.dao.DataAccessException;
@@ -23,22 +23,20 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
 /**
- * Eple Data Access Object.
+ * BookStatus Data Access Object.
  *
  * @author BRUCELLA2
  */
 @Component
-public class EpleDaoImpl extends AbstractDao implements EpleDao {
+public class BookStatusDaoImpl extends AbstractDao implements BookStatusDao {
 
-
-
-  /** Eple DAO logger. */
-  private static final Log LOG = LogFactory.getLog(EpleDaoImpl.class);
+  /** BookStatus DAO logger. */
+  private static final Log LOG = LogFactory.getLog(BookStatusDaoImpl.class);
 
   // ===== Constructor =====
 
   /** Default Constructor */
-  public EpleDaoImpl() {
+  public BookStatusDaoImpl() {
     super();
   }
 
@@ -47,24 +45,24 @@ public class EpleDaoImpl extends AbstractDao implements EpleDao {
 
   /** {@inheritDoc} */
   @Override
-  public Eple getEple(Integer epleId) throws TechnicalException, NotFoundException {
+  public BookStatus getBookStatus(Integer bookStatusId) throws TechnicalException, NotFoundException {
 
-    sql = "SELECT * FROM eple WHERE eple_id = :epleId";
+    sql = "SELECT * FROM book_status WHERE book_status_id = :bookStatusId";
 
     final MapSqlParameterSource parameterSource = new MapSqlParameterSource();
-    parameterSource.addValue("epleId", epleId);
+    parameterSource.addValue("bookStatusId", bookStatusId);
 
-    final RowMapper<Eple> epleRowMapper = new EpleRM();
+    final RowMapper<BookStatus> bookStatusRowMapper = new BookStatusRM();
 
     try {
-      return this.getNamedJdbcTemplate().queryForObject(sql, parameterSource, epleRowMapper);
+      return this.getNamedJdbcTemplate().queryForObject(sql, parameterSource, bookStatusRowMapper);
     } catch (EmptyResultDataAccessException exception) {
       if (LOG.isDebugEnabled()) {
         LOG.debug("SQL : " + sql);
-        LOG.debug("epleId = " + epleId);
+        LOG.debug("bookStatusId = " + bookStatusId);
       }
       LOG.error(exception.getMessage());
-      throw new NotFoundException(messages.getString("epleDao.getEple.notFound"), exception);
+      throw new NotFoundException(messages.getString("bookStatusDao.getBookStatus.notFound"), exception);
     } catch (PermissionDeniedDataAccessException exception) {
       LOG.error(exception.getMessage());
       throw new TechnicalException(messages.getString(PERMISSION_DENIED), exception);
@@ -79,29 +77,29 @@ public class EpleDaoImpl extends AbstractDao implements EpleDao {
 
   /** {@inheritDoc} */
   @Override
-  public void updateEple(Eple eple) throws TechnicalException, NotFoundException {
+  public void updateBookStatus(BookStatus bookStatus) throws TechnicalException, NotFoundException {
 
-    sql = "UPDATE eple SET rne = :rne, department_id = :departmentId, city_id = :cityId, eple_name = :epleName WHERE eple_id = :epleId";
+    sql = "UPDATE book_status SET book_status_name = :bookStatusName WHERE book_status_id = :bookStatusId";
 
-    final SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(eple);
+    final SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(bookStatus);
 
     try {
       final int result = this.getNamedJdbcTemplate().update(sql, parameterSource);
       if (result == 0) {
         if (LOG.isDebugEnabled()) {
           LOG.debug("SQL : " + sql);
-          LOG.debug("eple = " + eple.toString());
+          LOG.debug("bookStatus = " + bookStatus.toString());
         }
-        throw new NotFoundException(messages.getString("epleDao.updateEple.NotFound"));
+        throw new NotFoundException(messages.getString("bookStatusDao.updateBookStatus.NotFound"));
       }
     } catch (DataIntegrityViolationException exception) {
       if (LOG.isDebugEnabled()) {
         LOG.debug("SQL : " + sql);
-        LOG.debug("eple : " + eple.toString());
+        LOG.debug("bookStatus : " + bookStatus.toString());
       }
       LOG.error(exception.getMessage());
       throw new TechnicalException(
-          messages.getString("epleDao.updateEple.integrityViolation"), exception);
+          messages.getString("bookStatusDao.updateBookStatus.integrityViolation"), exception);
     } catch (PermissionDeniedDataAccessException exception) {
       LOG.error(exception.getMessage());
       throw new TechnicalException(messages.getString(PERMISSION_DENIED), exception);
@@ -116,31 +114,31 @@ public class EpleDaoImpl extends AbstractDao implements EpleDao {
 
   /** {@inheritDoc} */
   @Override
-  public int insertEple(Eple eple) throws TechnicalException {
+  public int insertBookStatus(BookStatus bookStatus) throws TechnicalException {
 
-    sql = "INSERT INTO eple (eple_id, rne, department_id, city_id, eple_name) VALUES (DEFAULT, :rne, :departmentId, :cityId, :epleName)";
+    sql = "INSERT INTO book_status (book_status_id, book_status_name) VALUES (DEFAULT, :bookStatusName)";
 
     final KeyHolder keyHolder = new GeneratedKeyHolder();
-    final SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(eple);
+    final SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(bookStatus);
 
     try {
-      this.getNamedJdbcTemplate().update(sql, parameterSource, keyHolder, new String[]{"eple_id"});
+      this.getNamedJdbcTemplate().update(sql, parameterSource, keyHolder, new String[]{"book_status_id"});
       return keyHolder.getKey().intValue();
     } catch (DuplicateKeyException exception) {
       if (LOG.isDebugEnabled()) {
         LOG.debug("SQL : " + sql);
-        LOG.debug("eple : " + eple.toString());
+        LOG.debug("bookStatus : " + bookStatus.toString());
       }
       LOG.error(exception.getMessage());
-      throw new TechnicalException(messages.getString("epleDao.insertEple.duplicate"), exception);
+      throw new TechnicalException(messages.getString("bookStatusDao.insertBookStatus.duplicate"), exception);
     } catch (DataIntegrityViolationException exception) {
       if (LOG.isDebugEnabled()) {
         LOG.debug("SQL : " + sql);
-        LOG.debug("eple : " + eple.toString());
+        LOG.debug("bookStatus : " + bookStatus.toString());
       }
       LOG.error(exception.getMessage());
       throw new TechnicalException(
-          messages.getString("epleDao.insertEple.integrityViolation"), exception);
+          messages.getString("bookStatusDao.insertBookStatus.integrityViolation"), exception);
     } catch (PermissionDeniedDataAccessException exception) {
       LOG.error(exception.getMessage());
       throw new TechnicalException(messages.getString(PERMISSION_DENIED), exception);
@@ -155,21 +153,21 @@ public class EpleDaoImpl extends AbstractDao implements EpleDao {
 
   /** {@inheritDoc} */
   @Override
-  public void deleteEple(Integer epleId) throws TechnicalException, NotFoundException {
+  public void deleteBookStatus(Integer bookStatusId) throws TechnicalException, NotFoundException {
 
-    sql = "DELETE FROM eple WHERE eple_id = :epleId";
+    sql = "DELETE FROM book_status WHERE book_status_id = : bookStatusId";
 
     final MapSqlParameterSource parameterSource = new MapSqlParameterSource();
-    parameterSource.addValue("epleId", epleId);
+    parameterSource.addValue("bookStatusId", bookStatusId);
 
     try {
       final int result = this.getNamedJdbcTemplate().update(sql, parameterSource);
       if (result == 0) {
         if (LOG.isDebugEnabled()) {
           LOG.debug("SQL : " + sql);
-          LOG.debug("epleId = " + epleId);
+          LOG.debug("bookStatusId = " + bookStatusId);
         }
-        throw new NotFoundException(messages.getString("epleDao.deleteEple.notFound"));
+        throw new NotFoundException(messages.getString("bookStatusDao.deleteBookStatus.notFound"));
       }
     } catch (PermissionDeniedDataAccessException exception) {
       LOG.error(exception.getMessage());
@@ -180,7 +178,7 @@ public class EpleDaoImpl extends AbstractDao implements EpleDao {
     } catch (DataAccessException exception) {
       if (LOG.isDebugEnabled()) {
         LOG.debug("SQL : " + sql);
-        LOG.debug("epleId = " + epleId);
+        LOG.debug("bookStatusId = " + bookStatusId);
       }
       LOG.error(exception.getMessage());
       throw new TechnicalException(messages.getString(DATA_ACCESS), exception);

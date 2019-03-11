@@ -3,6 +3,7 @@ package fr.brucella.form.prescows.dao.contracts.dao;
 import fr.brucella.form.prescows.dao.contracts.dao.eples.CityDao;
 import fr.brucella.form.prescows.dao.contracts.dao.eples.DepartmentDao;
 import fr.brucella.form.prescows.dao.contracts.dao.eples.EpleDao;
+import fr.brucella.form.prescows.dao.contracts.dao.prescriptions.BookStatusDao;
 import fr.brucella.form.prescows.dao.contracts.dao.users.RoleDao;
 import fr.brucella.form.prescows.dao.contracts.dao.users.UserDao;
 import fr.brucella.form.prescows.dao.contracts.dao.users.UserEpleDao;
@@ -97,4 +98,18 @@ public interface DaoFactory {
    * @param epleDao the Eple Data Access Object.
    */
   void setEpleDao(final EpleDao epleDao);
+
+  /**
+   * Gives the BookStatus Data Access Object.
+   *
+   * @return the BookStatus Data Access Object.
+   */
+  BookStatusDao getBookStatusDao();
+
+  /**
+   * Set the BookStatus Data Access Object.
+   *
+   * @param bookStatusDao the BookStatus Data Access Object.
+   */
+  void setBookStatusDao(final BookStatusDao bookStatusDao);
 }
