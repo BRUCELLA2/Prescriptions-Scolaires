@@ -2,6 +2,7 @@ package fr.brucella.form.prescows.dao.contracts.dao;
 
 import fr.brucella.form.prescows.dao.contracts.dao.eples.CityDao;
 import fr.brucella.form.prescows.dao.contracts.dao.eples.DepartmentDao;
+import fr.brucella.form.prescows.dao.contracts.dao.eples.EpleDao;
 import fr.brucella.form.prescows.dao.contracts.dao.users.RoleDao;
 import fr.brucella.form.prescows.dao.contracts.dao.users.UserDao;
 import fr.brucella.form.prescows.dao.contracts.dao.users.UserEpleDao;
@@ -70,7 +71,7 @@ public interface DaoFactory {
   void setCityDao(final CityDao cityDao);
 
   /**
-   * Give the Department Data Access Object.
+   * Gives the Department Data Access Object.
    *
    * @return the Department Data Access Object.
    */
@@ -82,4 +83,18 @@ public interface DaoFactory {
    * @param departmentDao the Department Data Access Object.
    */
   void setDepartmentDao(final DepartmentDao departmentDao);
+
+  /**
+   * Gives the Eple Data Access Object.
+   *
+   * @return the Eple Data Access Object.
+   */
+  EpleDao getEpleDao();
+
+  /**
+   * Set the Eple Data Access Object.
+   *
+   * @param epleDao the Eple Data Access Object.
+   */
+  void setEpleDao(final EpleDao epleDao);
 }
