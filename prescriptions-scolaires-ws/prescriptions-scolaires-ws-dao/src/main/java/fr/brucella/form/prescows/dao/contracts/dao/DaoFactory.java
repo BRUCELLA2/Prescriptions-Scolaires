@@ -5,6 +5,7 @@ import fr.brucella.form.prescows.dao.contracts.dao.eples.DepartmentDao;
 import fr.brucella.form.prescows.dao.contracts.dao.eples.EpleDao;
 import fr.brucella.form.prescows.dao.contracts.dao.prescriptions.BookStatusDao;
 import fr.brucella.form.prescows.dao.contracts.dao.prescriptions.ProcessingBookDao;
+import fr.brucella.form.prescows.dao.contracts.dao.prescriptions.ProcessingPrescriptionDao;
 import fr.brucella.form.prescows.dao.contracts.dao.users.RoleDao;
 import fr.brucella.form.prescows.dao.contracts.dao.users.UserDao;
 import fr.brucella.form.prescows.dao.contracts.dao.users.UserEpleDao;
@@ -127,4 +128,18 @@ public interface DaoFactory {
    * @param processingBookDao the ProcessingBook Data Access Object.
    */
   void setProcessingBookDao(final ProcessingBookDao processingBookDao);
+
+  /**
+   * Gives the ProcessingPrescription Data Access Object.
+   *
+   * @return the ProcessingPrescription Data Access Object.
+   */
+  ProcessingPrescriptionDao getProcessingPrescriptionDao();
+
+  /**
+   * Set the ProcessingPrescription Data Access Object.
+   *
+   * @param processingPrescriptionDao the ProcessingPrescription Data Access Object.
+   */
+  void setProcessingPrescriptionDao(final ProcessingPrescriptionDao processingPrescriptionDao);
 }

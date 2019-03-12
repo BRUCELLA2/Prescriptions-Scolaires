@@ -6,6 +6,7 @@ import fr.brucella.form.prescows.dao.contracts.dao.eples.DepartmentDao;
 import fr.brucella.form.prescows.dao.contracts.dao.eples.EpleDao;
 import fr.brucella.form.prescows.dao.contracts.dao.prescriptions.BookStatusDao;
 import fr.brucella.form.prescows.dao.contracts.dao.prescriptions.ProcessingBookDao;
+import fr.brucella.form.prescows.dao.contracts.dao.prescriptions.ProcessingPrescriptionDao;
 import fr.brucella.form.prescows.dao.contracts.dao.users.RoleDao;
 import fr.brucella.form.prescows.dao.contracts.dao.users.UserDao;
 import fr.brucella.form.prescows.dao.contracts.dao.users.UserEpleDao;
@@ -43,6 +44,9 @@ public class DaoFactoryImpl implements DaoFactory {
 
   /** ProcessingBook Data Access Object. */
   @Autowired private ProcessingBookDao processingBookDao;
+
+  /** ProcessingPrescription Data Access Object. */
+  @Autowired private ProcessingPrescriptionDao processingPrescriptionDao;
 
   // ===== Constructor =====
 
@@ -122,7 +126,7 @@ public class DaoFactoryImpl implements DaoFactory {
 
   /** {@inheritDoc} */
   @Override
-  public void setEpleDao(EpleDao epleDao) {
+  public void setEpleDao(final EpleDao epleDao) {
     this.epleDao = epleDao;
   }
 
@@ -134,7 +138,7 @@ public class DaoFactoryImpl implements DaoFactory {
 
   /** {@inheritDoc} */
   @Override
-  public void setBookStatusDao(BookStatusDao bookStatusDao) {
+  public void setBookStatusDao(final BookStatusDao bookStatusDao) {
     this.bookStatusDao = bookStatusDao;
   }
 
@@ -146,7 +150,19 @@ public class DaoFactoryImpl implements DaoFactory {
 
   /** {@inheritDoc} */
   @Override
-  public void setProcessingBookDao(ProcessingBookDao processingBookDao) {
+  public void setProcessingBookDao(final ProcessingBookDao processingBookDao) {
     this.processingBookDao = processingBookDao;
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  public ProcessingPrescriptionDao getProcessingPrescriptionDao() {
+    return processingPrescriptionDao;
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  public void setProcessingPrescriptionDao(final ProcessingPrescriptionDao processingPrescriptionDao) {
+    this.processingPrescriptionDao = processingPrescriptionDao;
   }
 }

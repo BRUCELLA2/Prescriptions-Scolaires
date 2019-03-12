@@ -16,6 +16,7 @@ public interface ProcessingBookDao {
    *
    * @param userId id of the user.
    * @param bookId id of the book.
+   * @return the processingBook with the specified user id and book id.
    * @throws TechnicalException - wraps technical exception caused during data access.
    * @throws NotFoundException - This exception is throws if there is no technical exception and the processingBook is not found.
    */
