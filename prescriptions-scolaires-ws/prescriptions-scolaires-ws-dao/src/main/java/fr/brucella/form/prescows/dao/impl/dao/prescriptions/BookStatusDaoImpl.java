@@ -45,7 +45,7 @@ public class BookStatusDaoImpl extends AbstractDao implements BookStatusDao {
 
   /** {@inheritDoc} */
   @Override
-  public BookStatus getBookStatus(Integer bookStatusId) throws TechnicalException, NotFoundException {
+  public BookStatus getBookStatus(final Integer bookStatusId) throws TechnicalException, NotFoundException {
 
     sql = "SELECT * FROM book_status WHERE book_status_id = :bookStatusId";
 
@@ -77,7 +77,7 @@ public class BookStatusDaoImpl extends AbstractDao implements BookStatusDao {
 
   /** {@inheritDoc} */
   @Override
-  public void updateBookStatus(BookStatus bookStatus) throws TechnicalException, NotFoundException {
+  public void updateBookStatus(final BookStatus bookStatus) throws TechnicalException, NotFoundException {
 
     sql = "UPDATE book_status SET book_status_name = :bookStatusName WHERE book_status_id = :bookStatusId";
 
@@ -114,7 +114,7 @@ public class BookStatusDaoImpl extends AbstractDao implements BookStatusDao {
 
   /** {@inheritDoc} */
   @Override
-  public int insertBookStatus(BookStatus bookStatus) throws TechnicalException {
+  public int insertBookStatus(final BookStatus bookStatus) throws TechnicalException {
 
     sql = "INSERT INTO book_status (book_status_id, book_status_name) VALUES (DEFAULT, :bookStatusName)";
 
@@ -153,7 +153,7 @@ public class BookStatusDaoImpl extends AbstractDao implements BookStatusDao {
 
   /** {@inheritDoc} */
   @Override
-  public void deleteBookStatus(Integer bookStatusId) throws TechnicalException, NotFoundException {
+  public void deleteBookStatus(final Integer bookStatusId) throws TechnicalException, NotFoundException {
 
     sql = "DELETE FROM book_status WHERE book_status_id = : bookStatusId";
 

@@ -45,7 +45,7 @@ public class RoleDaoImpl extends AbstractDao implements RoleDao {
 
   /** {@inheritDoc} */
   @Override
-  public Role getRole(Integer roleId) throws TechnicalException, NotFoundException {
+  public Role getRole(final Integer roleId) throws TechnicalException, NotFoundException {
 
     sql = "SELECT * FROM role WHERE role_id = :roleId";
 
@@ -77,7 +77,7 @@ public class RoleDaoImpl extends AbstractDao implements RoleDao {
 
   /** {@inheritDoc} */
   @Override
-  public void updateRole(Role role) throws TechnicalException, NotFoundException {
+  public void updateRole(final Role role) throws TechnicalException, NotFoundException {
 
 
     sql = "UPDATE role SET role_name = :roleName WHERE role_id = :roleId";
@@ -115,7 +115,7 @@ public class RoleDaoImpl extends AbstractDao implements RoleDao {
 
   /** {@inheritDoc} */
   @Override
-  public int insertRole(Role role) throws TechnicalException {
+  public int insertRole(final Role role) throws TechnicalException {
 
     sql = "INSERT INTO role (role_id, role_name) VALUES (DEFAULT, :roleName)";
 
@@ -155,7 +155,7 @@ public class RoleDaoImpl extends AbstractDao implements RoleDao {
 
   /** {@inheritDoc} */
   @Override
-  public void deleteRole(Integer roleId) throws TechnicalException, NotFoundException {
+  public void deleteRole(final Integer roleId) throws TechnicalException, NotFoundException {
 
     sql = "DELETE FROM role WHERE role_id = :roleId";
 

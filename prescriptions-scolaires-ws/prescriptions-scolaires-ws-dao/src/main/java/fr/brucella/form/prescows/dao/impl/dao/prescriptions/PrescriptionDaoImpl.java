@@ -1,6 +1,5 @@
 package fr.brucella.form.prescows.dao.impl.dao.prescriptions;
 
-import com.sun.rowset.internal.Row;
 import fr.brucella.form.prescows.dao.contracts.dao.prescriptions.PrescriptionDao;
 import fr.brucella.form.prescows.dao.impl.dao.AbstractDao;
 import fr.brucella.form.prescows.dao.impl.rowmapper.prescriptions.dto.PrescriptionWithEpleNameDtoRM;
@@ -83,7 +82,7 @@ public class PrescriptionDaoImpl extends AbstractDao implements PrescriptionDao 
 
   /** {@inheritDoc} */
   @Override
-  public List<PrescriptionWithEpleNameDto> getPrescriptionWithEpleNameDtoList(Integer userId)
+  public List<PrescriptionWithEpleNameDto> getPrescriptionWithEpleNameDtoList(final Integer userId)
       throws TechnicalException {
 
     sql = "SELECT prescription.prescription_id, prescription.prescription_name, prescription.creation_date, prescription.user_id, prescription.purchase_deadline, prescription.validation_status, prescription.eple_id, eple.eple_name FROM prescription INNER JOIN eple ON prescription.eple_id = eple.eple_id WHERE prescription.user_id = :userId";

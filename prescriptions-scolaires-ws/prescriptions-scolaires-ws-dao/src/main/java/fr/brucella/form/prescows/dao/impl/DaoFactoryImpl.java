@@ -104,7 +104,7 @@ public class DaoFactoryImpl implements DaoFactory {
 
   /** {@inheritDoc} */
   @Override
-  public CityDao getCity() {
+  public CityDao getCityDao() {
     return cityDao;
   }
 

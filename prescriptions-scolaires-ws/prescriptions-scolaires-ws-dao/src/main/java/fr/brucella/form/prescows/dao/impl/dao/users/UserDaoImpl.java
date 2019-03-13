@@ -52,7 +52,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 
   /** {@inheritDoc} */
   @Override
-  public User getUser(Integer userId) throws TechnicalException, NotFoundException {
+  public User getUser(final Integer userId) throws TechnicalException, NotFoundException {
     sql = "SELECT * FROM users WHERE user_id = :userId";
 
     final MapSqlParameterSource parameterSource = new MapSqlParameterSource();
@@ -83,7 +83,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 
   /** {@inheritDoc} */
   @Override
-  public UserDetailsDto getUserByLogin(String login) throws TechnicalException, NotFoundException {
+  public UserDetailsDto getUserByLogin(final String login) throws TechnicalException, NotFoundException {
     sql = "SELECT users.user_id, users.login, users.password, users.last_name, users.first_name, users.email, users.role_id, role.role_name FROM users INNER JOIN role ON users.role_id = role.role_id WHERE users.login = :login";
 
     final MapSqlParameterSource userParameterSource = new MapSqlParameterSource();
@@ -142,7 +142,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 
   /** {@inheritDoc} */
   @Override
-  public Boolean loginAvailable(String login) throws TechnicalException {
+  public Boolean loginAvailable(final String login) throws TechnicalException {
 
     sql = "SELECT COUNT(login) FROM users WHERE login = :login";
 
@@ -168,7 +168,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 
   /** {@inheritDoc} */
   @Override
-  public void updateUser(User user) throws TechnicalException, NotFoundException {
+  public void updateUser(final User user) throws TechnicalException, NotFoundException {
 
     sql =
         "UPDATE users SET password = :password, email = :email, login = :login, phone = :phone, address_id = :addressId, user_options_id = :userOptionsId WHERE user_id = :userId";
@@ -206,7 +206,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 
   /** {@inheritDoc} */
   @Override
-  public int insertUser(User user) throws TechnicalException {
+  public int insertUser(final User user) throws TechnicalException {
 
     sql =
         "INSERT INTO users (user_id, login, password, last_name, first_name, email, role_id) VALUES (DEFAULT, :login, :password, :lastName, :firstName, :email, :roleId)";
@@ -247,7 +247,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 
   /** {@inheritDoc} */
   @Override
-  public void deleteUser(Integer userId) throws TechnicalException, NotFoundException {
+  public void deleteUser(final Integer userId) throws TechnicalException, NotFoundException {
 
     sql = "DELETE FROM users WHERE user_id = :userId";
 

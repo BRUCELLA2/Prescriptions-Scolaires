@@ -81,7 +81,7 @@ public class BookDaoImpl extends AbstractDao implements BookDao {
 
   /** {@inheritDoc} */
   @Override
-  public List<BookWithStatusDto> getBookWithStatusListPrescription(Integer prescriptionId)
+  public List<BookWithStatusDto> getBookWithStatusListPrescription(final Integer prescriptionId)
       throws TechnicalException {
 
     sql = "SELECT book.book_id, book.ean, book.title, book.author, book.comments, book.email_teacher_send, book.email_send_date, book.book_status_id, book.prescription_id, book_status.book_status_name FROM book INNER JOIN book_status ON book.book_status_id = book_status.book_status_id WHERE book.prescription_id = :prescriptionId";

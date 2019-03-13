@@ -21,13 +21,13 @@ public class NotFoundExceptionTest {
    * Constructors testing.
    */
   @Test
-  public void ConstructorsTest() {
+  public void constructorsTest() {
     final String message = "Message test";
     final NotFoundException notFoundExceptionTest = new NotFoundException(message);
 
     Assert.assertEquals(message, notFoundExceptionTest.getMessage());
 
-    Throwable cause = new Throwable();
+    final Throwable cause = new Throwable();
     final NotFoundException notFoundExceptionTestWithCause = new NotFoundException(message, cause);
 
     Assert.assertEquals(message, notFoundExceptionTestWithCause.getMessage());

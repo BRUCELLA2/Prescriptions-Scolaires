@@ -50,7 +50,7 @@ public class PrescriptionWithEpleNameDto extends Prescription {
 
   // ===== Methods =====
 
-
+  /** {@inheritDoc} */
   @Override
   public String toString() {
     final StringBuilder sb = new StringBuilder("PrescriptionWithEpleNameDto{");

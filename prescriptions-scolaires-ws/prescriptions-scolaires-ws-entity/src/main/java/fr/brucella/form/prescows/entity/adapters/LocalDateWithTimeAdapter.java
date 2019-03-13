@@ -24,7 +24,7 @@ public class LocalDateWithTimeAdapter extends XmlAdapter<String, LocalDateTime> 
 
   /** {@inheritDoc} */
   @Override
-  public LocalDateTime unmarshal(String date) {
+  public LocalDateTime unmarshal(final String date) {
     return LocalDateTime.parse(date, formatter);
   }
 

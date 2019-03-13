@@ -2,7 +2,6 @@ package fr.brucella.form.prescows.dao.contracts.dao.prescriptions;
 
 import fr.brucella.form.prescows.entity.exceptions.NotFoundException;
 import fr.brucella.form.prescows.entity.exceptions.TechnicalException;
-import fr.brucella.form.prescows.entity.prescriptions.dto.BookFullDetailsDto;
 import fr.brucella.form.prescows.entity.prescriptions.dto.BookWithStatusDto;
 import fr.brucella.form.prescows.entity.prescriptions.model.Book;
 import java.util.List;

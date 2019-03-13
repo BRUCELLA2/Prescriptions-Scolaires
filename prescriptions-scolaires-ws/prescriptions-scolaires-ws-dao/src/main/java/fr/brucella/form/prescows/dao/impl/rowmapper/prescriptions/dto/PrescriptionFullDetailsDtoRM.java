@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 /**
  * This class allow to map row of ResultSet to a PrescriptionFullDetailsDto object.
+ * The list of ProcessingPrescription is set to null. An update of the PrescriptionFullDetailsDto is needed after row mapping to set the list of ProcessingPrescription.
  *
  * @author BRUCELLA2
  */
@@ -41,6 +42,7 @@ public class PrescriptionFullDetailsDtoRM implements RowMapper<PrescriptionFullD
     prescriptionFullDetailsDto.setEpleName(resultSet.getString("eple_name"));
     prescriptionFullDetailsDto.setCityName(resultSet.getString("city_name"));
     prescriptionFullDetailsDto.setDepartmentName(resultSet.getString("department_name"));
+    prescriptionFullDetailsDto.setProcessingPrescriptionList(null);
 
     return prescriptionFullDetailsDto;
   }

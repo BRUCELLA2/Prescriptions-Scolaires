@@ -18,7 +18,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
-import sun.security.krb5.internal.PAData;
 
 /**
  * ProcessingBook Data Access Object.
@@ -78,7 +77,7 @@ public class ProcessingBookDaoImpl extends AbstractDao implements ProcessingBook
 
   /** {@inheritDoc} */
   @Override
-  public void updateProcessingBook(ProcessingBook processingBook) throws TechnicalException, NotFoundException {
+  public void updateProcessingBook(final ProcessingBook processingBook) throws TechnicalException, NotFoundException {
 
     sql = "UPDATE processing_book SET processing_status = :processingStatus WHERE user_id = :userId AND book_id = :bookId";
 
@@ -115,7 +114,7 @@ public class ProcessingBookDaoImpl extends AbstractDao implements ProcessingBook
 
   /** {@inheritDoc} */
   @Override
-  public void insertProcessingBook(ProcessingBook processingBook) throws TechnicalException {
+  public void insertProcessingBook(final ProcessingBook processingBook) throws TechnicalException {
 
     sql = "INSERT INTO processing_book (user_id, book_id, processing_status) VALUES (:userId, :bookId, :processingStatus)";
 
@@ -152,7 +151,7 @@ public class ProcessingBookDaoImpl extends AbstractDao implements ProcessingBook
 
   /** {@inheritDoc} */
   @Override
-  public void deleteProcessingBook(Integer userId, Integer bookId) throws TechnicalException, NotFoundException {
+  public void deleteProcessingBook(final Integer userId, final Integer bookId) throws TechnicalException, NotFoundException {
 
     sql = "DELETE FROM processing_book WHERE user_id = :userId AND book_id = :bookId";
 

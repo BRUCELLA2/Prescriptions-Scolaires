@@ -46,7 +46,7 @@ public class CityDaoImpl extends AbstractDao implements CityDao {
 
   /** {@inheritDoc} */
   @Override
-  public City getCity(Integer cityId) throws TechnicalException, NotFoundException {
+  public City getCity(final Integer cityId) throws TechnicalException, NotFoundException {
 
     sql = "SELECT * FROM city WHERE city_id = :cityId";
 
@@ -78,7 +78,7 @@ public class CityDaoImpl extends AbstractDao implements CityDao {
 
   /** {@inheritDoc} */
   @Override
-  public void updateCity(City city) throws TechnicalException, NotFoundException {
+  public void updateCity(final City city) throws TechnicalException, NotFoundException {
 
     sql = "UPDATE city SET zip_code = :zipCode, city_name = :cityName, department_id = :departmentId WHERE city_id = :cityId";
 
@@ -115,7 +115,7 @@ public class CityDaoImpl extends AbstractDao implements CityDao {
 
   /** {@inheritDoc} */
   @Override
-  public int insertCity(City city) throws TechnicalException {
+  public int insertCity(final City city) throws TechnicalException {
 
     sql = "INSERT INTO city (city_id, zip_code, city_name, department_id) VALUES (DEFAULT, :cityId, :zipCode, :cityName, :departmentId)";
 
@@ -154,7 +154,7 @@ public class CityDaoImpl extends AbstractDao implements CityDao {
 
   /** {@inheritDoc} */
   @Override
-  public void deleteCity(Integer cityId) throws TechnicalException, NotFoundException {
+  public void deleteCity(final Integer cityId) throws TechnicalException, NotFoundException {
 
     sql = "DELETE FROM city WHERE city_id = :cityId";
 

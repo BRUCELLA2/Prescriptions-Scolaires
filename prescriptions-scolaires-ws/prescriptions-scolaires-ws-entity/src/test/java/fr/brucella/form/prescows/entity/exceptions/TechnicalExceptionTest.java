@@ -4,6 +4,11 @@ package fr.brucella.form.prescows.entity.exceptions;
 import junit.framework.Assert;
 import org.junit.Test;
 
+/**
+ * TechnicalException unit test.
+ *
+ * @author BRUCELLA2
+ */
 public class TechnicalExceptionTest {
 
   // ===== Constructor =====
@@ -17,14 +22,14 @@ public class TechnicalExceptionTest {
    * Constructors testing.
    */
   @Test
-  public void ConstructorsTest() {
+  public void constructorsTest() {
 
     final String message = "Message test";
     final TechnicalException technicalException = new TechnicalException(message);
 
     Assert.assertEquals(message, technicalException.getMessage());
 
-    Throwable cause = new Throwable();
+    final Throwable cause = new Throwable();
     final TechnicalException technicalExceptionWithCause = new TechnicalException(message, cause);
 
     Assert.assertEquals(message, technicalExceptionWithCause.getMessage());

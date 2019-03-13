@@ -21,14 +21,14 @@ public class FunctionalExceptionTest {
    * Constructors testing.
    */
   @Test
-  public void ConstructorsTest() {
+  public void constructorsTest() {
 
     final String message = "Message test";
     final FunctionalException functionalException = new FunctionalException(message);
 
     Assert.assertEquals(message, functionalException.getMessage());
 
-    Throwable cause = new Throwable();
+    final Throwable cause = new Throwable();
     final FunctionalException functionalExceptionWithCause = new FunctionalException(message, cause);
 
     Assert.assertEquals(message, functionalExceptionWithCause.getMessage());

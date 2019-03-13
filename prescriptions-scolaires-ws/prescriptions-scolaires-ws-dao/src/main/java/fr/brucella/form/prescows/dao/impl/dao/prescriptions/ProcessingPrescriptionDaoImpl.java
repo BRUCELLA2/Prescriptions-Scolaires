@@ -116,7 +116,7 @@ public class ProcessingPrescriptionDaoImpl extends AbstractDao implements Proces
 
   /** {@inheritDoc} */
   @Override
-  public void insertProcessingPrescription(ProcessingPrescription processingPrescription) throws TechnicalException {
+  public void insertProcessingPrescription(final ProcessingPrescription processingPrescription) throws TechnicalException {
 
     sql = "INSERT INTO processing_prescription (user_id, prescription_id, processing_status) VALUES (:userId, :prescriptionId, :processingStatus)";
 
@@ -153,7 +153,7 @@ public class ProcessingPrescriptionDaoImpl extends AbstractDao implements Proces
 
   /** {@inheritDoc} */
   @Override
-  public void deleteProcessingPrescription(Integer userId, Integer prescriptionId)
+  public void deleteProcessingPrescription(final Integer userId, final Integer prescriptionId)
       throws TechnicalException, NotFoundException {
 
     sql = "DELETE FROM processing_prescription WHERE user_id = :userId AND prescription_id = :prescriptionId";

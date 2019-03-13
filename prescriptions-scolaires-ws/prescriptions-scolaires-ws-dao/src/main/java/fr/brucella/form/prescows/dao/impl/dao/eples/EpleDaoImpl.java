@@ -47,7 +47,7 @@ public class EpleDaoImpl extends AbstractDao implements EpleDao {
 
   /** {@inheritDoc} */
   @Override
-  public Eple getEple(Integer epleId) throws TechnicalException, NotFoundException {
+  public Eple getEple(final Integer epleId) throws TechnicalException, NotFoundException {
 
     sql = "SELECT * FROM eple WHERE eple_id = :epleId";
 
@@ -79,7 +79,7 @@ public class EpleDaoImpl extends AbstractDao implements EpleDao {
 
   /** {@inheritDoc} */
   @Override
-  public void updateEple(Eple eple) throws TechnicalException, NotFoundException {
+  public void updateEple(final Eple eple) throws TechnicalException, NotFoundException {
 
     sql = "UPDATE eple SET rne = :rne, department_id = :departmentId, city_id = :cityId, eple_name = :epleName WHERE eple_id = :epleId";
 
@@ -116,7 +116,7 @@ public class EpleDaoImpl extends AbstractDao implements EpleDao {
 
   /** {@inheritDoc} */
   @Override
-  public int insertEple(Eple eple) throws TechnicalException {
+  public int insertEple(final Eple eple) throws TechnicalException {
 
     sql = "INSERT INTO eple (eple_id, rne, department_id, city_id, eple_name) VALUES (DEFAULT, :rne, :departmentId, :cityId, :epleName)";
 
@@ -155,7 +155,7 @@ public class EpleDaoImpl extends AbstractDao implements EpleDao {
 
   /** {@inheritDoc} */
   @Override
-  public void deleteEple(Integer epleId) throws TechnicalException, NotFoundException {
+  public void deleteEple(final Integer epleId) throws TechnicalException, NotFoundException {
 
     sql = "DELETE FROM eple WHERE eple_id = :epleId";
 

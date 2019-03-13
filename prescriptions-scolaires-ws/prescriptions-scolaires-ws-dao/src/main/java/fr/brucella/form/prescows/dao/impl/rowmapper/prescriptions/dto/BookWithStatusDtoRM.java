@@ -17,6 +17,7 @@ public class BookWithStatusDtoRM implements RowMapper<BookWithStatusDto> {
     // This constructor is intentionally empty. Nothing special is needed here.
   }
 
+  /** {@inheritDoc} */
   @Override
   public BookWithStatusDto mapRow(final ResultSet resultSet, final int rowNum) throws SQLException {
 

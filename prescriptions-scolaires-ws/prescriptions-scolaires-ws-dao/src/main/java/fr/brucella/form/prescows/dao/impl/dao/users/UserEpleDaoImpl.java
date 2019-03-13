@@ -29,7 +29,7 @@ import org.springframework.stereotype.Component;
 public class UserEpleDaoImpl extends AbstractDao implements UserEpleDao {
 
   /** UserEple DAO logger. */
-  private static final Log LOG = LogFactory.getLog(RoleDaoImpl.class);
+  private static final Log LOG = LogFactory.getLog(UserEpleDaoImpl.class);
 
   // ===== Constructor =====
 
@@ -43,7 +43,7 @@ public class UserEpleDaoImpl extends AbstractDao implements UserEpleDao {
 
   /** {@inheritDoc} */
   @Override
-  public List<UserEple> getUserEpleForUser(Integer userId) throws TechnicalException, NotFoundException {
+  public List<UserEple> getUserEpleForUser(final Integer userId) throws TechnicalException, NotFoundException {
 
     sql = "SELECT * from users_eple WHERE user_id = :userId";
 
@@ -77,7 +77,7 @@ public class UserEpleDaoImpl extends AbstractDao implements UserEpleDao {
 
   /** {@inheritDoc} */
   @Override
-  public void insertUserEple(UserEple userEple) throws TechnicalException {
+  public void insertUserEple(final UserEple userEple) throws TechnicalException {
 
     sql = "INSERT INTO users_eple (user_id, eple_id) VALUES (:userId, :epleId)";
 
@@ -114,7 +114,7 @@ public class UserEpleDaoImpl extends AbstractDao implements UserEpleDao {
 
   /** {@inheritDoc} */
   @Override
-  public void deleteUserEple(Integer userId, Integer epleId) throws TechnicalException, NotFoundException {
+  public void deleteUserEple(final Integer userId, Integer epleId) throws TechnicalException, NotFoundException {
 
     sql = "DELETE FROM users_eple WHERE user_id = :userId AND eple_id = :epleId";
 

@@ -1,7 +1,5 @@
 package fr.brucella.form.prescows.entity.exceptions;
 
-import static org.junit.Assert.*;
-
 import com.jparams.verifier.tostring.NameStyle;
 import com.jparams.verifier.tostring.ToStringVerifier;
 import com.openpojo.reflection.PojoClass;
@@ -13,6 +11,11 @@ import com.openpojo.validation.test.impl.SetterTester;
 import junit.framework.Assert;
 import org.junit.Test;
 
+/**
+ * PrescoWsFault unit test.
+ *
+ * @author BRUCELLA2
+ */
 public class PrescoWsFaultTest {
 
   // ===== Constructor =====

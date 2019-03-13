@@ -66,7 +66,7 @@ public interface DaoFactory {
    *
    * @return  the City Data Access Object.
    */
-  CityDao getCity();
+  CityDao getCityDao();
 
   /**
    * Set the City Data Access Object.

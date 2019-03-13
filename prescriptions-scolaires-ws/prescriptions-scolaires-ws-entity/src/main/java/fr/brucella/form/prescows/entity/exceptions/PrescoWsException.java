@@ -26,6 +26,13 @@ public class PrescoWsException extends Exception {
     this.fault = fault;
   }
 
+  /**
+   * Constructor with throwable cause.
+   *
+   * @param message message of the exception.
+   * @param cause cause associated to the exception.
+   * @param fault fault associated to the exception.
+   */
   public PrescoWsException(final String message, final Throwable cause, final PrescoWsFault fault) {
     super(message, cause);
     this.fault = fault;
@@ -47,7 +54,7 @@ public class PrescoWsException extends Exception {
    *
    * @param fault the fault associated to the exception.
    */
-  public void setFault(PrescoWsFault fault) {
+  public void setFault(final PrescoWsFault fault) {
     this.fault = fault;
   }
 

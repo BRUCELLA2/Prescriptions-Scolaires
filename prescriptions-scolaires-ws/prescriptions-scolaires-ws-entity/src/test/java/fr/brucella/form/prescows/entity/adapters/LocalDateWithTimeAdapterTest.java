@@ -25,9 +25,9 @@ public class LocalDateWithTimeAdapterTest {
   @Test
   public void unmarshalTest() {
 
-    LocalDateWithTimeAdapter adapter = new LocalDateWithTimeAdapter();
-    String stringDate = "01-02-2010 12:55:20";
-    LocalDateTime date = adapter.unmarshal(stringDate);
+    final LocalDateWithTimeAdapter adapter = new LocalDateWithTimeAdapter();
+    final String stringDate = "01-02-2010 12:55:20";
+    final LocalDateTime date = adapter.unmarshal(stringDate);
 
     Assert.assertEquals(01, date.getDayOfMonth());
     Assert.assertEquals(02, date.getMonthValue());
@@ -43,9 +43,9 @@ public class LocalDateWithTimeAdapterTest {
   @Test
   public void marshalTest() {
 
-    LocalDateWithTimeAdapter adapter = new LocalDateWithTimeAdapter();
-    LocalDateTime date = LocalDateTime.of(2010,02,01,12,55,20);
-    String stringDate = adapter.marshal(date);
+    final LocalDateWithTimeAdapter adapter = new LocalDateWithTimeAdapter();
+    final LocalDateTime date = LocalDateTime.of(2010,02,01,12,55,20);
+    final String stringDate = adapter.marshal(date);
 
     Assert.assertEquals("01-02-2010 12:55:20", stringDate);
   }
