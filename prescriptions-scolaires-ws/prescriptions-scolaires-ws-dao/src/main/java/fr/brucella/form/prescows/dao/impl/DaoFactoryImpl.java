@@ -4,6 +4,7 @@ import fr.brucella.form.prescows.dao.contracts.dao.DaoFactory;
 import fr.brucella.form.prescows.dao.contracts.dao.eples.CityDao;
 import fr.brucella.form.prescows.dao.contracts.dao.eples.DepartmentDao;
 import fr.brucella.form.prescows.dao.contracts.dao.eples.EpleDao;
+import fr.brucella.form.prescows.dao.contracts.dao.prescriptions.BookDao;
 import fr.brucella.form.prescows.dao.contracts.dao.prescriptions.BookStatusDao;
 import fr.brucella.form.prescows.dao.contracts.dao.prescriptions.ProcessingBookDao;
 import fr.brucella.form.prescows.dao.contracts.dao.prescriptions.ProcessingPrescriptionDao;
@@ -47,6 +48,9 @@ public class DaoFactoryImpl implements DaoFactory {
 
   /** ProcessingPrescription Data Access Object. */
   @Autowired private ProcessingPrescriptionDao processingPrescriptionDao;
+
+  /** Book Data Access Object. */
+  @Autowired private BookDao bookDao;
 
   // ===== Constructor =====
 
@@ -164,5 +168,17 @@ public class DaoFactoryImpl implements DaoFactory {
   @Override
   public void setProcessingPrescriptionDao(final ProcessingPrescriptionDao processingPrescriptionDao) {
     this.processingPrescriptionDao = processingPrescriptionDao;
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  public BookDao getBookDao() {
+    return bookDao;
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  public void setBookDao(final BookDao bookDao) {
+    this.bookDao = bookDao;
   }
 }
