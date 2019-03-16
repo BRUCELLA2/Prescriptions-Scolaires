@@ -3,7 +3,7 @@ package fr.brucella.form.prescows.entity.searchcriteria.dto;
 import java.time.LocalDateTime;
 
 /**
- * Represents the searching criteria used by users.
+ * Represents the searching criteriapres used by users.
  *
  * @author BRUCELLA2
  */
@@ -23,6 +23,9 @@ public class SearchCriteriaDto {
 
   /** indicate if the item search is process or not */
   private Boolean processing;
+
+  /** id of the bookseller who make the search */
+  private Integer userId;
 
 
   // ===== Constructor =====
@@ -124,6 +127,23 @@ public class SearchCriteriaDto {
     this.processing = processing;
   }
 
+  /**
+   * Gives the id of the booksellers.
+   *
+   * @return the id of the booksellers.
+   */
+  public Integer getUserId() {
+    return userId;
+  }
+
+  /**
+   * Set the id of the booksellers.
+   *
+   * @param userId
+   */
+  public void setUserId(Integer userId) {
+    this.userId = userId;
+  }
 
   // ===== Methods =====
 
@@ -136,6 +156,7 @@ public class SearchCriteriaDto {
     sb.append(", rne='").append(rne).append('\'');
     sb.append(", purchaseDeadline=").append(purchaseDeadline);
     sb.append(", processing=").append(processing);
+    sb.append(", userId=").append(userId);
     sb.append('}');
     return sb.toString();
   }

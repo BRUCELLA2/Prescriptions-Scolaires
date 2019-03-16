@@ -2,8 +2,10 @@ package fr.brucella.form.prescows.dao.contracts.dao.prescriptions;
 
 import fr.brucella.form.prescows.entity.exceptions.NotFoundException;
 import fr.brucella.form.prescows.entity.exceptions.TechnicalException;
+import fr.brucella.form.prescows.entity.prescriptions.dto.BookFullDetailsDto;
 import fr.brucella.form.prescows.entity.prescriptions.dto.BookWithStatusDto;
 import fr.brucella.form.prescows.entity.prescriptions.model.Book;
+import fr.brucella.form.prescows.entity.searchcriteria.dto.SearchCriteriaDto;
 import java.util.List;
 
 /**
@@ -32,6 +34,24 @@ public interface BookDao {
    * @throws TechnicalException - wraps technical exception caused during data access.
    */
   List<BookWithStatusDto> getBookWithStatusListPrescription(final Integer prescriptionId) throws TechnicalException;
+
+  /**
+   * Gives a list of book with full details (BookFullDetailsDto) for the prescription with the specified id from the datastore.
+   *
+   * @param prescriptionId id of the prescription.
+   * @return list of book with full details (BookFullDetailsDto) for the prescription with the specified id
+   * @throws TechnicalException - wraps technical exception caused during data access.
+   */
+  List<BookFullDetailsDto> getBookFullDetailsListPrescription(final Integer prescriptionId) throws TechnicalException;
+
+  /**
+   * Gives a list of book with full details (BookFullDetailsDto) corresponding to the search criteria.
+   *
+   * @param searchCriteriaDto search criteria.
+   * @return a list of book with full details (BookFullDetailsDto) corresponding to the search criteria.
+   * @throws TechnicalException - wraps technical exception caused during data access.
+   */
+  List<BookFullDetailsDto> getSearchBookFullDetailsList(final SearchCriteriaDto searchCriteriaDto) throws TechnicalException;
 
   /**
    * Update an existing book in the datastore.
