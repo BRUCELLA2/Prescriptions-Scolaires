@@ -2,14 +2,20 @@ package fr.brucella.form.prescows.dao.impl.dao.prescriptions;
 
 import fr.brucella.form.prescows.dao.contracts.dao.prescriptions.PrescriptionDao;
 import fr.brucella.form.prescows.dao.impl.dao.AbstractDao;
+import fr.brucella.form.prescows.dao.impl.rowmapper.prescriptions.dto.PrescriptionFullDetailsDtoRM;
 import fr.brucella.form.prescows.dao.impl.rowmapper.prescriptions.dto.PrescriptionWithEpleNameDtoRM;
 import fr.brucella.form.prescows.dao.impl.rowmapper.prescriptions.model.PrescriptionRM;
+import fr.brucella.form.prescows.dao.impl.rowmapper.prescriptions.model.ProcessingPrescriptionRM;
 import fr.brucella.form.prescows.entity.exceptions.NotFoundException;
 import fr.brucella.form.prescows.entity.exceptions.TechnicalException;
+import fr.brucella.form.prescows.entity.prescriptions.dto.PrescriptionFullDetailsDto;
 import fr.brucella.form.prescows.entity.prescriptions.dto.PrescriptionWithEpleNameDto;
 import fr.brucella.form.prescows.entity.prescriptions.model.Prescription;
+import fr.brucella.form.prescows.entity.prescriptions.model.ProcessingPrescription;
+import fr.brucella.form.prescows.entity.searchcriteria.dto.SearchCriteriaDto;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.dao.DataAccessException;
@@ -108,6 +114,101 @@ public class PrescriptionDaoImpl extends AbstractDao implements PrescriptionDao 
       LOG.error(exception.getMessage());
       throw new TechnicalException(messages.getString(DATA_ACCESS), exception);
     }
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  public List<PrescriptionFullDetailsDto> getSearchPrescriptionFullDetailsList(SearchCriteriaDto searchCriteriaDto)
+      throws TechnicalException {
+
+    if(LOG.isDebugEnabled()) {
+      LOG.debug("Search = " + searchCriteriaDto.toString());
+    }
+
+    final MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+
+    final StringBuilder stringBuilder = new StringBuilder();
+    stringBuilder.append("SELECT prescription.prescription_id, prescription.prescription_name, prescription.creation_date, prescription.user_id, prescription.purchase_deadline, prescription.validation_status, prescription.eple_id, city.city_name, department.department_name FROM prescription INNER JOIN eple ON eple.eple_id = prescription.eple_id INNER JOIN department ON department.department_id = eple.department_id INNER JOIN city ON city.city_id = eple.city_id INNER JOIN processing_prescription ON processing_prescription.prescription_id = prescription.prescription_id WHERE 1=1");
+
+    if (searchCriteriaDto != null) {
+      if (searchCriteriaDto.getDepartmentId() != null) {
+        stringBuilder.append(" AND department.department_id = :departmentId");
+        parameterSource.addValue("departmentId", searchCriteriaDto.getDepartmentId());
+      }
+      if (searchCriteriaDto.getCityId() != null) {
+        stringBuilder.append(" AND city.city_id = :cityId");
+        parameterSource.addValue("cityId", searchCriteriaDto.getCityId());
+      }
+      if (!StringUtils.isEmpty(searchCriteriaDto.getRne())) {
+        stringBuilder.append(" AND eple.eple_rne = :epleRne");
+        parameterSource.addValue("epleRne", searchCriteriaDto.getRne());
+      }
+      if (searchCriteriaDto.getPurchaseDeadline() != null) {
+        stringBuilder.append(" AND prescription.purchase_deadline < :purchaseDeadline");
+        parameterSource.addValue("purchaseDeadline", searchCriteriaDto.getPurchaseDeadline());
+      }
+      if (searchCriteriaDto.getProcessing() != null && searchCriteriaDto.getUserId() != null) {
+        if (searchCriteriaDto.getProcessing() == false) {
+          stringBuilder.append(
+              " AND processing_prescription.prescription_id = prescription.prescription_id and processing_book.user_id = :userId and processing_prescription.processing_status = :processingStatus");
+          parameterSource.addValue("userId", searchCriteriaDto.getUserId());
+          parameterSource.addValue("processingStatus", searchCriteriaDto.getProcessing());
+        }
+      }
+    }
+
+    final RowMapper<PrescriptionFullDetailsDto> prescriptionFullDetailsDtoRowMapper = new PrescriptionFullDetailsDtoRM();
+
+    List<PrescriptionFullDetailsDto> prescriptionFullDetailsDtoList;
+
+    try {
+      if(LOG.isDebugEnabled()) {
+        LOG.debug("SQL : " + sql);
+      }
+      prescriptionFullDetailsDtoList = this.getNamedJdbcTemplate().query(sql, parameterSource, prescriptionFullDetailsDtoRowMapper);
+      if(prescriptionFullDetailsDtoList.isEmpty()) {
+        prescriptionFullDetailsDtoList = new ArrayList<>();
+      }
+    } catch (PermissionDeniedDataAccessException exception) {
+      LOG.error(exception.getMessage());
+      throw new TechnicalException(messages.getString(PERMISSION_DENIED), exception);
+    } catch (DataAccessResourceFailureException exception) {
+      LOG.error(exception.getMessage());
+      throw new TechnicalException(messages.getString(DATA_ACCESS_RESOURCE_FAILURE), exception);
+    } catch (DataAccessException exception) {
+      LOG.error(exception.getMessage());
+      throw new TechnicalException(messages.getString(DATA_ACCESS), exception);
+    }
+
+    // Add processing prescription list to processing full details dto
+
+    sql = "SELECT * FROM processing_prescription WHERE prescription_id = :prescriptionId";
+
+    for(final PrescriptionFullDetailsDto prescriptionFullDetailsDto : prescriptionFullDetailsDtoList) {
+      final MapSqlParameterSource processingParameterSource = new MapSqlParameterSource();
+      processingParameterSource.addValue("prescriptionId", prescriptionFullDetailsDto.getPrescriptionId());
+      final RowMapper<ProcessingPrescription> processingPrescriptionRowMapper = new ProcessingPrescriptionRM();
+
+      try {
+        List<ProcessingPrescription> processingPrescriptionList = getNamedJdbcTemplate().query(sql, processingParameterSource, processingPrescriptionRowMapper);
+        if(processingPrescriptionList.isEmpty()) {
+          prescriptionFullDetailsDto.setProcessingPrescriptionList(new ArrayList<>());
+        } else {
+          prescriptionFullDetailsDto.setProcessingPrescriptionList(processingPrescriptionList);
+        }
+      } catch (PermissionDeniedDataAccessException exception) {
+        LOG.error(exception.getMessage());
+        throw new TechnicalException(messages.getString(PERMISSION_DENIED), exception);
+      } catch (DataAccessResourceFailureException exception) {
+        LOG.error(exception.getMessage());
+        throw new TechnicalException(messages.getString(DATA_ACCESS_RESOURCE_FAILURE), exception);
+      } catch (DataAccessException exception) {
+        LOG.error(exception.getMessage());
+        throw new TechnicalException(messages.getString(DATA_ACCESS), exception);
+      }
+    }
+
+    return prescriptionFullDetailsDtoList;
   }
 
   /** {@inheritDoc} */

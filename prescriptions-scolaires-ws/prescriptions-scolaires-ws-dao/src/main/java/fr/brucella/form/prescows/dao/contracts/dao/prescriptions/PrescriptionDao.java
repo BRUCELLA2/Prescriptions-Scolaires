@@ -2,8 +2,10 @@ package fr.brucella.form.prescows.dao.contracts.dao.prescriptions;
 
 import fr.brucella.form.prescows.entity.exceptions.NotFoundException;
 import fr.brucella.form.prescows.entity.exceptions.TechnicalException;
+import fr.brucella.form.prescows.entity.prescriptions.dto.PrescriptionFullDetailsDto;
 import fr.brucella.form.prescows.entity.prescriptions.dto.PrescriptionWithEpleNameDto;
 import fr.brucella.form.prescows.entity.prescriptions.model.Prescription;
+import fr.brucella.form.prescows.entity.searchcriteria.dto.SearchCriteriaDto;
 import java.util.List;
 
 /**
@@ -31,6 +33,15 @@ public interface PrescriptionDao {
    * @throws TechnicalException - wraps technical exception caused during data access.
    */
   List<PrescriptionWithEpleNameDto> getPrescriptionWithEpleNameDtoList(final Integer userId) throws TechnicalException;
+
+  /**
+   * Gives a list of prescription with full details (PrescriptionFullDetailsDto) corresponding to the search criteria.
+   *
+   * @param searchCriteriaDto search criteria.
+   * @return a list of prescription with full details (PrescriptionFullDetailsDto) corresponding to the search criteria.
+   * @throws TechnicalException - wraps technical exception caused during data access.
+   */
+  List<PrescriptionFullDetailsDto> getSearchPrescriptionFullDetailsList(final SearchCriteriaDto searchCriteriaDto) throws TechnicalException;
 
   /**
    * Update an existing prescription in the datastore.
