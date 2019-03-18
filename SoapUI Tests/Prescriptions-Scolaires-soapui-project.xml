@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="db0167ae-6098-4c0c-965e-b12e2f1a1f50" activeEnvironment="Default" name="Prescriptions Scolaires" resourceRoot="" soapui-version="5.4.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="97ea0b9c-0725-48ba-9322-0db108c30f12" wsaVersion="NONE" name="AuthentificationServiceSoapBinding" type="wsdl" bindingName="{http://services.prescows.form.brucella.fr/}AuthentificationServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/authentificationService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/authentificationService?wsdl"><con:part><con:url>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/authentificationService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="AuthentificationService" targetNamespace="http://services.prescows.form.brucella.fr/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.prescows.form.brucella.fr/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://services.prescows.form.brucella.fr/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="login" type="tns:login"/>
+      <xs:element name="loginResponse" type="tns:loginResponse"/>
+      <xs:complexType name="login">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+          <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="loginResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:userDetailsDto"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="userDetailsDto">
+        <xs:complexContent>
+          <xs:extension base="tns:user">
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="epleList" nillable="true" type="tns:eple"/>
+              <xs:element minOccurs="0" name="roleName" type="xs:string"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="user">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="email" type="xs:string"/>
+          <xs:element minOccurs="0" name="firstName" type="xs:string"/>
+          <xs:element minOccurs="0" name="lastName" type="xs:string"/>
+          <xs:element minOccurs="0" name="login" type="xs:string"/>
+          <xs:element minOccurs="0" name="password" type="xs:string"/>
+          <xs:element minOccurs="0" name="roleId" type="xs:int"/>
+          <xs:element minOccurs="0" name="userId" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="eple">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cityId" type="xs:int"/>
+          <xs:element minOccurs="0" name="departmentId" type="xs:int"/>
+          <xs:element minOccurs="0" name="epleId" type="xs:int"/>
+          <xs:element minOccurs="0" name="epleName" type="xs:string"/>
+          <xs:element minOccurs="0" name="rne" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="prescoWsFault">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="faultCode" type="xs:string"/>
+          <xs:element minOccurs="0" name="faultString" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="PrescoWsException" type="tns:PrescoWsException"/>
+      <xs:complexType name="PrescoWsException">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="fault" type="tns:prescoWsFault"/>
+          <xs:element minOccurs="0" name="message" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="loginResponse">
+    <wsdl:part element="tns:loginResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="PrescoWsException">
+    <wsdl:part element="tns:PrescoWsException" name="PrescoWsException"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="login">
+    <wsdl:part element="tns:login" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="AuthentificationService">
+    <wsdl:operation name="login">
+      <wsdl:input message="tns:login" name="login"></wsdl:input>
+      <wsdl:output message="tns:loginResponse" name="loginResponse"></wsdl:output>
+      <wsdl:fault message="tns:PrescoWsException" name="PrescoWsException"></wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AuthentificationServiceSoapBinding" type="tns:AuthentificationService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="login">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="login">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="loginResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="PrescoWsException">
+        <soap:fault name="PrescoWsException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AuthentificationService">
+    <wsdl:port binding="tns:AuthentificationServiceSoapBinding" name="AuthentificationServicePort">
+      <soap:address location="http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/authentificationService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/authentificationService</con:endpoint></con:endpoints><con:operation id="42bc6957-e863-44df-a649-57243fcdb207" isOneWay="false" action="" name="login" bindingOperationName="login" type="Request-Response" outputName="loginResponse" inputName="login" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="3390fac7-eeb9-4bf8-86d5-c468050b9cc9" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/authentificationService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:login>
+         <!--Optional:-->
+         <arg0>fred</arg0>
+         <!--Optional:-->
+         <arg1>pass</arg1>
+      </ser:login>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/AuthentificationService/login"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite id="5cd0f346-cc1d-4b82-aa44-5b35520da28d" name="TestSuite AuthentificationService"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="7b5da303-24c4-465e-a6c1-89e12b6ef546" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase login" searchProperties="true"><con:settings/><con:testStep type="request" id="7fdc243c-c912-4f9a-b6fb-7dedb23dc8ca" name="login - passing test"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>AuthentificationServiceSoapBinding</con:interface><con:operation>login</con:operation><con:request name="login - passing test" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="bd4b64a8-ac9a-4b90-93fc-5cc227dda5e8"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/authentificationService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:login>
+         <!--Optional:-->
+         <arg0>${#TestCase#login}</arg0>
+         <!--Optional:-->
+         <arg1>${#TestCase#password}</arg1>
+      </ser:login>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="db65f382-59fe-4a65-8355-71ba5ef74434" name="SOAP Response"/><con:assertion type="SOAP Fault Assertion" id="f2a22766-9391-4207-8257-bf7c65d497b1" name="Not SOAP Fault"/><con:assertion type="Simple Contains" id="344bd905-7370-4a39-94b4-35a63c611a83" name="Contains"><con:configuration><token>&lt;login>fred&lt;/login></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/AuthentificationService/login"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="11095682-2d76-4e1c-b65e-8a0d205cf1f3" name="login - login null"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>AuthentificationServiceSoapBinding</con:interface><con:operation>login</con:operation><con:request name="login - login null" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="bd4b64a8-ac9a-4b90-93fc-5cc227dda5e8"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/authentificationService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:login>
+         <!--Optional:-->
+         <arg1>${#TestCase#password}</arg1>
+      </ser:login>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="db65f382-59fe-4a65-8355-71ba5ef74434" name="SOAP Response"/><con:assertion type="Not SOAP Fault Assertion" id="2b06b6ed-0e29-49c4-9443-516efee02319" name="SOAP Fault"/><con:assertion type="Simple Contains" id="117e4ce9-a99a-452a-855e-991ccc222cc8" name="Contains"><con:configuration><token>PrescoWsException</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/AuthentificationService/login"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="eed7c5f9-cac2-4147-af0e-98d2ecd3d9c5" name="login - password null"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>AuthentificationServiceSoapBinding</con:interface><con:operation>login</con:operation><con:request name="login - password null" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="bd4b64a8-ac9a-4b90-93fc-5cc227dda5e8"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/authentificationService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:login>
+         <!--Optional:-->
+         <arg0>${#TestCase#login}</arg0>
+      </ser:login>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="db65f382-59fe-4a65-8355-71ba5ef74434" name="SOAP Response"/><con:assertion type="Not SOAP Fault Assertion" id="80b88c4a-a878-43a5-975b-43a7dfe352a9" name="SOAP Fault"/><con:assertion type="Simple Contains" id="157e3467-ee30-4e4f-a935-6505c62d8619" name="Contains"><con:configuration><token>PrescoWsException</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/AuthentificationService/login"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="96ccbe4a-9b56-41a5-9556-778baac5f352" name="login - login password don't match"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>AuthentificationServiceSoapBinding</con:interface><con:operation>login</con:operation><con:request name="login - login password don't match" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="bd4b64a8-ac9a-4b90-93fc-5cc227dda5e8"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/authentificationService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:login>
+         <!--Optional:-->
+         <arg0>${#TestCase#login}</arg0>
+         <!--Optional:-->
+         <arg1>${#TestCase#falsePassword}</arg1>
+      </ser:login>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="db65f382-59fe-4a65-8355-71ba5ef74434" name="SOAP Response"/><con:assertion type="Not SOAP Fault Assertion" id="437d1939-8cb9-452a-84b2-7b5fc16674b8" name="SOAP Fault"/><con:assertion type="Simple Contains" id="f8b8037e-28d5-4dcb-9b2c-aa68129fb2e7" name="Contains"><con:configuration><token>PrescoWsException</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/AuthentificationService/login"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="890345df-2a3d-48af-b6f4-0ccda6fe3aaa" name="login - login not found"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>AuthentificationServiceSoapBinding</con:interface><con:operation>login</con:operation><con:request name="login - login not found" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="bd4b64a8-ac9a-4b90-93fc-5cc227dda5e8"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/authentificationService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:login>
+         <!--Optional:-->
+         <arg0>${#TestCase#falseLogin}</arg0>
+         <!--Optional:-->
+         <arg1>${#TestCase#password}</arg1>
+      </ser:login>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="db65f382-59fe-4a65-8355-71ba5ef74434" name="SOAP Response"/><con:assertion type="SOAP Fault Assertion" id="f2a22766-9391-4207-8257-bf7c65d497b1" name="Not SOAP Fault"/><con:assertion type="Simple NotContains" id="6f73e8da-678e-48bc-adef-5b3cfdf846f4" name="Not Contains"><con:configuration><token>PrescoWsException</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/AuthentificationService/login"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties><con:property><con:name>login</con:name><con:value>fred</con:value></con:property><con:property><con:name>password</con:name><con:value>pass</con:value></con:property><con:property><con:name>falseLogin</con:name><con:value>xdfretezea</con:value></con:property><con:property><con:name>falsePassword</con:name><con:value>tgfdsfgsdfrgre</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

@@ -18,12 +18,14 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.stereotype.Component;
 
 /**
  * ProcessingBook Data Access Object.
  *
  * @author BRUCELLA2
  */
+@Component
 public class ProcessingBookDaoImpl extends AbstractDao implements ProcessingBookDao {
 
 

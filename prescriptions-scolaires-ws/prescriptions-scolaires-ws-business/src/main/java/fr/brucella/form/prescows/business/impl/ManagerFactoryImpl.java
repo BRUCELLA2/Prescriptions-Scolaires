@@ -49,7 +49,7 @@ public class ManagerFactoryImpl implements ManagerFactory {
   /** Defaut constructor */
   @Override
   public AuthentificationManager getAuthentificationManager() {
-    return null;
+    return authentificationManager;
   }
 
   /** Defaut constructor */
@@ -61,7 +61,7 @@ public class ManagerFactoryImpl implements ManagerFactory {
   /** Defaut constructor */
   @Override
   public BookDetailsManager getBookDetailsManager() {
-    return null;
+    return bookDetailsManager;
   }
 
   /** Defaut constructor */
@@ -73,7 +73,7 @@ public class ManagerFactoryImpl implements ManagerFactory {
   /** Defaut constructor */
   @Override
   public BookListingManager getBookListingManager() {
-    return null;
+    return bookListingManager;
   }
 
   /** Defaut constructor */
@@ -85,7 +85,7 @@ public class ManagerFactoryImpl implements ManagerFactory {
   /** Defaut constructor */
   @Override
   public PrescriptionDetailsManager getPrescriptionDetailsManager() {
-    return null;
+    return prescriptionDetailsManager;
   }
 
   /** Defaut constructor */
@@ -97,7 +97,7 @@ public class ManagerFactoryImpl implements ManagerFactory {
   /** Defaut constructor */
   @Override
   public PrescriptionListingManager getPrescriptionListingManager() {
-    return null;
+    return prescriptionListingManager;
   }
 
   /** Defaut constructor */
@@ -109,7 +109,7 @@ public class ManagerFactoryImpl implements ManagerFactory {
   /** Defaut constructor */
   @Override
   public AlertManager getAlertManager() {
-    return null;
+    return alertManager;
   }
 
   /** Defaut constructor */

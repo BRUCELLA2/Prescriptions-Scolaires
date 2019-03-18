@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/">
+<Context path="">
   <Resource name="jdbc/DB_PRESCO" auth="Container"
     type="javax.sql.DataSource"
-    url="jdbc:postgresql://presco_database:5432/presco"
+    url="jdbc:postgresql://prescriptions-scolaires-database:5432/presco"
     driverClassName="org.postgresql.Driver" username="adm_presco"
     password="adm_presco" defaultAutoCommit="true"
     defaultTransactionIsolation="READ_COMMITTED" initialSize="1"
