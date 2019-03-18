@@ -171,7 +171,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
   public void updateUser(final User user) throws TechnicalException, NotFoundException {
 
     sql =
-        "UPDATE users SET password = :password, email = :email, login = :login, phone = :phone, address_id = :addressId, user_options_id = :userOptionsId WHERE user_id = :userId";
+        "UPDATE users SET login = :login, password = :password, last_name = :lastName, first_name = :firstName, email = :email, role_id = :roleId WHERE user_id = :userId";
 
     final SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(user);
 

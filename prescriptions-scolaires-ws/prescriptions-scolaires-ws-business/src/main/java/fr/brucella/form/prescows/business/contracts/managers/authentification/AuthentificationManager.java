@@ -25,4 +25,16 @@ public interface AuthentificationManager {
    */
   UserDetailsDto getConnectUser(final String login, final String password)
       throws TechnicalException, FunctionalException;
+
+  /**
+   * Modify the user with the user provide in parameter.
+   * If password don't match with the user password stored in datastore, this method throws a Functional exception.
+   *
+   * @param userDetailsDto the user details dto with the modification.
+   * @return true if the password match with the user password store in datastore and if modification success.
+   * @throws TechnicalException - wraps technical exception caused during data access.
+   * @throws FunctionalException - This exception is throw if the userDetailsDto is not valid (null or with invalid data).
+   *                               This exception is throw if the password don't match with the user password stored in the datastore.
+   */
+  Boolean userModification(final UserDetailsDto userDetailsDto) throws TechnicalException, FunctionalException;
 }

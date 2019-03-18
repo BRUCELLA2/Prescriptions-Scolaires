@@ -23,9 +23,9 @@ INSERT INTO public.role (role_name)
 /* INSERT INTO users */
 INSERT INTO public.users (login, password, last_name, first_name, email, role_id) 
 	VALUES
-		('fred', 'pass', 'Fouret', 'Frédéric', 'fouretfrederic@gmail.com', 1),
-		('pierre', 'pass', 'Carré', 'Pierre', 'carrepierre@test.com', 2);
-
+		('fred', '$2a$10$qD/S8Wv/isAF12ADRdRsZ.M35zpWTdEkofs1/f8vQTFsf1htwTba.', 'Fouret', 'Frédéric', 'fouretfrederic@gmail.com', 1),
+		('pierre', '$2a$10$qD/S8Wv/isAF12ADRdRsZ.M35zpWTdEkofs1/f8vQTFsf1htwTba.', 'Carré', 'Pierre', 'carrepierre@test.com', 2);
+		('modifyUser', '$2a$10$qD/S8Wv/isAF12ADRdRsZ.M35zpWTdEkofs1/f8vQTFsf1htwTba.', 'modify', 'user', 'moduser@test.com', 1);
 /* INSERT INTO users_eple */
 INSERT INTO public.users_eple (user_id, eple_id)
 	VALUES

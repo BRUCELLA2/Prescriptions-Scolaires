@@ -6,6 +6,11 @@ import fr.brucella.form.prescows.entity.exceptions.FunctionalException;
 import fr.brucella.form.prescows.entity.exceptions.NotFoundException;
 import fr.brucella.form.prescows.entity.exceptions.TechnicalException;
 import fr.brucella.form.prescows.entity.users.dto.UserDetailsDto;
+import fr.brucella.form.prescows.entity.users.model.User;
+import java.util.Set;
+import javax.jws.soap.SOAPBinding.Use;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -62,6 +67,52 @@ public class AuthentificationManagerImpl extends AbstractManager implements Auth
     return userDetailsDto;
   }
 
+  /** {@inheritDoc} */
+  @Override
+  public Boolean userModification(UserDetailsDto userDetailsDto) throws TechnicalException, FunctionalException {
+
+    if(userDetailsDto == null) {
+      LOG.error(messages.getString("authentificationManager.userModification.userDetailsDtoNull"));
+      throw new FunctionalException(messages.getString("authentificationManager.userModification.userDetailsDtoNull"));
+    }
+
+    final Set<ConstraintViolation<UserDetailsDto>> violations = this.getConstraintValidator().validate(userDetailsDto);
+    if(!violations.isEmpty()) {
+      if(LOG.isDebugEnabled()) {
+        for(final ConstraintViolation<UserDetailsDto> violation : violations) {
+          LOG.debug(violation.getMessage());
+        }
+      }
+      LOG.error(messages.getString("authentificationManager.userModification.constraints"));
+      throw new FunctionalException(messages.getString("authentificationManager.userModification.constraints"), new ConstraintViolationException(violations));
+    }
+
+    try {
+      final User oldUser = this.getDaoFactory().getUserDao().getUser(userDetailsDto.getUserId());
+
+      if(!this.checkedPassword(userDetailsDto.getPassword(), oldUser.getPassword())) {
+        LOG.error("password incorrect");
+        throw new FunctionalException(messages.getString("authentificationManager.userModification.passDontMatch"));
+      }
+
+      final User modifiedUser = new User();
+      modifiedUser.setUserId(userDetailsDto.getUserId());
+      modifiedUser.setLogin(userDetailsDto.getLogin());
+      modifiedUser.setPassword(this.encodePassword(userDetailsDto.getPassword()));
+      modifiedUser.setLastName(userDetailsDto.getLastName());
+      modifiedUser.setFirstName(userDetailsDto.getFirstName());
+      modifiedUser.setEmail(userDetailsDto.getEmail());
+      modifiedUser.setRoleId(userDetailsDto.getRoleId());
+
+      this.getDaoFactory().getUserDao().updateUser(modifiedUser);
+    } catch (NotFoundException exception) {
+      LOG.error(exception.getMessage());
+      throw new FunctionalException(exception.getMessage(), exception);
+    }
+
+    return true;
+  }
+
 
   /**
    * This method check if a a raw password is the same than the encrypted password. This methode use the password encoder {@link #passwordEncoder}.
@@ -73,5 +124,15 @@ public class AuthentificationManagerImpl extends AbstractManager implements Auth
   private boolean checkedPassword(final String rawPassword, final String encodePassword) {
 
     return this.passwordEncoder.matches(rawPassword, encodePassword);
+  }
+
+  /**
+   * This method encrypt a raw password with the password encoder {@link #passwordEncoder}.
+   *
+   * @param rawPassword the raw password to encrypt.
+   * @return the password encrypted.
+   */
+  private String encodePassword(final String rawPassword) {
+    return this.passwordEncoder.encode(rawPassword);
   }
 }

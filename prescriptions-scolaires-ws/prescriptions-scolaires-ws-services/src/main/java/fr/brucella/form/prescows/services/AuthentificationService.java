@@ -84,4 +84,37 @@ public class AuthentificationService extends SpringBeanAutowiringSupport {
           FUNC_ERROR, exception, new PrescoWsFault(CLIENT, exception.getMessage()));
     }
   }
+
+  /**
+   * Modify a user.
+   *
+   * @param userDetailsDto the full user dto with the modification.
+   * @return true if password is correct and modification is done without problem, throws exception if not.
+   * @throws PrescoWsException Throws this exception if there is technical problem.
+   *                           This exception is throw if the UserDetailsDto is not valid (null or with invalid data).
+   *                           This exception is throw if the password don't match with the user password stored in the datastore.
+   */
+  @WebMethod
+  public Boolean modifyUser(final UserDetailsDto userDetailsDto) throws PrescoWsException {
+
+    if(userDetailsDto == null) {
+      LOG.error("fullUserDto null");
+      throw new PrescoWsException(
+          FUNC_ERROR,
+          new PrescoWsFault(
+              CLIENT, "L'utilisateur à modifier est vide. La modification n'a pu être faite"));
+    }
+
+    try {
+      return this.managerFactory.getAuthentificationManager().userModification(userDetailsDto);
+    } catch (TechnicalException exception) {
+      LOG.error(exception.getMessage());
+      throw new PrescoWsException(
+          TECH_ERROR, exception, new PrescoWsFault(SERVER, exception.getMessage()));
+    } catch (FunctionalException exception) {
+      LOG.error(exception.getMessage());
+      throw new PrescoWsException(
+          FUNC_ERROR, exception, new PrescoWsFault(CLIENT, exception.getMessage()));
+    }
+  }
 }
