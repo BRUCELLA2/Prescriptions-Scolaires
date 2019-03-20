@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project id="db0167ae-6098-4c0c-965e-b12e2f1a1f50" activeEnvironment="Default" name="Prescriptions Scolaires" resourceRoot="" soapui-version="5.4.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="97ea0b9c-0725-48ba-9322-0db108c30f12" wsaVersion="NONE" name="AuthentificationServiceSoapBinding" type="wsdl" bindingName="{http://services.prescows.form.brucella.fr/}AuthentificationServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/authentificationService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/authentificationService?wsdl"><con:part><con:url>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/authentificationService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="AuthentificationService" targetNamespace="http://services.prescows.form.brucella.fr/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.prescows.form.brucella.fr/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+<con:soapui-project id="db0167ae-6098-4c0c-965e-b12e2f1a1f50" activeEnvironment="Default" name="Prescriptions Scolaires" resourceRoot="" soapui-version="5.4.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="97ea0b9c-0725-48ba-9322-0db108c30f12" wsaVersion="NONE" name="AuthentificationServiceSoapBinding" type="wsdl" bindingName="{http://services.prescows.form.brucella.fr/}AuthentificationServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/authentificationService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/authentificationService?wsdl"><con:part><con:url>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/authentificationService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="AuthentificationService" targetNamespace="http://services.prescows.form.brucella.fr/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.prescows.form.brucella.fr/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
   <wsdl:types>
     <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://services.prescows.form.brucella.fr/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:element name="login" type="tns:login"/>
@@ -179,7 +179,163 @@
          </arg0>
       </ser:modifyUser>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/AuthentificationService/modifyUser"/></con:call></con:operation></con:interface><con:testSuite id="5cd0f346-cc1d-4b82-aa44-5b35520da28d" name="TestSuite AuthentificationService"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="7b5da303-24c4-465e-a6c1-89e12b6ef546" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase login" searchProperties="true"><con:settings/><con:testStep type="request" id="7fdc243c-c912-4f9a-b6fb-7dedb23dc8ca" name="login - passing test"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>AuthentificationServiceSoapBinding</con:interface><con:operation>login</con:operation><con:request name="login - passing test" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="bd4b64a8-ac9a-4b90-93fc-5cc227dda5e8"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/authentificationService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/AuthentificationService/modifyUser"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="6ca3298d-6079-4f14-b9d8-873d1462cd9e" wsaVersion="NONE" name="PrescriptionServiceSoapBinding" type="wsdl" bindingName="{http://services.prescows.form.brucella.fr/}PrescriptionServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/prescriptionService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/prescriptionService?wsdl"><con:part><con:url>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/prescriptionService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="PrescriptionService" targetNamespace="http://services.prescows.form.brucella.fr/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.prescows.form.brucella.fr/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://services.prescows.form.brucella.fr/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="makePrescription" type="tns:makePrescription"/>
+      <xs:element name="makePrescriptionResponse" type="tns:makePrescriptionResponse"/>
+      <xs:element name="modifyPrescription" type="tns:modifyPrescription"/>
+      <xs:element name="modifyPrescriptionResponse" type="tns:modifyPrescriptionResponse"/>
+      <xs:complexType name="modifyPrescription">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="tns:prescription"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="prescription">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="creationDate" type="xs:string"/>
+          <xs:element minOccurs="0" name="epleId" type="xs:int"/>
+          <xs:element minOccurs="0" name="prescriptionId" type="xs:int"/>
+          <xs:element minOccurs="0" name="prescriptionName" type="xs:string"/>
+          <xs:element minOccurs="0" name="purchaseDeadline" type="xs:string"/>
+          <xs:element minOccurs="0" name="userId" type="xs:int"/>
+          <xs:element minOccurs="0" name="validationStatus" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="modifyPrescriptionResponse">
+        <xs:sequence>
+          <xs:element name="return" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="prescoWsFault">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="faultCode" type="xs:string"/>
+          <xs:element minOccurs="0" name="faultString" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="makePrescription">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="tns:prescription"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="makePrescriptionResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="PrescoWsException" type="tns:PrescoWsException"/>
+      <xs:complexType name="PrescoWsException">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="fault" type="tns:prescoWsFault"/>
+          <xs:element minOccurs="0" name="message" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="modifyPrescriptionResponse">
+    <wsdl:part element="tns:modifyPrescriptionResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="modifyPrescription">
+    <wsdl:part element="tns:modifyPrescription" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="makePrescriptionResponse">
+    <wsdl:part element="tns:makePrescriptionResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="PrescoWsException">
+    <wsdl:part element="tns:PrescoWsException" name="PrescoWsException"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="makePrescription">
+    <wsdl:part element="tns:makePrescription" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="PrescriptionService">
+    <wsdl:operation name="modifyPrescription">
+      <wsdl:input message="tns:modifyPrescription" name="modifyPrescription"></wsdl:input>
+      <wsdl:output message="tns:modifyPrescriptionResponse" name="modifyPrescriptionResponse"></wsdl:output>
+      <wsdl:fault message="tns:PrescoWsException" name="PrescoWsException"></wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="makePrescription">
+      <wsdl:input message="tns:makePrescription" name="makePrescription"></wsdl:input>
+      <wsdl:output message="tns:makePrescriptionResponse" name="makePrescriptionResponse"></wsdl:output>
+      <wsdl:fault message="tns:PrescoWsException" name="PrescoWsException"></wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PrescriptionServiceSoapBinding" type="tns:PrescriptionService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="modifyPrescription">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="modifyPrescription">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="modifyPrescriptionResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="PrescoWsException">
+        <soap:fault name="PrescoWsException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="makePrescription">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="makePrescription">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="makePrescriptionResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="PrescoWsException">
+        <soap:fault name="PrescoWsException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PrescriptionService">
+    <wsdl:port binding="tns:PrescriptionServiceSoapBinding" name="PrescriptionServicePort">
+      <soap:address location="http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/prescriptionService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/prescriptionService</con:endpoint></con:endpoints><con:operation id="3ce486fd-e64d-4d3e-a921-2cf7090ab044" isOneWay="false" action="" name="makePrescription" bindingOperationName="makePrescription" type="Request-Response" outputName="makePrescriptionResponse" inputName="makePrescription" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="5e1b6ed8-07b0-40de-b21e-25d8688a658d" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/prescriptionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:makePrescription>
+         <!--Optional:-->
+         <arg0>
+            <!--Optional:-->
+            <creationDate>15-02-2019 09:15:00</creationDate>
+            <!--Optional:-->
+            <epleId>1</epleId>
+            <!--Optional:-->
+            <prescriptionName>Prescription Test</prescriptionName>
+            <!--Optional:-->
+            <purchaseDeadline>01-09-2019 00:00:00</purchaseDeadline>
+            <!--Optional:-->
+            <userId>2</userId>
+            <!--Optional:-->
+            <validationStatus>false</validationStatus>
+         </arg0>
+      </ser:makePrescription>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/PrescriptionService/makePrescription"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="e72cc515-7e53-41ea-b743-21f01b871f2d" isOneWay="false" action="" name="modifyPrescription" bindingOperationName="modifyPrescription" type="Request-Response" outputName="modifyPrescriptionResponse" inputName="modifyPrescription" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="5488fb3d-e4a4-4eda-b763-8fe1aee5bb07" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/prescriptionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:modifyPrescription>
+         <!--Optional:-->
+         <arg0>
+            <!--Optional:-->
+            <creationDate>?</creationDate>
+            <!--Optional:-->
+            <epleId>?</epleId>
+            <!--Optional:-->
+            <prescriptionId>?</prescriptionId>
+            <!--Optional:-->
+            <prescriptionName>?</prescriptionName>
+            <!--Optional:-->
+            <purchaseDeadline>?</purchaseDeadline>
+            <!--Optional:-->
+            <userId>?</userId>
+            <!--Optional:-->
+            <validationStatus>?</validationStatus>
+         </arg0>
+      </ser:modifyPrescription>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/PrescriptionService/modifyPrescription"/></con:call></con:operation></con:interface><con:testSuite id="5cd0f346-cc1d-4b82-aa44-5b35520da28d" name="TestSuite AuthentificationService"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="7b5da303-24c4-465e-a6c1-89e12b6ef546" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase login" searchProperties="true"><con:settings/><con:testStep type="request" id="7fdc243c-c912-4f9a-b6fb-7dedb23dc8ca" name="login - passing test"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>AuthentificationServiceSoapBinding</con:interface><con:operation>login</con:operation><con:request name="login - passing test" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="bd4b64a8-ac9a-4b90-93fc-5cc227dda5e8"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/authentificationService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
    <soapenv:Header/>
    <soapenv:Body>
       <ser:login>
@@ -465,4 +621,335 @@
          </arg0>
       </ser:modifyUser>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="215cd029-4daf-464d-bf27-c295e991ce5a" name="SOAP Response"/><con:assertion type="Not SOAP Fault Assertion" id="cba29a03-5524-49fd-81d2-353040daf0bc" name="SOAP Fault"/><con:assertion type="Simple Contains" id="ab2af54a-f68a-4790-9316-5e4e71087e95" name="Contains"><con:configuration><token>PrescoWsException</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/AuthentificationService/modifyUser"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties><con:property><con:name>email</con:name><con:value>moduser@test.com</con:value></con:property><con:property><con:name>firstName</con:name><con:value>user</con:value></con:property><con:property><con:name>lastName</con:name><con:value>modify</con:value></con:property><con:property><con:name>login</con:name><con:value>modifyUser</con:value></con:property><con:property><con:name>password</con:name><con:value>pass</con:value></con:property><con:property><con:name>roleId</con:name><con:value>1</con:value></con:property><con:property><con:name>userId</con:name><con:value>3</con:value></con:property><con:property><con:name>newEmail</con:name><con:value>modify@test.com</con:value></con:property><con:property><con:name>newFirstName</con:name><con:value>modifyFirstName</con:value></con:property><con:property><con:name>newLastName</con:name><con:value>modifyLastName</con:value></con:property><con:property><con:name>wrongPassword</con:name><con:value>dsfsdfsdf</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="215cd029-4daf-464d-bf27-c295e991ce5a" name="SOAP Response"/><con:assertion type="Not SOAP Fault Assertion" id="cba29a03-5524-49fd-81d2-353040daf0bc" name="SOAP Fault"/><con:assertion type="Simple Contains" id="ab2af54a-f68a-4790-9316-5e4e71087e95" name="Contains"><con:configuration><token>PrescoWsException</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/AuthentificationService/modifyUser"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties><con:property><con:name>email</con:name><con:value>moduser@test.com</con:value></con:property><con:property><con:name>firstName</con:name><con:value>user</con:value></con:property><con:property><con:name>lastName</con:name><con:value>modify</con:value></con:property><con:property><con:name>login</con:name><con:value>modifyUser</con:value></con:property><con:property><con:name>password</con:name><con:value>pass</con:value></con:property><con:property><con:name>roleId</con:name><con:value>1</con:value></con:property><con:property><con:name>userId</con:name><con:value>3</con:value></con:property><con:property><con:name>newEmail</con:name><con:value>modify@test.com</con:value></con:property><con:property><con:name>newFirstName</con:name><con:value>modifyFirstName</con:value></con:property><con:property><con:name>newLastName</con:name><con:value>modifyLastName</con:value></con:property><con:property><con:name>wrongPassword</con:name><con:value>dsfsdfsdf</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:testSuite id="26a10129-c01a-4018-8313-9a23d298be9f" name="TestSuite PrescriptionService"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="a0a52c3a-29eb-4cf0-833a-766af4e88243" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase makePrescription" searchProperties="true"><con:settings/><con:testStep type="request" id="a769d676-bea6-41b5-b85c-9002041c567a" name="makePrescription - passing test"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>PrescriptionServiceSoapBinding</con:interface><con:operation>makePrescription</con:operation><con:request name="makePrescription - passing test" id="a6303135-dc87-47dd-8fff-83ba129cae5c"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/prescriptionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:makePrescription>
+         <!--Optional:-->
+         <arg0>
+            <!--Optional:-->
+            <creationDate>${#TestCase#creationDate}</creationDate>
+            <!--Optional:-->
+            <epleId>${#TestCase#epleId}</epleId>
+            <!--Optional:-->
+            <prescriptionName>${#TestCase#prescriptionName}</prescriptionName>
+            <!--Optional:-->
+            <purchaseDeadline>${#TestCase#purchaseDeadline}</purchaseDeadline>
+            <!--Optional:-->
+            <userId>${#TestCase#userId}</userId>
+            <!--Optional:-->
+            <validationStatus>${#TestCase#validationStatus}</validationStatus>
+         </arg0>
+      </ser:makePrescription>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="f2f09503-babd-4a3b-98b6-42a623c8aaf4" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="SOAP Fault Assertion" id="e1b2dedd-1bbb-4f33-b6c5-5810b3950431" name="Not SOAP Fault"/><con:assertion type="Simple Contains" id="d7ed07d0-e900-4276-b9fa-9f17fc2aa22e" name="Contains"><con:configuration><token>&lt;return></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://services.prescows.form.brucella.fr/PrescriptionService/makePrescription" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="9052b644-148f-4dcf-82cd-9ec2bed42837" name="makePrescription - prescriptionName null"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>PrescriptionServiceSoapBinding</con:interface><con:operation>makePrescription</con:operation><con:request name="makePrescription - prescriptionName null" id="a6303135-dc87-47dd-8fff-83ba129cae5c"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/prescriptionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:makePrescription>
+         <!--Optional:-->
+         <arg0>
+            <!--Optional:-->
+            <creationDate>${#TestCase#creationDate}</creationDate>
+            <!--Optional:-->
+            <epleId>${#TestCase#epleId}</epleId>
+            <!--Optional:-->
+            <purchaseDeadline>${#TestCase#purchaseDeadline}</purchaseDeadline>
+            <!--Optional:-->
+            <userId>${#TestCase#userId}</userId>
+            <!--Optional:-->
+            <validationStatus>${#TestCase#validationStatus}</validationStatus>
+         </arg0>
+      </ser:makePrescription>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="f2f09503-babd-4a3b-98b6-42a623c8aaf4" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="Not SOAP Fault Assertion" id="8cdc47cf-11df-4045-beba-55c077521e00" name="SOAP Fault"/><con:assertion type="Simple Contains" id="78995668-160e-4f8c-8f4b-7f59940f7dda" name="Contains"><con:configuration><token>PrescoWsException</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://services.prescows.form.brucella.fr/PrescriptionService/makePrescription" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="db0168f4-1152-4de1-8552-5261b4ab3860" name="makePrescription - creationDate null"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>PrescriptionServiceSoapBinding</con:interface><con:operation>makePrescription</con:operation><con:request name="makePrescription - creationDate null" id="a6303135-dc87-47dd-8fff-83ba129cae5c"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/prescriptionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:makePrescription>
+         <!--Optional:-->
+         <arg0>
+            <!--Optional:-->
+            <epleId>${#TestCase#epleId}</epleId>
+            <!--Optional:-->
+            <prescriptionId></prescriptionId>
+            <!--Optional:-->
+            <prescriptionName>${#TestCase#prescriptionName}</prescriptionName>
+            <!--Optional:-->
+            <purchaseDeadline>${#TestCase#purchaseDeadline}</purchaseDeadline>
+            <!--Optional:-->
+            <userId>${#TestCase#userId}</userId>
+            <!--Optional:-->
+            <validationStatus>${#TestCase#validationStatus}</validationStatus>
+         </arg0>
+      </ser:makePrescription>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="f2f09503-babd-4a3b-98b6-42a623c8aaf4" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="Not SOAP Fault Assertion" id="6931987e-89db-45fb-bb3c-b6bdc889ba09" name="SOAP Fault"/><con:assertion type="Simple Contains" id="d3e88e11-e3ad-4dbe-8f41-fc675cecacf8" name="Contains"><con:configuration><token>PrescoWsException</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://services.prescows.form.brucella.fr/PrescriptionService/makePrescription" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="14425466-1988-4166-bedb-2f47a9397e00" name="makePrescription - userId null"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>PrescriptionServiceSoapBinding</con:interface><con:operation>makePrescription</con:operation><con:request name="makePrescription - userId null" id="a6303135-dc87-47dd-8fff-83ba129cae5c"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/prescriptionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:makePrescription>
+         <!--Optional:-->
+         <arg0>
+            <!--Optional:-->
+            <creationDate>${#TestCase#creationDate}</creationDate>
+            <!--Optional:-->
+            <epleId>${#TestCase#epleId}</epleId>
+            <!--Optional:-->
+            <prescriptionName>${#TestCase#prescriptionName}</prescriptionName>
+            <!--Optional:-->
+            <purchaseDeadline>${#TestCase#purchaseDeadline}</purchaseDeadline>
+            <!--Optional:-->
+            <validationStatus>${#TestCase#validationStatus}</validationStatus>
+         </arg0>
+      </ser:makePrescription>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="f2f09503-babd-4a3b-98b6-42a623c8aaf4" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="Simple Contains" id="d7ed07d0-e900-4276-b9fa-9f17fc2aa22e" name="Contains"><con:configuration><token>PrescoWsException</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Not SOAP Fault Assertion" id="ffb7fd57-97f1-474a-8bb6-9581cd53377b" name="SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://services.prescows.form.brucella.fr/PrescriptionService/makePrescription" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="48b708bc-7a56-41e0-b76b-9124301f0759" name="makePrescription - purchaseDeadline null"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>PrescriptionServiceSoapBinding</con:interface><con:operation>makePrescription</con:operation><con:request name="makePrescription - purchaseDeadline null" id="a6303135-dc87-47dd-8fff-83ba129cae5c"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/prescriptionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:makePrescription>
+         <!--Optional:-->
+         <arg0>
+            <!--Optional:-->
+            <creationDate>${#TestCase#creationDate}</creationDate>
+            <!--Optional:-->
+            <epleId>${#TestCase#epleId}</epleId>
+            <!--Optional:-->
+            <prescriptionName>${#TestCase#prescriptionName}</prescriptionName>
+            <!--Optional:-->
+            <userId>${#TestCase#userId}</userId>
+            <!--Optional:-->
+            <validationStatus>${#TestCase#validationStatus}</validationStatus>
+         </arg0>
+      </ser:makePrescription>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="f2f09503-babd-4a3b-98b6-42a623c8aaf4" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="Simple Contains" id="d7ed07d0-e900-4276-b9fa-9f17fc2aa22e" name="Contains"><con:configuration><token>PrescoWsException</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Not SOAP Fault Assertion" id="76b46a3c-1d5e-4f20-91c9-c3b12fffdaec" name="SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://services.prescows.form.brucella.fr/PrescriptionService/makePrescription" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="0504826a-e983-461b-9095-732eb1ead129" name="makePrescription - validationStatus null"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>PrescriptionServiceSoapBinding</con:interface><con:operation>makePrescription</con:operation><con:request name="makePrescription - validationStatus null" id="a6303135-dc87-47dd-8fff-83ba129cae5c"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/prescriptionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:makePrescription>
+         <!--Optional:-->
+         <arg0>
+            <!--Optional:-->
+            <creationDate>${#TestCase#creationDate}</creationDate>
+            <!--Optional:-->
+            <epleId>${#TestCase#epleId}</epleId>
+            <!--Optional:-->
+            <prescriptionName>${#TestCase#prescriptionName}</prescriptionName>
+            <!--Optional:-->
+            <purchaseDeadline>${#TestCase#purchaseDeadline}</purchaseDeadline>
+            <!--Optional:-->
+            <userId>${#TestCase#userId}</userId>
+         </arg0>
+      </ser:makePrescription>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="f2f09503-babd-4a3b-98b6-42a623c8aaf4" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="Simple Contains" id="d7ed07d0-e900-4276-b9fa-9f17fc2aa22e" name="Contains"><con:configuration><token>PrescoWsException</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Not SOAP Fault Assertion" id="a28741b0-11bd-4ae4-964b-b48dfa4cff52" name="SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://services.prescows.form.brucella.fr/PrescriptionService/makePrescription" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="630a41b4-8553-474e-a593-20a967a146e1" name="makePrescription - epleId null"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>PrescriptionServiceSoapBinding</con:interface><con:operation>makePrescription</con:operation><con:request name="makePrescription - epleId null" id="a6303135-dc87-47dd-8fff-83ba129cae5c"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/prescriptionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:makePrescription>
+         <!--Optional:-->
+         <arg0>
+            <!--Optional:-->
+            <creationDate>${#TestCase#creationDate}</creationDate>
+            <!--Optional:-->
+            <prescriptionName>${#TestCase#prescriptionName}</prescriptionName>
+            <!--Optional:-->
+            <purchaseDeadline>${#TestCase#purchaseDeadline}</purchaseDeadline>
+            <!--Optional:-->
+            <userId>${#TestCase#userId}</userId>
+            <!--Optional:-->
+            <validationStatus>${#TestCase#validationStatus}</validationStatus>
+         </arg0>
+      </ser:makePrescription>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="f2f09503-babd-4a3b-98b6-42a623c8aaf4" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="Simple Contains" id="d7ed07d0-e900-4276-b9fa-9f17fc2aa22e" name="Contains"><con:configuration><token>PrescoWsException</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Not SOAP Fault Assertion" id="4f4c8054-3410-4ca1-a0fc-748d7188f09d" name="SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://services.prescows.form.brucella.fr/PrescriptionService/makePrescription" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties><con:property><con:name>creationDate</con:name><con:value>20-03-2019 00:00:00</con:value></con:property><con:property><con:name>epleId</con:name><con:value>1</con:value></con:property><con:property><con:name>prescriptionName</con:name><con:value>Test prescription</con:value></con:property><con:property><con:name>purchaseDeadline</con:name><con:value>01-09-2019 00:00:00</con:value></con:property><con:property><con:name>userId</con:name><con:value>2</con:value></con:property><con:property><con:name>validationStatus</con:name><con:value>false</con:value></con:property></con:properties></con:testCase><con:testCase id="1adda973-8b97-4f78-931d-d203e484b8b2" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase modifyPrescription" searchProperties="true"><con:settings/><con:testStep type="request" id="e03e39bc-a2e5-494e-8edb-76e3aa5e6c2b" name="makePrescription"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>PrescriptionServiceSoapBinding</con:interface><con:operation>makePrescription</con:operation><con:request name="makePrescription" id="a6303135-dc87-47dd-8fff-83ba129cae5c"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/prescriptionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:makePrescription>
+         <!--Optional:-->
+         <arg0>
+            <!--Optional:-->
+            <creationDate>${#TestCase#creationDate}</creationDate>
+            <!--Optional:-->
+            <epleId>${#TestCase#epleId}</epleId>
+            <!--Optional:-->
+            <prescriptionName>${#TestCase#prescriptionName}</prescriptionName>
+            <!--Optional:-->
+            <purchaseDeadline>${#TestCase#purchaseDeadline}</purchaseDeadline>
+            <!--Optional:-->
+            <userId>${#TestCase#userId}</userId>
+            <!--Optional:-->
+            <validationStatus>${#TestCase#validationStatus}</validationStatus>
+         </arg0>
+      </ser:makePrescription>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="f2f09503-babd-4a3b-98b6-42a623c8aaf4" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="SOAP Fault Assertion" id="e1b2dedd-1bbb-4f33-b6c5-5810b3950431" name="Not SOAP Fault"/><con:assertion type="Simple Contains" id="d7ed07d0-e900-4276-b9fa-9f17fc2aa22e" name="Contains"><con:configuration><token>&lt;return></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://services.prescows.form.brucella.fr/PrescriptionService/makePrescription" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="Transfert prescriptionId" id="fd957ce5-a499-4a83-8405-2d9659951dfb"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>prescriptionId</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>makePrescription</con:sourceStep><con:sourcePath>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace ns1='http://services.prescows.form.brucella.fr/';
+
+/soap:Envelope/soap:Body/ns1:makePrescriptionResponse/return/text()</con:sourcePath><con:targetType>prescriptionId</con:targetType><con:targetStep>#TestCase#</con:targetStep><con:targetPath/><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="request" id="5738e0ea-eaf6-472f-8a34-0d4b3ba3885f" name="modifyPrescription - passing test"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>PrescriptionServiceSoapBinding</con:interface><con:operation>modifyPrescription</con:operation><con:request name="modifyPrescription - passing test" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="06b64ec2-bfe6-465e-bb92-3e162a571c8a"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/prescriptionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:modifyPrescription>
+         <!--Optional:-->
+         <arg0>
+            <!--Optional:-->
+            <creationDate>${#TestCase#newCreationDate}</creationDate>
+            <!--Optional:-->
+            <epleId>${#TestCase#newEpleId}</epleId>
+            <!--Optional:-->
+            <prescriptionId>${#TestCase#prescriptionId}</prescriptionId>
+            <!--Optional:-->
+            <prescriptionName>${#TestCase#newPrescriptionName}</prescriptionName>
+            <!--Optional:-->
+            <purchaseDeadline>${#TestCase#newPurchaseDeadline}</purchaseDeadline>
+            <!--Optional:-->
+            <userId>${#TestCase#newUserId}</userId>
+            <!--Optional:-->
+            <validationStatus>${#TestCase#newValidationStatus}</validationStatus>
+         </arg0>
+      </ser:modifyPrescription>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="b9025f0a-74fa-47c7-abc5-3d3249be0ffe" name="SOAP Response"/><con:assertion type="SOAP Fault Assertion" id="c98a78f5-daaa-41e2-a12b-e47528530144" name="Not SOAP Fault"/><con:assertion type="Simple Contains" id="e903c8e8-4084-447a-9eec-26d32e5c96ea" name="Contains"><con:configuration><token>true</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/PrescriptionService/modifyPrescription"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="3c577569-1cf5-4b70-aaf5-fc3a66b5ae75" name="modifyPrescription - prescriptionId null"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>PrescriptionServiceSoapBinding</con:interface><con:operation>modifyPrescription</con:operation><con:request name="modifyPrescription - prescriptionId null" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="06b64ec2-bfe6-465e-bb92-3e162a571c8a"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/prescriptionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:modifyPrescription>
+         <!--Optional:-->
+         <arg0>
+            <!--Optional:-->
+            <creationDate>${#TestCase#newCreationDate}</creationDate>
+            <!--Optional:-->
+            <epleId>${#TestCase#newEpleId}</epleId>
+            <!--Optional:-->
+            <prescriptionName>${#TestCase#newPrescriptionName}</prescriptionName>
+            <!--Optional:-->
+            <purchaseDeadline>${#TestCase#newPurchaseDeadline}</purchaseDeadline>
+            <!--Optional:-->
+            <userId>${#TestCase#newUserId}</userId>
+            <!--Optional:-->
+            <validationStatus>${#TestCase#newValidationStatus}</validationStatus>
+         </arg0>
+      </ser:modifyPrescription>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="b9025f0a-74fa-47c7-abc5-3d3249be0ffe" name="SOAP Response"/><con:assertion type="Simple Contains" id="e903c8e8-4084-447a-9eec-26d32e5c96ea" name="Contains"><con:configuration><token>PrescoWsException</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Not SOAP Fault Assertion" id="f7ae72f3-3e8e-46a2-8604-be4259676a37" name="SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/PrescriptionService/modifyPrescription"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="32bb0a3a-f128-4528-8f01-6e70c0dc66d4" name="modifyPrescription - prescriptionName null"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>PrescriptionServiceSoapBinding</con:interface><con:operation>modifyPrescription</con:operation><con:request name="modifyPrescription - prescriptionName null" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="06b64ec2-bfe6-465e-bb92-3e162a571c8a"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/prescriptionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:modifyPrescription>
+         <!--Optional:-->
+         <arg0>
+            <!--Optional:-->
+            <creationDate>${#TestCase#newCreationDate}</creationDate>
+            <!--Optional:-->
+            <epleId>${#TestCase#newEpleId}</epleId>
+            <!--Optional:-->
+            <prescriptionId>${#TestCase#prescriptionId}</prescriptionId>
+            <!--Optional:-->
+            <purchaseDeadline>${#TestCase#newPurchaseDeadline}</purchaseDeadline>
+            <!--Optional:-->
+            <userId>${#TestCase#newUserId}</userId>
+            <!--Optional:-->
+            <validationStatus>${#TestCase#newValidationStatus}</validationStatus>
+         </arg0>
+      </ser:modifyPrescription>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="b9025f0a-74fa-47c7-abc5-3d3249be0ffe" name="SOAP Response"/><con:assertion type="Simple Contains" id="e903c8e8-4084-447a-9eec-26d32e5c96ea" name="Contains"><con:configuration><token>PrescoWsException</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Not SOAP Fault Assertion" id="7ca3a6c8-d0d2-429a-ba5a-d4e31d09dc6c" name="SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/PrescriptionService/modifyPrescription"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="6ca10f18-d1ff-4807-a6aa-4090942776ed" name="modifyPrescription - creationDate null"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>PrescriptionServiceSoapBinding</con:interface><con:operation>modifyPrescription</con:operation><con:request name="modifyPrescription - creationDate null" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="06b64ec2-bfe6-465e-bb92-3e162a571c8a"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/prescriptionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:modifyPrescription>
+         <!--Optional:-->
+         <arg0>
+            <!--Optional:-->
+            <epleId>${#TestCase#newEpleId}</epleId>
+            <!--Optional:-->
+            <prescriptionId>${#TestCase#prescriptionId}</prescriptionId>
+            <!--Optional:-->
+            <prescriptionName>${#TestCase#newPrescriptionName}</prescriptionName>
+            <!--Optional:-->
+            <purchaseDeadline>${#TestCase#newPurchaseDeadline}</purchaseDeadline>
+            <!--Optional:-->
+            <userId>${#TestCase#newUserId}</userId>
+            <!--Optional:-->
+            <validationStatus>${#TestCase#newValidationStatus}</validationStatus>
+         </arg0>
+      </ser:modifyPrescription>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="b9025f0a-74fa-47c7-abc5-3d3249be0ffe" name="SOAP Response"/><con:assertion type="Simple Contains" id="e903c8e8-4084-447a-9eec-26d32e5c96ea" name="Contains"><con:configuration><token>PrescoWsException</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Not SOAP Fault Assertion" id="8b18df14-6890-4c3c-bebf-fd8bfa32065a" name="SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/PrescriptionService/modifyPrescription"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="eb3bb8d5-4d2c-4f0e-82c8-62aadafa42f3" name="modifyPrescription - userId null"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>PrescriptionServiceSoapBinding</con:interface><con:operation>modifyPrescription</con:operation><con:request name="modifyPrescription - userId null" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="06b64ec2-bfe6-465e-bb92-3e162a571c8a"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/prescriptionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:modifyPrescription>
+         <!--Optional:-->
+         <arg0>
+            <!--Optional:-->
+            <creationDate>${#TestCase#newCreationDate}</creationDate>
+            <!--Optional:-->
+            <epleId>${#TestCase#newEpleId}</epleId>
+            <!--Optional:-->
+            <prescriptionId>${#TestCase#prescriptionId}</prescriptionId>
+            <!--Optional:-->
+            <prescriptionName>${#TestCase#newPrescriptionName}</prescriptionName>
+            <!--Optional:-->
+            <purchaseDeadline>${#TestCase#newPurchaseDeadline}</purchaseDeadline>
+            <!--Optional:-->
+            <validationStatus>${#TestCase#newValidationStatus}</validationStatus>
+         </arg0>
+      </ser:modifyPrescription>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="b9025f0a-74fa-47c7-abc5-3d3249be0ffe" name="SOAP Response"/><con:assertion type="Simple Contains" id="e903c8e8-4084-447a-9eec-26d32e5c96ea" name="Contains"><con:configuration><token>PrescoWsException</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Not SOAP Fault Assertion" id="402172d1-4d7e-4736-9b75-054132ff6198" name="SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/PrescriptionService/modifyPrescription"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="3b282d6c-1fdf-49aa-ae04-bb8bd13122a2" name="modifyPrescription - purchaseDeadline null"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>PrescriptionServiceSoapBinding</con:interface><con:operation>modifyPrescription</con:operation><con:request name="modifyPrescription - purchaseDeadline null" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="06b64ec2-bfe6-465e-bb92-3e162a571c8a"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/prescriptionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:modifyPrescription>
+         <!--Optional:-->
+         <arg0>
+            <!--Optional:-->
+            <creationDate>${#TestCase#newCreationDate}</creationDate>
+            <!--Optional:-->
+            <epleId>${#TestCase#newEpleId}</epleId>
+            <!--Optional:-->
+            <prescriptionId>${#TestCase#prescriptionId}</prescriptionId>
+            <!--Optional:-->
+            <prescriptionName>${#TestCase#newPrescriptionName}</prescriptionName>
+            <!--Optional:-->
+            <userId>${#TestCase#newUserId}</userId>
+            <!--Optional:-->
+            <validationStatus>${#TestCase#newValidationStatus}</validationStatus>
+         </arg0>
+      </ser:modifyPrescription>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="b9025f0a-74fa-47c7-abc5-3d3249be0ffe" name="SOAP Response"/><con:assertion type="Simple Contains" id="e903c8e8-4084-447a-9eec-26d32e5c96ea" name="Contains"><con:configuration><token>PrescoWsException</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Not SOAP Fault Assertion" id="5ef55c7b-2c02-40b2-abc5-4f49b2972e16" name="SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/PrescriptionService/modifyPrescription"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="7b64f8fa-f3e7-469a-81e6-668c3d906ceb" name="modifyPrescription - validationStatus null"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>PrescriptionServiceSoapBinding</con:interface><con:operation>modifyPrescription</con:operation><con:request name="modifyPrescription - validationStatus null" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="06b64ec2-bfe6-465e-bb92-3e162a571c8a"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/prescriptionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:modifyPrescription>
+         <!--Optional:-->
+         <arg0>
+            <!--Optional:-->
+            <creationDate>${#TestCase#newCreationDate}</creationDate>
+            <!--Optional:-->
+            <epleId>${#TestCase#newEpleId}</epleId>
+            <!--Optional:-->
+            <prescriptionId>${#TestCase#prescriptionId}</prescriptionId>
+            <!--Optional:-->
+            <prescriptionName>${#TestCase#newPrescriptionName}</prescriptionName>
+            <!--Optional:-->
+            <purchaseDeadline>${#TestCase#newPurchaseDeadline}</purchaseDeadline>
+            <!--Optional:-->
+            <userId>${#TestCase#newUserId}</userId>
+         </arg0>
+      </ser:modifyPrescription>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="b9025f0a-74fa-47c7-abc5-3d3249be0ffe" name="SOAP Response"/><con:assertion type="Simple Contains" id="e903c8e8-4084-447a-9eec-26d32e5c96ea" name="Contains"><con:configuration><token>PrescoWsException</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Not SOAP Fault Assertion" id="8b332b53-dca8-4007-9daf-c12a6235ff2e" name="SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/PrescriptionService/modifyPrescription"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="4fabedc3-997b-4690-aa6b-db1526f5f64e" name="modifyPrescription - epleId null"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>PrescriptionServiceSoapBinding</con:interface><con:operation>modifyPrescription</con:operation><con:request name="modifyPrescription - epleId null" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="06b64ec2-bfe6-465e-bb92-3e162a571c8a"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/prescriptionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:modifyPrescription>
+         <!--Optional:-->
+         <arg0>
+            <!--Optional:-->
+            <creationDate>${#TestCase#newCreationDate}</creationDate>
+            <!--Optional:-->
+            <prescriptionId>${#TestCase#prescriptionId}</prescriptionId>
+            <!--Optional:-->
+            <prescriptionName>${#TestCase#newPrescriptionName}</prescriptionName>
+            <!--Optional:-->
+            <purchaseDeadline>${#TestCase#newPurchaseDeadline}</purchaseDeadline>
+            <!--Optional:-->
+            <userId>${#TestCase#newUserId}</userId>
+            <!--Optional:-->
+            <validationStatus>${#TestCase#newValidationStatus}</validationStatus>
+         </arg0>
+      </ser:modifyPrescription>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="b9025f0a-74fa-47c7-abc5-3d3249be0ffe" name="SOAP Response"/><con:assertion type="Simple Contains" id="e903c8e8-4084-447a-9eec-26d32e5c96ea" name="Contains"><con:configuration><token>PrescoWsException</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Not SOAP Fault Assertion" id="1f859637-b71e-4603-9e84-939dd9c9d191" name="SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/PrescriptionService/modifyPrescription"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties><con:property><con:name>prescriptionId</con:name><con:value>8</con:value></con:property><con:property><con:name>creationDate</con:name><con:value>20-03-2019 00:00:00</con:value></con:property><con:property><con:name>epleId</con:name><con:value>1</con:value></con:property><con:property><con:name>prescriptionName</con:name><con:value>Test prescription</con:value></con:property><con:property><con:name>purchaseDeadline</con:name><con:value>01-09-2019 00:00:00</con:value></con:property><con:property><con:name>userId</con:name><con:value>2</con:value></con:property><con:property><con:name>validationStatus</con:name><con:value>false</con:value></con:property><con:property><con:name>newCreationDate</con:name><con:value>01-01-2018 00:00:00</con:value></con:property><con:property><con:name>newEpleId</con:name><con:value>2</con:value></con:property><con:property><con:name>newPrescriptionName</con:name><con:value>name modified</con:value></con:property><con:property><con:name>newPurchaseDeadline</con:name><con:value>01-09-2018 00:00:00</con:value></con:property><con:property><con:name>newUserId</con:name><con:value>1</con:value></con:property><con:property><con:name>newValidationStatus</con:name><con:value>true</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

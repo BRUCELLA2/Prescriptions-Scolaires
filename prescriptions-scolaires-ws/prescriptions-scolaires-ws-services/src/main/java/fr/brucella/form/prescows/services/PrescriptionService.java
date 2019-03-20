@@ -1,6 +1,12 @@
 package fr.brucella.form.prescows.services;
 
 import fr.brucella.form.prescows.business.contracts.ManagerFactory;
+import fr.brucella.form.prescows.entity.exceptions.FunctionalException;
+import fr.brucella.form.prescows.entity.exceptions.PrescoWsException;
+import fr.brucella.form.prescows.entity.exceptions.PrescoWsFault;
+import fr.brucella.form.prescows.entity.exceptions.TechnicalException;
+import fr.brucella.form.prescows.entity.prescriptions.model.Prescription;
+import javax.jws.WebMethod;
 import javax.jws.WebService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -47,4 +53,61 @@ public class PrescriptionService extends SpringBeanAutowiringSupport {
   }
 
   // ===== WebMethods ===== //
+
+  /**
+   * Make a prescription.
+   * Save in datastore the prescription in parameter and return the id of the new prescription.
+   *
+   * @param prescription the prescription to save in datastore.
+   * @return the id of the new prescription saved in datastore.
+   * @throws PrescoWsException Throw this exception if there is a technical problem or if the prescription is null or invalid.
+   */
+  @WebMethod
+  public Integer makePrescription(final Prescription prescription) throws PrescoWsException {
+
+    if(prescription == null) {
+      LOG.error("Prescription null");
+      throw new PrescoWsException(FUNC_ERROR, new PrescoWsFault(CLIENT, "La prescription est vide. Création impossible"));
+    }
+
+    try {
+      return this.managerFactory.getPrescriptionDetailsManager().addPrescription(prescription);
+    } catch (TechnicalException exception) {
+      LOG.error(exception.getMessage());
+      throw new PrescoWsException(
+          TECH_ERROR, exception, new PrescoWsFault(SERVER, exception.getMessage()));
+    } catch (FunctionalException exception) {
+      LOG.error(exception.getMessage());
+      throw new PrescoWsException(
+          FUNC_ERROR, exception, new PrescoWsFault(CLIENT, exception.getMessage()));
+    }
+  }
+
+  /**
+   * Modify a prescription.
+   *
+   * @param prescription the prescription with the updated informations to save in datastore.
+   * @return true if modification is a success. Throw exception if not.
+   * @throws PrescoWsException Throw this exception if there is a technical problem or if the prescription is null or invalid.
+   */
+  @WebMethod
+  public boolean modifyPrescription(final Prescription prescription) throws PrescoWsException {
+
+    if(prescription == null) {
+      LOG.error("Prescription null");
+      throw new PrescoWsException(FUNC_ERROR, new PrescoWsFault(CLIENT, "La prescription est vide. Création impossible"));
+    }
+
+    try {
+      return this.managerFactory.getPrescriptionDetailsManager().modifyPrescription(prescription);
+    } catch (TechnicalException exception) {
+      LOG.error(exception.getMessage());
+      throw new PrescoWsException(
+          TECH_ERROR, exception, new PrescoWsFault(SERVER, exception.getMessage()));
+    } catch (FunctionalException exception) {
+      LOG.error(exception.getMessage());
+      throw new PrescoWsException(
+          FUNC_ERROR, exception, new PrescoWsFault(CLIENT, exception.getMessage()));
+    }
+  }
 }

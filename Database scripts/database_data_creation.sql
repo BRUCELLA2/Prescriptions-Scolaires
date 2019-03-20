@@ -11,7 +11,8 @@ INSERT INTO public.city (zip_code, city_name, department_id)
 /* INSERT INTO eple */
 INSERT INTO public.eple (rne, department_id, city_id, eple_name) 
 	VALUES
-		('0292047T', 1, 1, 'Lycée Champollion');
+		('0292047T', 1, 1, 'Lycée Champollion'),
+		('0342055A', 1, 1, 'Collège Jean Monnet');
 
 
 /* INSERT INTO role */
