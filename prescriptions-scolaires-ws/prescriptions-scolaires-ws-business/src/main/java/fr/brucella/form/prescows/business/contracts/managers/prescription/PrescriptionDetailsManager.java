@@ -28,7 +28,28 @@ public interface PrescriptionDetailsManager {
    * @param prescription the prescription with the updated informations to save in datastore.
    * @return true if modification is a success. Throw exception if not.
    * @throws TechnicalException - wraps technical exception caused during data access.
-   * @throws FunctionalException - This exception is throw if the prescription is not valid.
+   * @throws FunctionalException - This exception is throw if the prescription is null or invalid or if the prescription is not found.
    */
   Boolean modifyPrescription(final Prescription prescription) throws TechnicalException, FunctionalException;
+
+  /**
+   * Delete a prescription
+   *
+   * @param prescriptionId id of the prescription to delete.
+   * @return true if delete is a success. Throws exception if not.
+   * @throws TechnicalException - wraps technical exception caused during data access.
+   * @throws FunctionalException - Throws this exception if the prescriptionId is null or if the prescription is not found.
+   */
+  Boolean deletePrescription(final Integer prescriptionId) throws TechnicalException, FunctionalException;
+
+  /**
+   * Declare prescription processed for an user.
+   *
+   * @param prescriptionId id of the prescription.
+   * @param userId id of the user.
+   * @return true if delete is a success. Throws exception if not.
+   * @throws TechnicalException - wraps technical exception caused during data access.
+   * @throws FunctionalException - Throws this exception if the userId or the prescriptionId are null or if the ProcessingPrescription is not found.
+   */
+  Boolean prescriptionProcessed(final Integer prescriptionId, final Integer userId) throws TechnicalException, FunctionalException;
 }

@@ -8,7 +8,6 @@ import fr.brucella.form.prescows.entity.exceptions.TechnicalException;
 import fr.brucella.form.prescows.entity.users.dto.UserDetailsDto;
 import fr.brucella.form.prescows.entity.users.model.User;
 import java.util.Set;
-import javax.jws.soap.SOAPBinding.Use;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import org.apache.commons.lang3.StringUtils;
@@ -48,6 +47,7 @@ public class AuthentificationManagerImpl extends AbstractManager implements Auth
 
     if(StringUtils.isEmpty(login) || StringUtils.isEmpty(password)) {
       LOG.error(messages.getString("authentificationManager.getConnectUser.loginPasswordNull"));
+      throw new FunctionalException(messages.getString("authentificationManager.getConnectUser.loginPasswordNull"));
     }
 
     UserDetailsDto userDetailsDto = null;

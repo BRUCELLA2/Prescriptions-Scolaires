@@ -6,6 +6,7 @@ import fr.brucella.form.prescows.entity.exceptions.FunctionalException;
 import fr.brucella.form.prescows.entity.exceptions.NotFoundException;
 import fr.brucella.form.prescows.entity.exceptions.TechnicalException;
 import fr.brucella.form.prescows.entity.prescriptions.model.Prescription;
+import fr.brucella.form.prescows.entity.prescriptions.model.ProcessingPrescription;
 import java.util.Set;
 import javax.validation.ConstraintViolation;
 import org.apache.commons.logging.Log;
@@ -36,10 +37,11 @@ public class PrescriptionDetailsManagerImpl extends AbstractManager implements P
 
   /** {@inheritDoc} */
   @Override
-  public Integer addPrescription(Prescription prescription) throws TechnicalException, FunctionalException {
+  public Integer addPrescription(final Prescription prescription) throws TechnicalException, FunctionalException {
 
     if(prescription == null) {
       LOG.error(messages.getString("PrescriptionDetailsManager.createPrescription.prescriptionNull"));
+      throw new FunctionalException(messages.getString("PrescriptionDetailsManager.createPrescription.prescriptionNull"));
     }
 
     final Set<ConstraintViolation<Prescription>> violations = this.getConstraintValidator().validate(prescription);
@@ -59,10 +61,11 @@ public class PrescriptionDetailsManagerImpl extends AbstractManager implements P
 
   /** {@inheritDoc} */
   @Override
-  public Boolean modifyPrescription(Prescription prescription) throws TechnicalException, FunctionalException {
+  public Boolean modifyPrescription(final Prescription prescription) throws TechnicalException, FunctionalException {
 
     if(prescription == null) {
       LOG.error(messages.getString("PrescriptionDetailsManager.modifyPrescription.prescriptionNull"));
+      throw new FunctionalException(messages.getString("PrescriptionDetailsManager.modifyPrescription.prescriptionNull"));
     }
 
     final Set<ConstraintViolation<Prescription>> violations = this.getConstraintValidator().validate(prescription);
@@ -86,5 +89,44 @@ public class PrescriptionDetailsManagerImpl extends AbstractManager implements P
     }
   }
 
+  /** {@inheritDoc} */
+  @Override
+  public Boolean deletePrescription(final Integer prescriptionId) throws TechnicalException, FunctionalException {
 
+    if(prescriptionId == null) {
+      LOG.error(messages.getString("PrescriptionDetailsManager.deletePrescription.prescriptionIdNull"));
+      throw new FunctionalException(messages.getString("PrescriptionDetailsManager.deletePrescription.prescriptionIdNull"));
+    }
+
+    try {
+      this.getDaoFactory().getPrescriptionDao().deletePrescription(prescriptionId);
+      return true;
+    } catch (NotFoundException exception) {
+      LOG.error(exception.getMessage());
+      throw new FunctionalException(exception.getMessage(), exception);
+    }
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  public Boolean prescriptionProcessed(final Integer prescriptionId, Integer userId)
+      throws TechnicalException, FunctionalException {
+
+    if(prescriptionId == null || userId == null) {
+      LOG.error(messages.getString("PrescriptionDetailsManager.prescriptionProcessed.prescriptionIdOrUserIdNull"));
+      throw new FunctionalException(messages.getString("PrescriptionDetailsManager.prescriptionProcessed.prescriptionIdOrUserIdNull"));
+    }
+
+    try {
+      final ProcessingPrescription processingPrescription = new ProcessingPrescription();
+      processingPrescription.setUserId(userId);
+      processingPrescription.setPrescriptionId(prescriptionId);
+      processingPrescription.setProcessingStatus(true);
+      this.getDaoFactory().getProcessingPrescriptionDao().updateProcessingPrescription(processingPrescription);
+      return true;
+    } catch (NotFoundException exception) {
+      LOG.error(exception.getMessage());
+      throw new FunctionalException(exception.getMessage(), exception);
+    }
+  }
 }
