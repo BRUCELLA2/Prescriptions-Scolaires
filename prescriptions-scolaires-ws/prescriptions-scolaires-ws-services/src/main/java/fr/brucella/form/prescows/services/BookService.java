@@ -1,6 +1,12 @@
 package fr.brucella.form.prescows.services;
 
 import fr.brucella.form.prescows.business.contracts.ManagerFactory;
+import fr.brucella.form.prescows.entity.exceptions.FunctionalException;
+import fr.brucella.form.prescows.entity.exceptions.PrescoWsException;
+import fr.brucella.form.prescows.entity.exceptions.PrescoWsFault;
+import fr.brucella.form.prescows.entity.exceptions.TechnicalException;
+import fr.brucella.form.prescows.entity.prescriptions.model.Book;
+import javax.jws.WebMethod;
 import javax.jws.WebService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -46,4 +52,61 @@ public class BookService extends SpringBeanAutowiringSupport {
   }
 
   // ===== WebMethods ===== //
+
+  /**
+   * Make a book.
+   * Save in datastore the book in parameter and return the id of the new book.
+   *
+   * @param book the book to save in datastore.
+   * @return the id of the new book saved in datastore.
+   * @throws PrescoWsException - Throws this exception if there is a technical problem or if the book is null or invalid.
+   */
+  @WebMethod
+  public Integer makeBook(final Book book) throws PrescoWsException {
+
+    if(book == null) {
+      LOG.error("book null");
+      throw new PrescoWsException(FUNC_ERROR, new PrescoWsFault(CLIENT, "Le livre est vide. Création impossible"));
+    }
+
+    try {
+      return this.managerFactory.getBookDetailsManager().addBook(book);
+    } catch (TechnicalException exception) {
+      LOG.error(exception.getMessage());
+      throw new PrescoWsException(
+          TECH_ERROR, exception, new PrescoWsFault(SERVER, exception.getMessage()));
+    } catch (FunctionalException exception) {
+      LOG.error(exception.getMessage());
+      throw new PrescoWsException(
+          FUNC_ERROR, exception, new PrescoWsFault(CLIENT, exception.getMessage()));
+    }
+  }
+
+  /**
+   * Modify a book.
+   *
+   * @param book the book with the updated informations to save in datastore.
+   * @return true if modification is a success. Throws exception if not.
+   * @throws PrescoWsException - Throws this exception if there is a technical problem, if the book is null or invalid or if the book is not found.
+   */
+  @WebMethod
+  public boolean modifyBook(final Book book) throws PrescoWsException {
+
+    if(book == null) {
+      LOG.error("book null");
+      throw new PrescoWsException(FUNC_ERROR, new PrescoWsFault(CLIENT, "Le livre est vide. Modification impossible"));
+    }
+
+    try {
+      return this.managerFactory.getBookDetailsManager().modifyBook(book);
+    } catch (TechnicalException exception) {
+      LOG.error(exception.getMessage());
+      throw new PrescoWsException(
+          TECH_ERROR, exception, new PrescoWsFault(SERVER, exception.getMessage()));
+    } catch (FunctionalException exception) {
+      LOG.error(exception.getMessage());
+      throw new PrescoWsException(
+          FUNC_ERROR, exception, new PrescoWsFault(CLIENT, exception.getMessage()));
+    }
+  }
 }

@@ -272,7 +272,7 @@ public class BookDaoImpl extends AbstractDao implements BookDao {
   @Override
   public void updateBook(final Book book) throws TechnicalException, NotFoundException {
 
-    sql = "UPDATE book SET ean = :ean, title = :title, author = :author, comments = :comments, email_teacher_send = :emailTeacherSend, email_send_date = :emailSendDate, book_status = :bookStatus, prescription_id = prescriptionId WHERE book_id = :bookId";
+    sql = "UPDATE book SET ean = :ean, title = :title, author = :author, comments = :comments, email_teacher_send = :emailTeacherSend, email_send_date = :emailSendDate, book_status_id = :bookStatusId, prescription_id = :prescriptionId WHERE book_id = :bookId";
 
     final SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(book);
 
