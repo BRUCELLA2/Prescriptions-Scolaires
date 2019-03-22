@@ -31,4 +31,14 @@ public interface BookDetailsManager {
    * @throws FunctionalException - This exception is throw if the book is null or not valid or if the book is not found.
    */
   Boolean modifyBook(final Book book) throws TechnicalException, FunctionalException;
+
+  /**
+   * Delete a book
+   *
+   * @param bookId id of the book to delete.
+   * @return true if delete is a success. Throws exception if not.
+   * @throws TechnicalException - wraps technical exception caused during data access.
+   * @throws FunctionalException - This exception is throw if the bookId is null or if the book is not found.
+   */
+  Boolean deleteBook(final Integer bookId) throws TechnicalException, FunctionalException;
 }

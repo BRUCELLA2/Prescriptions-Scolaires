@@ -25,13 +25,13 @@ INSERT INTO public.role (role_name)
 INSERT INTO public.users (login, password, last_name, first_name, email, role_id) 
 	VALUES
 		('fred', '$2a$10$qD/S8Wv/isAF12ADRdRsZ.M35zpWTdEkofs1/f8vQTFsf1htwTba.', 'Fouret', 'Frédéric', 'fouretfrederic@gmail.com', 1),
-		('pierre', '$2a$10$qD/S8Wv/isAF12ADRdRsZ.M35zpWTdEkofs1/f8vQTFsf1htwTba.', 'Carré', 'Pierre', 'carrepierre@test.com', 2);
+		('pierre', '$2a$10$qD/S8Wv/isAF12ADRdRsZ.M35zpWTdEkofs1/f8vQTFsf1htwTba.', 'Carré', 'Pierre', 'carrepierre@test.com', 2),
 		('modifyUser', '$2a$10$qD/S8Wv/isAF12ADRdRsZ.M35zpWTdEkofs1/f8vQTFsf1htwTba.', 'modify', 'user', 'moduser@test.com', 1);
+	
 /* INSERT INTO users_eple */
 INSERT INTO public.users_eple (user_id, eple_id)
 	VALUES
 		(2, 1);
-
 
 /* INSERT INTO prescription */
 INSERT INTO public.prescription (prescription_name, creation_date, user_id, purchase_deadline, validation_status, eple_id) 

@@ -109,4 +109,32 @@ public class BookService extends SpringBeanAutowiringSupport {
           FUNC_ERROR, exception, new PrescoWsFault(CLIENT, exception.getMessage()));
     }
   }
+
+  /**
+   * Delete a book
+   *
+   * @param bookId id of the book to delete.
+   * @return true if delete is a success. Throws exception if not.
+   * @throws PrescoWsException - Throws this exception if there is a technical problem or if the bookId is null or the book is not found.
+   */
+  @WebMethod
+  public boolean deleteBook(final Integer bookId) throws PrescoWsException {
+
+    if(bookId == null) {
+      LOG.error("book null");
+      throw new PrescoWsException(FUNC_ERROR, new PrescoWsFault(CLIENT, "Le livre est vide. Suppression impossible"));
+    }
+
+    try {
+      return this.managerFactory.getBookDetailsManager().deleteBook(bookId);
+    } catch (TechnicalException exception) {
+      LOG.error(exception.getMessage());
+      throw new PrescoWsException(
+          TECH_ERROR, exception, new PrescoWsFault(SERVER, exception.getMessage()));
+    } catch (FunctionalException exception) {
+      LOG.error(exception.getMessage());
+      throw new PrescoWsException(
+          FUNC_ERROR, exception, new PrescoWsFault(CLIENT, exception.getMessage()));
+    }
+  }
 }

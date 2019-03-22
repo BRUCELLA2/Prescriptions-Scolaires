@@ -88,5 +88,23 @@ public class BookDetailsManagerImpl extends AbstractManager implements BookDetai
     }
   }
 
+  /** {@inheritDoc} */
+  @Override
+  public Boolean deleteBook(Integer bookId) throws TechnicalException, FunctionalException {
+
+    if(bookId == null) {
+      LOG.error(messages.getString("bookDetailsManagerImpl.deleteBook.bookIdNull"));
+      throw new FunctionalException(messages.getString("bookDetailsManagerImpl.deleteBook.bookIdNull"));
+    }
+
+    try {
+      this.getDaoFactory().getBookDao().deleteBook(bookId);
+      return true;
+    } catch (NotFoundException exception) {
+      LOG.error(exception.getMessage());
+      throw new FunctionalException(exception.getMessage(), exception);
+    }
+  }
+
 
 }
