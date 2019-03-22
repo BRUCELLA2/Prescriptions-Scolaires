@@ -47,6 +47,7 @@ INSERT INTO public.processing_prescription (user_id, prescription_id, processing
 /* INSERT INTO book_status */
 INSERT INTO public.book_status (book_status_name)
 	VALUES
+		('disponibilité non vérifiée'),
 		('disponible'),
 		('indisponible'),
 		('épuisé');

@@ -121,12 +121,53 @@ public class BookService extends SpringBeanAutowiringSupport {
   public boolean deleteBook(final Integer bookId) throws PrescoWsException {
 
     if(bookId == null) {
-      LOG.error("book null");
-      throw new PrescoWsException(FUNC_ERROR, new PrescoWsFault(CLIENT, "Le livre est vide. Suppression impossible"));
+      LOG.error("bookId null");
+      throw new PrescoWsException(FUNC_ERROR, new PrescoWsFault(CLIENT, "L'identifiant du livre est vide. Suppression impossible."));
     }
 
     try {
       return this.managerFactory.getBookDetailsManager().deleteBook(bookId);
+    } catch (TechnicalException exception) {
+      LOG.error(exception.getMessage());
+      throw new PrescoWsException(
+          TECH_ERROR, exception, new PrescoWsFault(SERVER, exception.getMessage()));
+    } catch (FunctionalException exception) {
+      LOG.error(exception.getMessage());
+      throw new PrescoWsException(
+          FUNC_ERROR, exception, new PrescoWsFault(CLIENT, exception.getMessage()));
+    }
+  }
+
+  /**
+   * Change the status of a book.
+   *
+   * @param bookId id of the book.
+   * @param bookStatusId id of the status.
+   * @return true if change is ok. Throws exception if not.
+   * @throws PrescoWsException - Throws this exception if there is a technical problem.
+   *                             Throws this exception if the bookId is null or the book is not found.
+   *                             Throws this exception if bookStatusId is null.
+   */
+  @WebMethod
+  public boolean changeBookStatus(final Integer bookId, final Integer bookStatusId) throws PrescoWsException {
+
+    if(bookId == null && bookStatusId == null) {
+      LOG.error("bookId null and bookStatusId null");
+      throw new PrescoWsException(FUNC_ERROR, new PrescoWsFault(CLIENT, "L'identifiant du statut du livre et l'identifiant du livre sont vides. Changement de statut impossible."));
+    }
+
+    if(bookId == null) {
+      LOG.error("bookId null");
+      throw new PrescoWsException(FUNC_ERROR, new PrescoWsFault(CLIENT, "L'identifiant du livre est vide. Changement de statut impossible."));
+    }
+
+    if(bookStatusId == null) {
+      LOG.error("bookStatusId null");
+      throw new PrescoWsException(FUNC_ERROR, new PrescoWsFault(CLIENT, "L'identifiant du statut du livre est vide. Changement de statut impossible."));
+    }
+
+    try {
+      return this.managerFactory.getBookDetailsManager().changeBookStatus(bookId, bookStatusId);
     } catch (TechnicalException exception) {
       LOG.error(exception.getMessage());
       throw new PrescoWsException(

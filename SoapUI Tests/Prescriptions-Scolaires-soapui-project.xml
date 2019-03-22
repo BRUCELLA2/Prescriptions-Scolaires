@@ -427,18 +427,21 @@
 </soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/PrescriptionService/prescriptionProcessed"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="9c8438db-d8e2-4d9d-a55b-b62e0104bf25" wsaVersion="NONE" name="BookServiceSoapBinding" type="wsdl" bindingName="{http://services.prescows.form.brucella.fr/}BookServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/bookService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/bookService?wsdl"><con:part><con:url>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/bookService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="BookService" targetNamespace="http://services.prescows.form.brucella.fr/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.prescows.form.brucella.fr/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
   <wsdl:types>
     <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://services.prescows.form.brucella.fr/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="changeBookStatus" type="tns:changeBookStatus"/>
+      <xs:element name="changeBookStatusResponse" type="tns:changeBookStatusResponse"/>
       <xs:element name="deleteBook" type="tns:deleteBook"/>
       <xs:element name="deleteBookResponse" type="tns:deleteBookResponse"/>
       <xs:element name="makeBook" type="tns:makeBook"/>
       <xs:element name="makeBookResponse" type="tns:makeBookResponse"/>
       <xs:element name="modifyBook" type="tns:modifyBook"/>
       <xs:element name="modifyBookResponse" type="tns:modifyBookResponse"/>
-      <xs:complexType name="deleteBook">
+      <xs:complexType name="changeBookStatus">
         <xs:sequence>
           <xs:element minOccurs="0" name="arg0" type="xs:int"/>
+          <xs:element minOccurs="0" name="arg1" type="xs:int"/>
         </xs:sequence>
       </xs:complexType>
-      <xs:complexType name="deleteBookResponse">
+      <xs:complexType name="changeBookStatusResponse">
         <xs:sequence>
           <xs:element name="return" type="xs:boolean"/>
         </xs:sequence>
@@ -447,6 +450,16 @@
         <xs:sequence>
           <xs:element minOccurs="0" name="faultCode" type="xs:string"/>
           <xs:element minOccurs="0" name="faultString" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="deleteBook">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="deleteBookResponse">
+        <xs:sequence>
+          <xs:element name="return" type="xs:boolean"/>
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="modifyBook">
@@ -503,16 +516,27 @@
   <wsdl:message name="modifyBookResponse">
     <wsdl:part element="tns:modifyBookResponse" name="parameters"></wsdl:part>
   </wsdl:message>
+  <wsdl:message name="changeBookStatusResponse">
+    <wsdl:part element="tns:changeBookStatusResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
   <wsdl:message name="makeBook">
     <wsdl:part element="tns:makeBook" name="parameters"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="makeBookResponse">
     <wsdl:part element="tns:makeBookResponse" name="parameters"></wsdl:part>
   </wsdl:message>
+  <wsdl:message name="changeBookStatus">
+    <wsdl:part element="tns:changeBookStatus" name="parameters"></wsdl:part>
+  </wsdl:message>
   <wsdl:message name="modifyBook">
     <wsdl:part element="tns:modifyBook" name="parameters"></wsdl:part>
   </wsdl:message>
   <wsdl:portType name="BookService">
+    <wsdl:operation name="changeBookStatus">
+      <wsdl:input message="tns:changeBookStatus" name="changeBookStatus"></wsdl:input>
+      <wsdl:output message="tns:changeBookStatusResponse" name="changeBookStatusResponse"></wsdl:output>
+      <wsdl:fault message="tns:PrescoWsException" name="PrescoWsException"></wsdl:fault>
+    </wsdl:operation>
     <wsdl:operation name="deleteBook">
       <wsdl:input message="tns:deleteBook" name="deleteBook"></wsdl:input>
       <wsdl:output message="tns:deleteBookResponse" name="deleteBookResponse"></wsdl:output>
@@ -531,6 +555,18 @@
   </wsdl:portType>
   <wsdl:binding name="BookServiceSoapBinding" type="tns:BookService">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="changeBookStatus">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="changeBookStatus">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="changeBookStatusResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="PrescoWsException">
+        <soap:fault name="PrescoWsException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
     <wsdl:operation name="deleteBook">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input name="deleteBook">
@@ -635,7 +671,17 @@
          <arg0>?</arg0>
       </ser:deleteBook>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/BookService/deleteBook"/></con:call></con:operation></con:interface><con:testSuite id="5cd0f346-cc1d-4b82-aa44-5b35520da28d" name="TestSuite AuthentificationService"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="7b5da303-24c4-465e-a6c1-89e12b6ef546" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase login" searchProperties="true"><con:settings/><con:testStep type="request" id="7fdc243c-c912-4f9a-b6fb-7dedb23dc8ca" name="login - passing test"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>AuthentificationServiceSoapBinding</con:interface><con:operation>login</con:operation><con:request name="login - passing test" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="bd4b64a8-ac9a-4b90-93fc-5cc227dda5e8"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/authentificationService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/BookService/deleteBook"/></con:call></con:operation><con:operation id="a1409a2e-4e90-434f-ac75-2aa0908ec539" isOneWay="false" action="" name="changeBookStatus" bindingOperationName="changeBookStatus" type="Request-Response" outputName="changeBookStatusResponse" inputName="changeBookStatus" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="a2dcc0ce-c65f-46da-bd51-40785275e13c" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/bookService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:changeBookStatus>
+         <!--Optional:-->
+         <arg0>?</arg0>
+         <!--Optional:-->
+         <arg1>?</arg1>
+      </ser:changeBookStatus>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/BookService/changeBookStatus"/></con:call></con:operation></con:interface><con:testSuite id="5cd0f346-cc1d-4b82-aa44-5b35520da28d" name="TestSuite AuthentificationService"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="7b5da303-24c4-465e-a6c1-89e12b6ef546" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase login" searchProperties="true"><con:settings/><con:testStep type="request" id="7fdc243c-c912-4f9a-b6fb-7dedb23dc8ca" name="login - passing test"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>AuthentificationServiceSoapBinding</con:interface><con:operation>login</con:operation><con:request name="login - passing test" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="bd4b64a8-ac9a-4b90-93fc-5cc227dda5e8"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/authentificationService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
    <soapenv:Header/>
    <soapenv:Body>
       <ser:login>
@@ -1788,7 +1834,7 @@ declare namespace ns1='http://services.prescows.form.brucella.fr/';
          </arg0>
       </ser:modifyBook>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="8c805c61-9164-4c04-9e31-5e4776e83717" name="SOAP Response"/><con:assertion type="Schema Compliance" id="f1874939-1542-4b64-9acf-d786c5897581" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="Simple Contains" id="0c54c68e-8e0f-4186-aef5-f2d9234f5b8e" name="Contains"><con:configuration><token>PrescoWsException</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Not SOAP Fault Assertion" id="f6d2c4b3-eb58-490b-964e-a1c8bf53862a" name="SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/BookService/modifyBook"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties><con:property><con:name>author</con:name><con:value>charles dupont</con:value></con:property><con:property><con:name>bookStatusId</con:name><con:value>3</con:value></con:property><con:property><con:name>comments</con:name><con:value>test</con:value></con:property><con:property><con:name>ean</con:name><con:value>9782720012007</con:value></con:property><con:property><con:name>emailTeachSend</con:name><con:value>false</con:value></con:property><con:property><con:name>prescriptionId</con:name><con:value>1</con:value></con:property><con:property><con:name>title</con:name><con:value>titre</con:value></con:property><con:property><con:name>bookId</con:name><con:value>14</con:value></con:property><con:property><con:name>emailSendDate</con:name><con:value>20-03-2019 18:00:00</con:value></con:property></con:properties></con:testCase><con:testCase id="194b556b-9b08-47e3-a1a9-1fb377be9a13" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase deleteBook" searchProperties="true"><con:settings/><con:testStep type="request" id="4702aa45-8a6e-45de-9ae0-8a398489458c" name="makeBook - passing test"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookServiceSoapBinding</con:interface><con:operation>makeBook</con:operation><con:request name="makeBook - passing test" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="040a5014-90fa-4218-90de-06a21719b860"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/bookService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="8c805c61-9164-4c04-9e31-5e4776e83717" name="SOAP Response"/><con:assertion type="Schema Compliance" id="f1874939-1542-4b64-9acf-d786c5897581" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="Simple Contains" id="0c54c68e-8e0f-4186-aef5-f2d9234f5b8e" name="Contains"><con:configuration><token>PrescoWsException</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Not SOAP Fault Assertion" id="f6d2c4b3-eb58-490b-964e-a1c8bf53862a" name="SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/BookService/modifyBook"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties><con:property><con:name>author</con:name><con:value>charles dupont</con:value></con:property><con:property><con:name>bookStatusId</con:name><con:value>3</con:value></con:property><con:property><con:name>comments</con:name><con:value>test</con:value></con:property><con:property><con:name>ean</con:name><con:value>9782720012007</con:value></con:property><con:property><con:name>emailTeachSend</con:name><con:value>false</con:value></con:property><con:property><con:name>prescriptionId</con:name><con:value>1</con:value></con:property><con:property><con:name>title</con:name><con:value>titre</con:value></con:property><con:property><con:name>bookId</con:name><con:value>14</con:value></con:property><con:property><con:name>emailSendDate</con:name><con:value>20-03-2019 18:00:00</con:value></con:property></con:properties></con:testCase><con:testCase id="194b556b-9b08-47e3-a1a9-1fb377be9a13" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase deleteBook" searchProperties="true"><con:settings/><con:testStep type="request" id="4702aa45-8a6e-45de-9ae0-8a398489458c" name="makeBook 2"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookServiceSoapBinding</con:interface><con:operation>makeBook</con:operation><con:request name="makeBook 2" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="040a5014-90fa-4218-90de-06a21719b860"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/bookService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
    <soapenv:Header/>
    <soapenv:Body>
       <ser:makeBook>
@@ -1811,7 +1857,7 @@ declare namespace ns1='http://services.prescows.form.brucella.fr/';
          </arg0>
       </ser:makeBook>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="6113be11-311c-4af3-b588-126a78d38777" name="SOAP Response"/><con:assertion type="SOAP Fault Assertion" id="fad0fe4e-7c98-43bb-900e-1a6f6066a3e7" name="Not SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/BookService/makeBook"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="Transfer bookId" id="253201df-8a0b-4bbb-826e-56606d592728"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>bookId</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>makeBook - passing test</con:sourceStep><con:sourcePath>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="6113be11-311c-4af3-b588-126a78d38777" name="SOAP Response"/><con:assertion type="SOAP Fault Assertion" id="fad0fe4e-7c98-43bb-900e-1a6f6066a3e7" name="Not SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/BookService/makeBook"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="Transfer bookId" id="253201df-8a0b-4bbb-826e-56606d592728"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>bookId</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>makeBook 2</con:sourceStep><con:sourcePath>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
 declare namespace ns1='http://services.prescows.form.brucella.fr/';
 
 /soap:Envelope/soap:Body/ns1:makeBookResponse/return/text()</con:sourcePath><con:targetType>bookId</con:targetType><con:targetStep>#TestCase#</con:targetStep><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="request" id="bd11620d-4839-4fda-9799-da1356e7fc2f" name="deleteBook - passing test"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookServiceSoapBinding</con:interface><con:operation>deleteBook</con:operation><con:request name="deleteBook - passing test" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="c07f1541-72f0-4fef-988b-83a0d77c11e7"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/bookService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
@@ -1822,4 +1868,113 @@ declare namespace ns1='http://services.prescows.form.brucella.fr/';
          <arg0>${#TestCase#bookId}</arg0>
       </ser:deleteBook>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="4a09fb94-7d4d-4c0d-bf9a-1662dbb0f438" name="SOAP Response"/><con:assertion type="SOAP Fault Assertion" id="530eec71-8a49-435a-80cc-f3deef08e978" name="Not SOAP Fault"/><con:assertion type="Simple Contains" id="c5d8d0c3-6333-4a54-835b-3f70a1a32357" name="Contains"><con:configuration><token>&lt;return>true&lt;/return></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Schema Compliance" id="1e14ef4c-033b-4240-ab26-2d09aeeb9833" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/BookService/deleteBook"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties><con:property><con:name>author</con:name><con:value>bob grapin</con:value></con:property><con:property><con:name>bookStatusId</con:name><con:value>2</con:value></con:property><con:property><con:name>comments</con:name><con:value>test comment</con:value></con:property><con:property><con:name>ean</con:name><con:value>9782720012001</con:value></con:property><con:property><con:name>emailTeachSend</con:name><con:value>false</con:value></con:property><con:property><con:name>prescriptionId</con:name><con:value>1</con:value></con:property><con:property><con:name>title</con:name><con:value>titre du livre</con:value></con:property><con:property><con:name>bookId</con:name><con:value>2</con:value></con:property><con:property><con:name>emailSendDate</con:name><con:value>01-03-2019 00:00:00</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="4a09fb94-7d4d-4c0d-bf9a-1662dbb0f438" name="SOAP Response"/><con:assertion type="SOAP Fault Assertion" id="530eec71-8a49-435a-80cc-f3deef08e978" name="Not SOAP Fault"/><con:assertion type="Simple Contains" id="c5d8d0c3-6333-4a54-835b-3f70a1a32357" name="Contains"><con:configuration><token>&lt;return>true&lt;/return></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Schema Compliance" id="1e14ef4c-033b-4240-ab26-2d09aeeb9833" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/BookService/deleteBook"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="e8ec061e-7db7-4257-ad24-2b2e2e42556c" name="makeBook"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookServiceSoapBinding</con:interface><con:operation>makeBook</con:operation><con:request name="makeBook" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="040a5014-90fa-4218-90de-06a21719b860"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/bookService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:makeBook>
+         <!--Optional:-->
+         <arg0>
+            <!--Optional:-->
+            <author>${#TestCase#author}</author>
+            <!--Optional:-->
+            <bookStatusId>${#TestCase#bookStatusId}</bookStatusId>
+            <!--Optional:-->
+            <comments>${#TestCase#comments}</comments>
+            <!--Optional:-->
+            <ean>${#TestCase#ean}</ean>
+            <!--Optional:-->
+            <emailTeacherSend>${#TestCase#emailTeachSend}</emailTeacherSend>
+            <!--Optional:-->
+            <prescriptionId>${#TestCase#prescriptionId}</prescriptionId>
+            <!--Optional:-->
+            <title>${#TestCase#title}</title>
+         </arg0>
+      </ser:makeBook>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="6113be11-311c-4af3-b588-126a78d38777" name="SOAP Response"/><con:assertion type="SOAP Fault Assertion" id="fad0fe4e-7c98-43bb-900e-1a6f6066a3e7" name="Not SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/BookService/makeBook"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="Transfer bookId 2" id="d7c9986a-e49e-49d2-873b-012c013e3dca"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>bookId</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>makeBook 2</con:sourceStep><con:sourcePath>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace ns1='http://services.prescows.form.brucella.fr/';
+
+/soap:Envelope/soap:Body/ns1:makeBookResponse/return/text()</con:sourcePath><con:targetType>bookId</con:targetType><con:targetStep>#TestCase#</con:targetStep><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="request" id="e9f5d9af-8244-4437-b120-4e18bfb90b8d" name="deleteBook - bookId null"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookServiceSoapBinding</con:interface><con:operation>deleteBook</con:operation><con:request name="deleteBook - bookId null" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="c07f1541-72f0-4fef-988b-83a0d77c11e7"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/bookService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:deleteBook>
+      </ser:deleteBook>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="4a09fb94-7d4d-4c0d-bf9a-1662dbb0f438" name="SOAP Response"/><con:assertion type="Simple Contains" id="c5d8d0c3-6333-4a54-835b-3f70a1a32357" name="Contains"><con:configuration><token>PrescoWsException</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Schema Compliance" id="1e14ef4c-033b-4240-ab26-2d09aeeb9833" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="Not SOAP Fault Assertion" id="bbfe800e-ab24-4f84-b003-4f7465eda62c" name="SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/BookService/deleteBook"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="8a9b7275-74cb-44b3-a393-94c144a951c9" name="makeBook 3"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookServiceSoapBinding</con:interface><con:operation>makeBook</con:operation><con:request name="makeBook 3" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="040a5014-90fa-4218-90de-06a21719b860"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/bookService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:makeBook>
+         <!--Optional:-->
+         <arg0>
+            <!--Optional:-->
+            <author>${#TestCase#author}</author>
+            <!--Optional:-->
+            <bookStatusId>${#TestCase#bookStatusId}</bookStatusId>
+            <!--Optional:-->
+            <comments>${#TestCase#comments}</comments>
+            <!--Optional:-->
+            <ean>${#TestCase#ean}</ean>
+            <!--Optional:-->
+            <emailTeacherSend>${#TestCase#emailTeachSend}</emailTeacherSend>
+            <!--Optional:-->
+            <prescriptionId>${#TestCase#prescriptionId}</prescriptionId>
+            <!--Optional:-->
+            <title>${#TestCase#title}</title>
+         </arg0>
+      </ser:makeBook>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="6113be11-311c-4af3-b588-126a78d38777" name="SOAP Response"/><con:assertion type="SOAP Fault Assertion" id="fad0fe4e-7c98-43bb-900e-1a6f6066a3e7" name="Not SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/BookService/makeBook"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="Transfer bookId 3" id="e8c35495-e42d-470d-8c26-d67d54e8d598"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>bookId</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>makeBook 2</con:sourceStep><con:sourcePath>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace ns1='http://services.prescows.form.brucella.fr/';
+
+/soap:Envelope/soap:Body/ns1:makeBookResponse/return/text()</con:sourcePath><con:targetType>bookId</con:targetType><con:targetStep>#TestCase#</con:targetStep><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="request" id="fe925052-9f99-41e3-895d-6531c4400c6c" name="deleteBook - book not found"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookServiceSoapBinding</con:interface><con:operation>deleteBook</con:operation><con:request name="deleteBook - book not found" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="c07f1541-72f0-4fef-988b-83a0d77c11e7"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/bookService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:deleteBook>
+         <!--Optional:-->
+         <arg0>${#TestCase#notBookId}</arg0>
+      </ser:deleteBook>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="4a09fb94-7d4d-4c0d-bf9a-1662dbb0f438" name="SOAP Response"/><con:assertion type="Simple Contains" id="c5d8d0c3-6333-4a54-835b-3f70a1a32357" name="Contains"><con:configuration><token>PrescoWsException</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Schema Compliance" id="1e14ef4c-033b-4240-ab26-2d09aeeb9833" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="Not SOAP Fault Assertion" id="928af54d-4997-4602-aa84-4347fcc2425d" name="SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/BookService/deleteBook"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties><con:property><con:name>author</con:name><con:value>bob grapin</con:value></con:property><con:property><con:name>bookStatusId</con:name><con:value>2</con:value></con:property><con:property><con:name>comments</con:name><con:value>test comment</con:value></con:property><con:property><con:name>ean</con:name><con:value>9782720012001</con:value></con:property><con:property><con:name>emailTeachSend</con:name><con:value>false</con:value></con:property><con:property><con:name>prescriptionId</con:name><con:value>1</con:value></con:property><con:property><con:name>title</con:name><con:value>titre du livre</con:value></con:property><con:property><con:name>bookId</con:name><con:value>2</con:value></con:property><con:property><con:name>emailSendDate</con:name><con:value>01-03-2019 00:00:00</con:value></con:property><con:property><con:name>notBookId</con:name><con:value>555</con:value></con:property></con:properties></con:testCase><con:testCase id="41eea717-ffc1-4909-a9af-a164d4fc5bf8" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase changeBookStatus" searchProperties="true"><con:settings/><con:testStep type="request" id="8b9f0f97-15a3-4bc6-97e8-c1277bcf552e" name="changeBookStatus - passing test"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookServiceSoapBinding</con:interface><con:operation>changeBookStatus</con:operation><con:request name="changeBookStatus - passing test" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="6a621f25-784a-4d57-815f-0aae23833ea5"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/bookService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:changeBookStatus>
+         <!--Optional:-->
+         <arg0>${#TestCase#bookId}</arg0>
+         <!--Optional:-->
+         <arg1>${#TestCase#bookStatusId}</arg1>
+      </ser:changeBookStatus>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="08949453-2269-41a9-b102-8bb2f9d13add" name="SOAP Response"/><con:assertion type="SOAP Fault Assertion" id="6b0776a4-1b54-4be3-955a-993f8214c112" name="Not SOAP Fault"/><con:assertion type="Schema Compliance" id="e6837675-73f2-4e5a-9a34-d4d99e4bdccb" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="Simple Contains" id="8ac7825f-38f2-4de7-b262-970612472cd3" name="Contains"><con:configuration><token>&lt;return>true&lt;/return></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/BookService/changeBookStatus"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="a40fcf17-6ae9-4eaf-af0f-3460da52ca16" name="changeBookStatus - bookId null"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookServiceSoapBinding</con:interface><con:operation>changeBookStatus</con:operation><con:request name="changeBookStatus - bookId null" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="6a621f25-784a-4d57-815f-0aae23833ea5"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/bookService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:changeBookStatus>
+         <!--Optional:-->
+         <arg1>${#TestCase#bookStatusId}</arg1>
+      </ser:changeBookStatus>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="08949453-2269-41a9-b102-8bb2f9d13add" name="SOAP Response"/><con:assertion type="Schema Compliance" id="e6837675-73f2-4e5a-9a34-d4d99e4bdccb" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="Simple Contains" id="8ac7825f-38f2-4de7-b262-970612472cd3" name="Contains"><con:configuration><token>PrescoWsException</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Not SOAP Fault Assertion" id="b1daefc7-a324-4ce1-86ec-c9d77717909c" name="SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/BookService/changeBookStatus"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="516d3949-6358-47f4-91d2-8ccfadb41182" name="changeBookStatus - bookStatusId null"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookServiceSoapBinding</con:interface><con:operation>changeBookStatus</con:operation><con:request name="changeBookStatus - bookStatusId null" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="6a621f25-784a-4d57-815f-0aae23833ea5"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/bookService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:changeBookStatus>
+         <!--Optional:-->
+         <arg0>${#TestCase#bookId}</arg0>
+      </ser:changeBookStatus>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="08949453-2269-41a9-b102-8bb2f9d13add" name="SOAP Response"/><con:assertion type="Schema Compliance" id="e6837675-73f2-4e5a-9a34-d4d99e4bdccb" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="Simple Contains" id="8ac7825f-38f2-4de7-b262-970612472cd3" name="Contains"><con:configuration><token>PrescoWsException</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Not SOAP Fault Assertion" id="4a6e05a6-995d-49c9-bd90-b5f8c68187b6" name="SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/BookService/changeBookStatus"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="ea86bde2-7099-48f6-8fcc-d23ae3efadfb" name="changeBookStatus - bookId and bookStatusId null"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookServiceSoapBinding</con:interface><con:operation>changeBookStatus</con:operation><con:request name="changeBookStatus - bookId and bookStatusId null" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="6a621f25-784a-4d57-815f-0aae23833ea5"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/bookService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:changeBookStatus>
+
+      </ser:changeBookStatus>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="08949453-2269-41a9-b102-8bb2f9d13add" name="SOAP Response"/><con:assertion type="Schema Compliance" id="e6837675-73f2-4e5a-9a34-d4d99e4bdccb" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="Simple Contains" id="8ac7825f-38f2-4de7-b262-970612472cd3" name="Contains"><con:configuration><token>PrescoWsException</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Not SOAP Fault Assertion" id="71aa6dac-4186-41fe-b784-8abf34feafd7" name="SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/BookService/changeBookStatus"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="a3eec25e-00d4-452f-86fe-f5a377fed768" name="changeBookStatus - bookNotFound"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookServiceSoapBinding</con:interface><con:operation>changeBookStatus</con:operation><con:request name="changeBookStatus - bookNotFound" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="6a621f25-784a-4d57-815f-0aae23833ea5"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/bookService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:changeBookStatus>
+         <!--Optional:-->
+         <arg0>${#TestCase#notBookId}</arg0>
+         <!--Optional:-->
+         <arg1>${#TestCase#bookStatusId}</arg1>
+      </ser:changeBookStatus>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="08949453-2269-41a9-b102-8bb2f9d13add" name="SOAP Response"/><con:assertion type="Schema Compliance" id="e6837675-73f2-4e5a-9a34-d4d99e4bdccb" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="Simple Contains" id="8ac7825f-38f2-4de7-b262-970612472cd3" name="Contains"><con:configuration><token>PrescoWsException</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Not SOAP Fault Assertion" id="935e152d-6821-425a-8e7e-96b424fffe00" name="SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/BookService/changeBookStatus"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties><con:property><con:name>bookId</con:name><con:value>1</con:value></con:property><con:property><con:name>bookStatusId</con:name><con:value>2</con:value></con:property><con:property><con:name>notBookId</con:name><con:value>555</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

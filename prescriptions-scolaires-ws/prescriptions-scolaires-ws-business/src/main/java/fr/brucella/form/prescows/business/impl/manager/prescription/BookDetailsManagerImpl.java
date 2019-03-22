@@ -60,7 +60,7 @@ public class BookDetailsManagerImpl extends AbstractManager implements BookDetai
 
   /** {@inheritDoc} */
   @Override
-  public Boolean modifyBook(Book book) throws TechnicalException, FunctionalException {
+  public Boolean modifyBook(final Book book) throws TechnicalException, FunctionalException {
 
     if(book == null) {
       LOG.error(messages.getString("bookDetailsManagerImpl.modifyBook.bookNull"));
@@ -90,7 +90,7 @@ public class BookDetailsManagerImpl extends AbstractManager implements BookDetai
 
   /** {@inheritDoc} */
   @Override
-  public Boolean deleteBook(Integer bookId) throws TechnicalException, FunctionalException {
+  public Boolean deleteBook(final Integer bookId) throws TechnicalException, FunctionalException {
 
     if(bookId == null) {
       LOG.error(messages.getString("bookDetailsManagerImpl.deleteBook.bookIdNull"));
@@ -106,5 +106,31 @@ public class BookDetailsManagerImpl extends AbstractManager implements BookDetai
     }
   }
 
+  /** {@inheritDoc} */
+  @Override
+  public Boolean changeBookStatus(final Integer bookId, final Integer bookStatusId) throws TechnicalException, FunctionalException {
 
+    if(bookId == null && bookStatusId == null) {
+      LOG.error(messages.getString("bookDetailsManagerImpl.changeBookStatus.bookIdAndBookStatusIdNull"));
+      throw new FunctionalException(messages.getString("bookDetailsManagerImpl.changeBookStatus.bookIdAndBookStatusIdNull"));
+    }
+    else if(bookId == null) {
+      LOG.error(messages.getString("bookDetailsManagerImpl.changeBookStatus.bookIdNull"));
+      throw new FunctionalException(messages.getString("bookDetailsManagerImpl.changeBookStatus.bookIdNull"));
+    }
+    else if(bookStatusId == null) {
+      LOG.error(messages.getString("bookDetailsManagerImpl.changeBookStatus.bookStatusId"));
+      throw new FunctionalException(messages.getString("bookDetailsManagerImpl.changeBookStatus.bookStatusId"));
+    }
+
+    try {
+      final Book book = this.getDaoFactory().getBookDao().getBook(bookId);
+      book.setBookStatusId(bookStatusId);
+      this.getDaoFactory().getBookDao().updateBook(book);
+      return true;
+    } catch (NotFoundException exception) {
+      LOG.error(exception.getMessage());
+      throw new FunctionalException(exception.getMessage(), exception);
+    }
+  }
 }
