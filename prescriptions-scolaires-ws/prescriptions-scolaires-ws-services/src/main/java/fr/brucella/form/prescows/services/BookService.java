@@ -6,6 +6,7 @@ import fr.brucella.form.prescows.entity.exceptions.PrescoWsException;
 import fr.brucella.form.prescows.entity.exceptions.PrescoWsFault;
 import fr.brucella.form.prescows.entity.exceptions.TechnicalException;
 import fr.brucella.form.prescows.entity.prescriptions.dto.BookFullDetailsDto;
+import fr.brucella.form.prescows.entity.prescriptions.dto.BookWithStatusDto;
 import fr.brucella.form.prescows.entity.prescriptions.model.Book;
 import java.util.List;
 import javax.jws.WebMethod;
@@ -184,7 +185,7 @@ public class BookService extends SpringBeanAutowiringSupport {
   /**
    * Return the list of book with full details for the prescription.
    *
-   * @param prescriptionId id of the prescription
+   * @param prescriptionId id of the prescription.
    * @return the list of book with full details for the prescription. If the prescription is not found, return empty list.
    * @throws PrescoWsException - Throws this exception if there is a technical problem.
    *
@@ -199,6 +200,34 @@ public class BookService extends SpringBeanAutowiringSupport {
 
     try {
       return this.managerFactory.getBookListingManager().getBookFullDetailsListPrescription(prescriptionId);
+    } catch (TechnicalException exception) {
+      LOG.error(exception.getMessage());
+      throw new PrescoWsException(
+          TECH_ERROR, exception, new PrescoWsFault(SERVER, exception.getMessage()));
+    } catch (FunctionalException exception) {
+      LOG.error(exception.getMessage());
+      throw new PrescoWsException(
+          FUNC_ERROR, exception, new PrescoWsFault(CLIENT, exception.getMessage()));
+    }
+  }
+
+  /**
+   * Return the list of book with book status for the prescription.
+   *
+   * @param prescriptionId id of the prescription.
+   * @return the list of book with book status for the prescription. If the prescription is not found, return empty list.
+   * @throws PrescoWsException - Throws this exception if there is a technical problem.
+   */
+  @WebMethod
+  public List<BookWithStatusDto> bookWithStatusListForPrescription(final Integer prescriptionId) throws PrescoWsException {
+
+    if(prescriptionId == null) {
+      LOG.error("prescriptionId null");
+      throw new PrescoWsException(FUNC_ERROR, new PrescoWsFault(CLIENT, "Paramètre incorrect. L'identifiant de la prescription ne peut être vide."));
+    }
+
+    try {
+      return this.managerFactory.getBookListingManager().getBookWithStatusListForPrescription(prescriptionId);
     } catch (TechnicalException exception) {
       LOG.error(exception.getMessage());
       throw new PrescoWsException(
