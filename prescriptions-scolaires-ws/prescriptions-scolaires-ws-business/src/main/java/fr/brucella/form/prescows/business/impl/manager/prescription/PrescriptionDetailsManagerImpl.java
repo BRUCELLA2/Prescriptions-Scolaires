@@ -5,6 +5,7 @@ import fr.brucella.form.prescows.business.impl.manager.AbstractManager;
 import fr.brucella.form.prescows.entity.exceptions.FunctionalException;
 import fr.brucella.form.prescows.entity.exceptions.NotFoundException;
 import fr.brucella.form.prescows.entity.exceptions.TechnicalException;
+import fr.brucella.form.prescows.entity.prescriptions.dto.PrescriptionFullDetailsDto;
 import fr.brucella.form.prescows.entity.prescriptions.model.Prescription;
 import fr.brucella.form.prescows.entity.prescriptions.model.ProcessingPrescription;
 import java.util.Set;
@@ -124,6 +125,24 @@ public class PrescriptionDetailsManagerImpl extends AbstractManager implements P
       processingPrescription.setProcessingStatus(true);
       this.getDaoFactory().getProcessingPrescriptionDao().updateProcessingPrescription(processingPrescription);
       return true;
+    } catch (NotFoundException exception) {
+      LOG.error(exception.getMessage());
+      throw new FunctionalException(exception.getMessage(), exception);
+    }
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  public PrescriptionFullDetailsDto getPrescriptionFullDetailsDto(Integer prescriptionId)
+      throws TechnicalException, FunctionalException {
+
+    if(prescriptionId == null) {
+      LOG.error(messages.getString("PrescriptionDetailsManager.getPrescriptionFullDetailsDto.prescriptionIdNull"));
+      throw new FunctionalException(messages.getString("PrescriptionDetailsManager.getPrescriptionFullDetailsDto.prescriptionIdNull"));
+    }
+
+    try {
+      return this.getDaoFactory().getPrescriptionDao().getPrescriptionFullDetailsDto(prescriptionId);
     } catch (NotFoundException exception) {
       LOG.error(exception.getMessage());
       throw new FunctionalException(exception.getMessage(), exception);

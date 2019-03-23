@@ -88,6 +88,70 @@ public class PrescriptionDaoImpl extends AbstractDao implements PrescriptionDao 
 
   /** {@inheritDoc} */
   @Override
+  public PrescriptionFullDetailsDto getPrescriptionFullDetailsDto(Integer prescriptionId)
+      throws TechnicalException, NotFoundException {
+
+    sql ="SELECT prescription.prescription_id, prescription.prescription_name, prescription.creation_date, prescription.user_id, prescription.purchase_deadline, prescription.validation_status, prescription.eple_id, city.city_name, department.department_name, eple.eple_name FROM prescription INNER JOIN eple ON eple.eple_id = prescription.eple_id INNER JOIN department ON department.department_id = eple.department_id INNER JOIN city ON city.city_id = eple.city_id INNER JOIN processing_prescription ON processing_prescription.prescription_id = prescription.prescription_id WHERE prescription.prescription_id = :prescriptionId";
+
+    final MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+    parameterSource.addValue("prescriptionId", prescriptionId);
+
+    final RowMapper<PrescriptionFullDetailsDto> prescriptionFullDetailsDtoRowMapper = new PrescriptionFullDetailsDtoRM();
+
+    PrescriptionFullDetailsDto prescriptionFullDetailsDto;
+
+    try {
+      prescriptionFullDetailsDto = this.getNamedJdbcTemplate().queryForObject(sql, parameterSource, prescriptionFullDetailsDtoRowMapper);
+    } catch (EmptyResultDataAccessException exception) {
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("SQL : " + sql);
+        LOG.debug("prescriptionId = " + prescriptionId);
+      }
+      LOG.error(exception.getMessage());
+      throw new NotFoundException(
+          messages.getString("prescriptionDao.getPrescriptionFullDetailsDto.notFound"), exception);
+    } catch (PermissionDeniedDataAccessException exception) {
+      LOG.error(exception.getMessage());
+      throw new TechnicalException(messages.getString(PERMISSION_DENIED), exception);
+    } catch (DataAccessResourceFailureException exception) {
+      LOG.error(exception.getMessage());
+      throw new TechnicalException(messages.getString(DATA_ACCESS_RESOURCE_FAILURE), exception);
+    } catch (DataAccessException exception) {
+      LOG.error(exception.getMessage());
+      throw new TechnicalException(messages.getString(DATA_ACCESS), exception);
+    }
+
+    // Add processing prescription list to processing full details dto
+
+    sql = "SELECT * FROM processing_prescription WHERE prescription_id = :prescriptionId";
+
+    final MapSqlParameterSource processingParameterSource = new MapSqlParameterSource();
+    processingParameterSource.addValue("prescriptionId", prescriptionFullDetailsDto.getPrescriptionId());
+    final RowMapper<ProcessingPrescription> processingPrescriptionRowMapper = new ProcessingPrescriptionRM();
+
+    try {
+      List<ProcessingPrescription> processingPrescriptionList = getNamedJdbcTemplate().query(sql, processingParameterSource, processingPrescriptionRowMapper);
+      if(processingPrescriptionList.isEmpty()) {
+        prescriptionFullDetailsDto.setProcessingPrescriptionList(new ArrayList<>());
+      } else {
+        prescriptionFullDetailsDto.setProcessingPrescriptionList(processingPrescriptionList);
+      }
+    } catch (PermissionDeniedDataAccessException exception) {
+      LOG.error(exception.getMessage());
+      throw new TechnicalException(messages.getString(PERMISSION_DENIED), exception);
+    } catch (DataAccessResourceFailureException exception) {
+      LOG.error(exception.getMessage());
+      throw new TechnicalException(messages.getString(DATA_ACCESS_RESOURCE_FAILURE), exception);
+    } catch (DataAccessException exception) {
+      LOG.error(exception.getMessage());
+      throw new TechnicalException(messages.getString(DATA_ACCESS), exception);
+    }
+
+    return prescriptionFullDetailsDto;
+  }
+
+  /** {@inheritDoc} */
+  @Override
   public List<PrescriptionWithEpleNameDto> getPrescriptionWithEpleNameDtoList(final Integer userId)
       throws TechnicalException {
 
@@ -128,7 +192,7 @@ public class PrescriptionDaoImpl extends AbstractDao implements PrescriptionDao 
     final MapSqlParameterSource parameterSource = new MapSqlParameterSource();
 
     final StringBuilder stringBuilder = new StringBuilder();
-    stringBuilder.append("SELECT prescription.prescription_id, prescription.prescription_name, prescription.creation_date, prescription.user_id, prescription.purchase_deadline, prescription.validation_status, prescription.eple_id, city.city_name, department.department_name FROM prescription INNER JOIN eple ON eple.eple_id = prescription.eple_id INNER JOIN department ON department.department_id = eple.department_id INNER JOIN city ON city.city_id = eple.city_id INNER JOIN processing_prescription ON processing_prescription.prescription_id = prescription.prescription_id WHERE 1=1");
+    stringBuilder.append("SELECT prescription.prescription_id, prescription.prescription_name, prescription.creation_date, prescription.user_id, prescription.purchase_deadline, prescription.validation_status, prescription.eple_id, city.city_name, department.department_name, eple.eple_name FROM prescription INNER JOIN eple ON eple.eple_id = prescription.eple_id INNER JOIN department ON department.department_id = eple.department_id INNER JOIN city ON city.city_id = eple.city_id INNER JOIN processing_prescription ON processing_prescription.prescription_id = prescription.prescription_id WHERE 1=1");
 
     if (searchCriteriaDto != null) {
       if (searchCriteriaDto.getDepartmentId() != null) {

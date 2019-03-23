@@ -115,7 +115,7 @@ public class BookService extends SpringBeanAutowiringSupport {
   }
 
   /**
-   * Delete a book
+   * Delete a book.
    *
    * @param bookId id of the book to delete.
    * @return true if delete is a success. Throws exception if not.

@@ -2,6 +2,7 @@ package fr.brucella.form.prescows.business.contracts.managers.prescription;
 
 import fr.brucella.form.prescows.entity.exceptions.FunctionalException;
 import fr.brucella.form.prescows.entity.exceptions.TechnicalException;
+import fr.brucella.form.prescows.entity.prescriptions.dto.PrescriptionFullDetailsDto;
 import fr.brucella.form.prescows.entity.prescriptions.model.Prescription;
 
 /**
@@ -52,4 +53,14 @@ public interface PrescriptionDetailsManager {
    * @throws FunctionalException - Throws this exception if the userId or the prescriptionId are null or if the ProcessingPrescription is not found.
    */
   Boolean prescriptionProcessed(final Integer prescriptionId, final Integer userId) throws TechnicalException, FunctionalException;
+
+  /**
+   * Return the prescription with the full details with the specified id.
+   *
+   * @param prescriptionId id of the prescription.
+   * @return the prescription with the full details with the specified id.
+   * @throws TechnicalException - wraps technical exception caused during data access.
+   * @throws FunctionalException - Throws this exception if the prescriptionId is null or if the prescription is not found.
+   */
+  PrescriptionFullDetailsDto getPrescriptionFullDetailsDto(final Integer prescriptionId) throws TechnicalException, FunctionalException;
 }

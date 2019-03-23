@@ -26,6 +26,16 @@ public interface PrescriptionDao {
   Prescription getPrescription(final Integer prescriptionId) throws TechnicalException, NotFoundException;
 
   /**
+   * Gives the PrescriptionFullDetailsDto with the specified id from the datastore.
+   *
+   * @param prescriptionId id of the prescription.
+   * @return the PrescriptionFullDetailsDto with the specified id.
+   * @throws TechnicalException - wraps technical exception caused during data access.
+   * @throws NotFoundException - This exception is throws if there is no technical exception and the prescription is not found.
+   */
+  PrescriptionFullDetailsDto getPrescriptionFullDetailsDto(final Integer prescriptionId) throws TechnicalException, NotFoundException;
+
+  /**
    * Gives the list of PrescriptionWithEpleNameDto for the user with the specified id from the datastore.
    *
    * @param userId id of the user.

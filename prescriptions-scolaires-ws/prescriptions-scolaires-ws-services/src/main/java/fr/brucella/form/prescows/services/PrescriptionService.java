@@ -5,6 +5,7 @@ import fr.brucella.form.prescows.entity.exceptions.FunctionalException;
 import fr.brucella.form.prescows.entity.exceptions.PrescoWsException;
 import fr.brucella.form.prescows.entity.exceptions.PrescoWsFault;
 import fr.brucella.form.prescows.entity.exceptions.TechnicalException;
+import fr.brucella.form.prescows.entity.prescriptions.dto.PrescriptionFullDetailsDto;
 import fr.brucella.form.prescows.entity.prescriptions.dto.PrescriptionWithEpleNameDto;
 import fr.brucella.form.prescows.entity.prescriptions.model.Prescription;
 import java.util.List;
@@ -204,6 +205,33 @@ public class PrescriptionService extends SpringBeanAutowiringSupport {
       throw new PrescoWsException(
           FUNC_ERROR, exception, new PrescoWsFault(CLIENT, exception.getMessage()));
     }
+  }
 
+  /**
+   * Return the prescription with the full details with the specified id.
+   *
+   * @param prescriptionId id of the prescription.
+   * @return the prescription with the full details with the specified id.
+   * @throws PrescoWsException - Throws this exception if there is a technical problem or if prescriptionId is null or if the prescription is not found.
+   */
+  @WebMethod
+  public PrescriptionFullDetailsDto getPrescriptionFullDetailsDto(final Integer prescriptionId) throws PrescoWsException {
+
+    if(prescriptionId == null) {
+      LOG.error("PrescriptionId null");
+      throw new PrescoWsException(FUNC_ERROR, new PrescoWsFault(CLIENT, "Paramètre incorrect. L'identifiant de la prescription ne peut être vide."));
+    }
+
+    try {
+      return this.managerFactory.getPrescriptionDetailsManager().getPrescriptionFullDetailsDto(prescriptionId);
+    } catch (TechnicalException exception) {
+      LOG.error(exception.getMessage());
+      throw new PrescoWsException(
+          TECH_ERROR, exception, new PrescoWsFault(SERVER, exception.getMessage()));
+    } catch (FunctionalException exception) {
+      LOG.error(exception.getMessage());
+      throw new PrescoWsException(
+          FUNC_ERROR, exception, new PrescoWsFault(CLIENT, exception.getMessage()));
+    }
   }
 }
