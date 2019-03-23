@@ -188,7 +188,7 @@ public class BookService extends SpringBeanAutowiringSupport {
    *
    * @param prescriptionId id of the prescription.
    * @return the list of book with full details for the prescription. If the prescription is not found, return empty list.
-   * @throws PrescoWsException - Throws this exception if there is a technical problem.
+   * @throws PrescoWsException - Throws this exception if there is a technical problem or if the prescriptionId is null.
    *
    */
   @WebMethod
@@ -217,7 +217,7 @@ public class BookService extends SpringBeanAutowiringSupport {
    *
    * @param prescriptionId id of the prescription.
    * @return the list of book with book status for the prescription. If the prescription is not found, return empty list.
-   * @throws PrescoWsException - Throws this exception if there is a technical problem.
+   * @throws PrescoWsException - Throws this exception if there is a technical problem or if the prescriptionId is null.
    */
   @WebMethod
   public List<BookWithStatusDto> bookWithStatusListForPrescription(final Integer prescriptionId) throws PrescoWsException {
@@ -245,7 +245,7 @@ public class BookService extends SpringBeanAutowiringSupport {
    *
    * @param searchCriteriaDto the search criteria.
    * @return the list of book corresponding to the search criteria. If no books is found, return empty list.
-   * @throws PrescoWsException - Throws this exception if there is a technical problem.
+   * @throws PrescoWsException - Throws this exception if there is a technical problem or if the searchCriteriaDto is null.
    */
   @WebMethod
   public List<BookFullDetailsDto> bookSearching(final SearchCriteriaDto searchCriteriaDto) throws PrescoWsException {

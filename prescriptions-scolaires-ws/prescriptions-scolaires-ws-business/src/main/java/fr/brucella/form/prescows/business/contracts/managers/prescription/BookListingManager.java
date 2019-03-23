@@ -28,7 +28,7 @@ public interface BookListingManager {
    * Return the list of book with book status for the prescription.
    *
    * @param prescriptionId id of the prescription.
-   * @return the list of book with book status for the prescription. If the prescription is not found, return empty list.
+   * @return the list of book with book status for the prescription. If no prescription is not found, return empty list.
    * @throws TechnicalException - wraps technical exception caused during data access.
    * @throws FunctionalException - This exception is throw if the prescriptionId is null.
    */

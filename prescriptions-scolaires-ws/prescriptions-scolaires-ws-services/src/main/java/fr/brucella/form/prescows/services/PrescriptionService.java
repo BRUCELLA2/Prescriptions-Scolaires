@@ -5,7 +5,9 @@ import fr.brucella.form.prescows.entity.exceptions.FunctionalException;
 import fr.brucella.form.prescows.entity.exceptions.PrescoWsException;
 import fr.brucella.form.prescows.entity.exceptions.PrescoWsFault;
 import fr.brucella.form.prescows.entity.exceptions.TechnicalException;
+import fr.brucella.form.prescows.entity.prescriptions.dto.PrescriptionWithEpleNameDto;
 import fr.brucella.form.prescows.entity.prescriptions.model.Prescription;
+import java.util.List;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import org.apache.commons.logging.Log;
@@ -145,7 +147,7 @@ public class PrescriptionService extends SpringBeanAutowiringSupport {
    * @param prescriptionId id of the prescription.
    * @param userId id of the user.
    * @return true if delete is a success. Throws exception if not.
-   * @throws PrescoWsException Throws this exception if there is a technical problem and if the ProcessingPrescription is not found.
+   * @throws PrescoWsException - Throws this exception if there is a technical problem and if the ProcessingPrescription is not found.
    */
   @WebMethod
   public boolean prescriptionProcessed(final Integer prescriptionId, final Integer userId) throws PrescoWsException {
@@ -158,9 +160,9 @@ public class PrescriptionService extends SpringBeanAutowiringSupport {
       LOG.error("PrescriptionId null");
       throw new PrescoWsException(FUNC_ERROR, new PrescoWsFault(CLIENT, "L'identifiant de la prescription est vide. La prescription ne peut être déclarée traitée."));
     }
-    else if(prescriptionId == null) {
+    else if(userId == null) {
       LOG.error("UserId null");
-      throw new PrescoWsException(FUNC_ERROR, new PrescoWsFault(CLIENT, "L'identifiant de l'ustilisateur est vide. La prescription ne peut être déclarée traitée."));
+      throw new PrescoWsException(FUNC_ERROR, new PrescoWsFault(CLIENT, "L'identifiant de l'utilisateur est vide. La prescription ne peut être déclarée traitée."));
     }
 
     try {
@@ -174,5 +176,34 @@ public class PrescriptionService extends SpringBeanAutowiringSupport {
       throw new PrescoWsException(
           FUNC_ERROR, exception, new PrescoWsFault(CLIENT, exception.getMessage()));
     }
+  }
+
+  /**
+   * Return the list of prescription for the user.
+   *
+   * @param userId id of the user.
+   * @return the list of prescription for the user. If no prescription is not found, return empty list.
+   * @throws PrescoWsException - Throws this exception if there is a technical problem or if userId is null.
+   */
+  @WebMethod
+  public List<PrescriptionWithEpleNameDto> prescriptionWithEpleNameListForUser(final Integer userId) throws PrescoWsException {
+
+    if(userId == null) {
+      LOG.error("UserId null");
+      throw new PrescoWsException(FUNC_ERROR, new PrescoWsFault(CLIENT, "Paramètre incorrect. L'identifiant de l'utilisateur ne peut être vide."));
+    }
+
+    try {
+      return this.managerFactory.getPrescriptionListingManager().getPrescriptionWithEpleNameListForUser(userId);
+    } catch (TechnicalException exception) {
+      LOG.error(exception.getMessage());
+      throw new PrescoWsException(
+          TECH_ERROR, exception, new PrescoWsFault(SERVER, exception.getMessage()));
+    } catch (FunctionalException exception) {
+      LOG.error(exception.getMessage());
+      throw new PrescoWsException(
+          FUNC_ERROR, exception, new PrescoWsFault(CLIENT, exception.getMessage()));
+    }
+
   }
 }
