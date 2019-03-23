@@ -56,7 +56,8 @@ INSERT INTO public.book_status (book_status_name)
 /* INSERT INTO book */
 INSERT INTO public.book (ean, title, author, comments, email_teacher_send, email_send_date, book_status_id, prescription_id) 
 	VALUES
-		('9782720012006', 'Kanji & Kana', 'Pierre Durmous', null, false, null, 1, 1);
+		('9782720012006', 'Kanji & Kana', 'Pierre Durmous', null, false, null, 1, 1),
+		('9784883191338', 'Minna no Nihongo I', 'Iwao Ogawa', null, false, null, 1, 1);
 
 /* INSERT INTO processing_book */
 INSERT INTO public.processing_book (user_id, book_id, processing_status) 
