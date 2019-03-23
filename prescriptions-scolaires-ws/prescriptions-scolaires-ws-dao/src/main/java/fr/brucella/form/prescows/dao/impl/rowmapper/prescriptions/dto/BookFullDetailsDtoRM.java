@@ -38,6 +38,11 @@ public class BookFullDetailsDtoRM implements RowMapper<BookFullDetailsDto> {
     bookFullDetailsDto.setBookStatusId(resultSet.getInt("book_status_id"));
     bookFullDetailsDto.setPrescriptionId(resultSet.getInt("prescription_id"));
     bookFullDetailsDto.setBookStatusName(resultSet.getString("book_status_name"));
+    if(resultSet.getTimestamp("purchase_deadline") == null) {
+      bookFullDetailsDto.setPurchaseDeadline(null);
+    } else {
+      bookFullDetailsDto.setPurchaseDeadline(resultSet.getTimestamp("purchase_deadline").toLocalDateTime());
+    }
     bookFullDetailsDto.setProcessingBookList(null);
 
     return bookFullDetailsDto;

@@ -4,6 +4,7 @@ import fr.brucella.form.prescows.entity.exceptions.FunctionalException;
 import fr.brucella.form.prescows.entity.exceptions.TechnicalException;
 import fr.brucella.form.prescows.entity.prescriptions.dto.BookFullDetailsDto;
 import fr.brucella.form.prescows.entity.prescriptions.dto.BookWithStatusDto;
+import fr.brucella.form.prescows.entity.searchcriteria.dto.SearchCriteriaDto;
 import java.util.List;
 
 /**
@@ -33,4 +34,13 @@ public interface BookListingManager {
    */
   List<BookWithStatusDto> getBookWithStatusListForPrescription(final Integer prescriptionId) throws TechnicalException, FunctionalException;
 
+  /**
+   * Return the list of book corresponding to the search criteria.
+   *
+   * @param searchCriteriaDto the search criteria.
+   * @return the list of book corresponding to the search criteria. If no books is found, return empty list.
+   * @throws TechnicalException - wraps technical exception caused during data access.
+   * @throws FunctionalException  - This exception is throw if the searchCriteriaDto is null.
+   */
+  List<BookFullDetailsDto> getBookSearching(final SearchCriteriaDto searchCriteriaDto) throws TechnicalException, FunctionalException;
 }

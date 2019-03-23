@@ -7,6 +7,7 @@ import fr.brucella.form.prescows.entity.exceptions.FunctionalException;
 import fr.brucella.form.prescows.entity.exceptions.TechnicalException;
 import fr.brucella.form.prescows.entity.prescriptions.dto.BookFullDetailsDto;
 import fr.brucella.form.prescows.entity.prescriptions.dto.BookWithStatusDto;
+import fr.brucella.form.prescows.entity.searchcriteria.dto.SearchCriteriaDto;
 import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -58,6 +59,19 @@ public class BookListingManagerImpl extends AbstractManager implements BookListi
     }
 
     return this.getDaoFactory().getBookDao().getBookWithStatusListPrescription(prescriptionId);
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  public List<BookFullDetailsDto> getBookSearching(SearchCriteriaDto searchCriteriaDto)
+      throws TechnicalException, FunctionalException {
+
+    if(searchCriteriaDto == null) {
+      LOG.error(messages.getString("BookListingManager.getBookSearching.searchCriteriaDtoNull"));;
+      throw new FunctionalException(messages.getString("BookListingManager.getBookSearching.searchCriteriaDtoNull"));
+    }
+
+    return this.getDaoFactory().getBookDao().getSearchBookFullDetailsList(searchCriteriaDto);
   }
 
 }

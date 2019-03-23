@@ -1,10 +1,14 @@
 package fr.brucella.form.prescows.entity.prescriptions.dto;
 
+import fr.brucella.form.prescows.entity.adapters.LocalDateWithTimeAdapter;
 import fr.brucella.form.prescows.entity.prescriptions.model.Book;
 import fr.brucella.form.prescows.entity.prescriptions.model.ProcessingBook;
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * Represents a BookFullDetails Data Transfert Object.
@@ -20,6 +24,10 @@ public class BookFullDetailsDto extends Book {
   @NotEmpty(message = "{bookStatus.name.empty}")
   @Size(min = 1, max = 50, message = "{bookStatus.name.size}")
   private String bookStatusName;
+
+  /** Deadline date for book purchase. Can't be null. */
+  @NotNull(message = "{prescription.purchaseDeadline.null}")
+  private LocalDateTime purchaseDeadline;
 
   /**
    * List of the ProcessingBook associated to the book.
@@ -73,6 +81,24 @@ public class BookFullDetailsDto extends Book {
     this.processingBookList = processingBookList;
   }
 
+  /**
+   * Gives the books purchase deadline.
+   *
+   * @return the books purchase deadline.
+   */
+  @XmlJavaTypeAdapter(value = LocalDateWithTimeAdapter.class)
+  public LocalDateTime getPurchaseDeadline() {
+    return purchaseDeadline;
+  }
+
+  /**
+   * Set the books purchase deadline.
+   *
+   * @param purchaseDeadline the books purchase deadline.
+   */
+  public void setPurchaseDeadline(LocalDateTime purchaseDeadline) {
+    this.purchaseDeadline = purchaseDeadline;
+  }
 
   // ===== Methods =====
 
@@ -81,6 +107,7 @@ public class BookFullDetailsDto extends Book {
   public String toString() {
     final StringBuilder sb = new StringBuilder("BookFullDetailsDto{");
     sb.append("bookStatusName='").append(bookStatusName).append('\'');
+    sb.append(", purchaseDeadline=").append(purchaseDeadline);
     sb.append(", processingBookList=").append(processingBookList);
     sb.append(super.toString());
     sb.append('}');

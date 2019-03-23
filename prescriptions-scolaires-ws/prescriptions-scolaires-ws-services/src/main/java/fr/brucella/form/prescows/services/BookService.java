@@ -8,6 +8,7 @@ import fr.brucella.form.prescows.entity.exceptions.TechnicalException;
 import fr.brucella.form.prescows.entity.prescriptions.dto.BookFullDetailsDto;
 import fr.brucella.form.prescows.entity.prescriptions.dto.BookWithStatusDto;
 import fr.brucella.form.prescows.entity.prescriptions.model.Book;
+import fr.brucella.form.prescows.entity.searchcriteria.dto.SearchCriteriaDto;
 import java.util.List;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -228,6 +229,34 @@ public class BookService extends SpringBeanAutowiringSupport {
 
     try {
       return this.managerFactory.getBookListingManager().getBookWithStatusListForPrescription(prescriptionId);
+    } catch (TechnicalException exception) {
+      LOG.error(exception.getMessage());
+      throw new PrescoWsException(
+          TECH_ERROR, exception, new PrescoWsFault(SERVER, exception.getMessage()));
+    } catch (FunctionalException exception) {
+      LOG.error(exception.getMessage());
+      throw new PrescoWsException(
+          FUNC_ERROR, exception, new PrescoWsFault(CLIENT, exception.getMessage()));
+    }
+  }
+
+  /**
+   * Return the list of book corresponding to the search criteria.
+   *
+   * @param searchCriteriaDto the search criteria.
+   * @return the list of book corresponding to the search criteria. If no books is found, return empty list.
+   * @throws PrescoWsException - Throws this exception if there is a technical problem.
+   */
+  @WebMethod
+  public List<BookFullDetailsDto> bookSearching(final SearchCriteriaDto searchCriteriaDto) throws PrescoWsException {
+
+    if(searchCriteriaDto == null) {
+      LOG.error("searchCriteriaDto null");
+      throw new PrescoWsException(FUNC_ERROR, new PrescoWsFault(CLIENT, "Paramètre incorrect. Les critères de recherche sont vide"));
+    }
+
+    try {
+      return this.managerFactory.getBookListingManager().getBookSearching(searchCriteriaDto);
     } catch (TechnicalException exception) {
       LOG.error(exception.getMessage());
       throw new PrescoWsException(

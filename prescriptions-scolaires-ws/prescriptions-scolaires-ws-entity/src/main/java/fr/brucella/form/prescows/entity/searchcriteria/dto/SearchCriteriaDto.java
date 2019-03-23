@@ -1,6 +1,8 @@
 package fr.brucella.form.prescows.entity.searchcriteria.dto;
 
+import fr.brucella.form.prescows.entity.adapters.LocalDateWithTimeAdapter;
 import java.time.LocalDateTime;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * Represents the searching criteriapres used by users.
@@ -96,6 +98,7 @@ public class SearchCriteriaDto {
    *
    * @return the purchase deadline.
    */
+  @XmlJavaTypeAdapter(value = LocalDateWithTimeAdapter.class)
   public LocalDateTime getPurchaseDeadline() {
     return purchaseDeadline;
   }
