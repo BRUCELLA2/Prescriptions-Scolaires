@@ -8,6 +8,7 @@ import fr.brucella.form.prescows.entity.exceptions.TechnicalException;
 import fr.brucella.form.prescows.entity.prescriptions.dto.PrescriptionFullDetailsDto;
 import fr.brucella.form.prescows.entity.prescriptions.dto.PrescriptionWithEpleNameDto;
 import fr.brucella.form.prescows.entity.prescriptions.model.Prescription;
+import fr.brucella.form.prescows.entity.searchcriteria.dto.SearchCriteriaDto;
 import java.util.List;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -224,6 +225,34 @@ public class PrescriptionService extends SpringBeanAutowiringSupport {
 
     try {
       return this.managerFactory.getPrescriptionDetailsManager().getPrescriptionFullDetailsDto(prescriptionId);
+    } catch (TechnicalException exception) {
+      LOG.error(exception.getMessage());
+      throw new PrescoWsException(
+          TECH_ERROR, exception, new PrescoWsFault(SERVER, exception.getMessage()));
+    } catch (FunctionalException exception) {
+      LOG.error(exception.getMessage());
+      throw new PrescoWsException(
+          FUNC_ERROR, exception, new PrescoWsFault(CLIENT, exception.getMessage()));
+    }
+  }
+
+  /**
+   * Return the list of prescription corresponding to the search criteria.
+   *
+   * @param searchCriteriaDto the search criteria.
+   * @return the list of prescription corresponding to the search criteria. If no prescription is found, return empty list.
+   * @throws PrescoWsException - Throws this exception if there is a technical problem or if the searchCriteriaDto is null.
+   */
+  @WebMethod
+  public List<PrescriptionFullDetailsDto> searchPrescription(final SearchCriteriaDto searchCriteriaDto) throws PrescoWsException {
+
+    if(searchCriteriaDto == null) {
+      LOG.error("searchCriteriaDto null");
+      throw new PrescoWsException(FUNC_ERROR, new PrescoWsFault(CLIENT, "Paramètre incorrect. Les critères de recherche sont vide"));
+    }
+
+    try {
+      return this.managerFactory.getPrescriptionListingManager().getPrescriptionSearching(searchCriteriaDto);
     } catch (TechnicalException exception) {
       LOG.error(exception.getMessage());
       throw new PrescoWsException(

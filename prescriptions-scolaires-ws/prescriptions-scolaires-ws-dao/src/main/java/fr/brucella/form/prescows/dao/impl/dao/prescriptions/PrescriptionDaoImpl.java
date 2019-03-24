@@ -192,7 +192,7 @@ public class PrescriptionDaoImpl extends AbstractDao implements PrescriptionDao 
     final MapSqlParameterSource parameterSource = new MapSqlParameterSource();
 
     final StringBuilder stringBuilder = new StringBuilder();
-    stringBuilder.append("SELECT prescription.prescription_id, prescription.prescription_name, prescription.creation_date, prescription.user_id, prescription.purchase_deadline, prescription.validation_status, prescription.eple_id, city.city_name, department.department_name, eple.eple_name FROM prescription INNER JOIN eple ON eple.eple_id = prescription.eple_id INNER JOIN department ON department.department_id = eple.department_id INNER JOIN city ON city.city_id = eple.city_id INNER JOIN processing_prescription ON processing_prescription.prescription_id = prescription.prescription_id WHERE 1=1");
+    stringBuilder.append("SELECT prescription.prescription_id, prescription.prescription_name, prescription.creation_date, prescription.user_id, prescription.purchase_deadline, prescription.validation_status, prescription.eple_id, city.city_name, department.department_name, eple.eple_name FROM prescription INNER JOIN eple ON eple.eple_id = prescription.eple_id INNER JOIN department ON department.department_id = eple.department_id INNER JOIN city ON city.city_id = eple.city_id LEFT OUTER JOIN processing_prescription ON processing_prescription.prescription_id = prescription.prescription_id WHERE 1=1");
 
     if (searchCriteriaDto != null) {
       if (searchCriteriaDto.getDepartmentId() != null) {
@@ -204,23 +204,23 @@ public class PrescriptionDaoImpl extends AbstractDao implements PrescriptionDao 
         parameterSource.addValue("cityId", searchCriteriaDto.getCityId());
       }
       if (!StringUtils.isEmpty(searchCriteriaDto.getRne())) {
-        stringBuilder.append(" AND eple.eple_rne = :epleRne");
+        stringBuilder.append(" AND eple.rne = :epleRne");
         parameterSource.addValue("epleRne", searchCriteriaDto.getRne());
       }
       if (searchCriteriaDto.getPurchaseDeadline() != null) {
-        stringBuilder.append(" AND prescription.purchase_deadline < :purchaseDeadline");
+        stringBuilder.append(" AND prescription.purchase_deadline > :purchaseDeadline");
         parameterSource.addValue("purchaseDeadline", searchCriteriaDto.getPurchaseDeadline());
       }
       if (searchCriteriaDto.getProcessing() != null && searchCriteriaDto.getUserId() != null) {
         if (searchCriteriaDto.getProcessing() == false) {
           stringBuilder.append(
-              " AND processing_prescription.prescription_id = prescription.prescription_id and processing_book.user_id = :userId and processing_prescription.processing_status = :processingStatus");
+              " AND processing_prescription.prescription_id = prescription.prescription_id and processing_prescription.user_id = :userId and processing_prescription.processing_status = :processingStatus");
           parameterSource.addValue("userId", searchCriteriaDto.getUserId());
           parameterSource.addValue("processingStatus", searchCriteriaDto.getProcessing());
         }
       }
     }
-
+    sql = stringBuilder.toString();
     final RowMapper<PrescriptionFullDetailsDto> prescriptionFullDetailsDtoRowMapper = new PrescriptionFullDetailsDtoRM();
 
     List<PrescriptionFullDetailsDto> prescriptionFullDetailsDtoList;

@@ -5,7 +5,9 @@ import fr.brucella.form.prescows.business.contracts.managers.prescription.Prescr
 import fr.brucella.form.prescows.business.impl.manager.AbstractManager;
 import fr.brucella.form.prescows.entity.exceptions.FunctionalException;
 import fr.brucella.form.prescows.entity.exceptions.TechnicalException;
+import fr.brucella.form.prescows.entity.prescriptions.dto.PrescriptionFullDetailsDto;
 import fr.brucella.form.prescows.entity.prescriptions.dto.PrescriptionWithEpleNameDto;
+import fr.brucella.form.prescows.entity.searchcriteria.dto.SearchCriteriaDto;
 import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -43,5 +45,18 @@ public class PrescriptionListingManagerImpl extends AbstractManager implements P
     }
 
     return this.getDaoFactory().getPrescriptionDao().getPrescriptionWithEpleNameDtoList(userId);
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  public List<PrescriptionFullDetailsDto> getPrescriptionSearching(SearchCriteriaDto searchCriteriaDto)
+      throws TechnicalException, FunctionalException {
+
+    if(searchCriteriaDto == null) {
+      LOG.error(messages.getString("PrescriptionListingManager.getPrescriptionSearching.searchCriteriaDtoNull"));;
+      throw new FunctionalException(messages.getString("PrescriptionListingManager.getPrescriptionSearching.searchCriteriaDtoNull"));
+    }
+
+    return this.getDaoFactory().getPrescriptionDao().getSearchPrescriptionFullDetailsList(searchCriteriaDto);
   }
 }
