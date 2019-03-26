@@ -10,7 +10,7 @@
     <!-- Bootstrap CSS Spacelab theme-->
     <link rel="stylesheet" href="/prescriptions-scolaires-web-enseignants/bootstrap/css/bootstrap.css">
 
-    <title>Accueil - Prescriptions Scolaires - Enseignants</title>
+    <title>Erreur - Prescriptions Scolaires - Enseignants</title>
 </head>
 
 <body>
@@ -26,7 +26,7 @@
     <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <s:a class="nav-link active" action="index">Accueil</s:a>
+                <s:a class="nav-link" action="index">Accueil</s:a>
             </li>
             <li class="nav-item">
                 <s:a class="nav-link" action="myPrescriptions">Mes listes</s:a>
@@ -36,15 +36,12 @@
     </nav>
 </div>
 
-<div class="container" style=""margin-top:30px">
-    <div class="card mb-4">
-        <div class="card-header text-white bg-secondary"><h4>Bienvenue sur l'application Prescriptions Scolaires - Enseignants.</h4></div>
-        <div class="card-body">
-            <p class="card-text">Cette application vous permet vous enseignants de préparer des listes de prescriptions scolaires et d'être informé si un livre de vos listes n'est pas disponible.</p>
-            <p class="card-text">Une fois les livres d'une prescription scolaire validés par un libraire, vous pourrez imprimer et distributer la liste sans crainte de devoir la recommencer à la dernière minute.</p>
-        </div>
+<div class="container" style="margin-top:30px">
+    <div class="alert alert-danger">
+        <h4>Malgré tous nos efforts, une erreur est survenue !</h4>
+        <p><s:actionerror/></p>
+        <p>Veuillez réessayer ou si nécessaire contacter l'administrateur du site.</p>
     </div>
-
 </div>
 
 <%@include file="/include/jsp/footer.jsp" %>
