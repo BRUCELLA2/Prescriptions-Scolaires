@@ -59,5 +59,13 @@
       <result name="error">/jsp/error.jsp</result>
     </action>
 
+    <!-- "myPrescriptions" Action -->
+    <action name="myPrescriptions"
+      class="fr.brucella.form.prescoweb.enseignants.actions.PrescriptionsListingAction"
+      method="doPrescriptionsListing">
+      <result name="success">/jsp/prescriptionsListing/prescriptionsListing.jsp</result>
+      <result name="error">/jsp/error.jsp</result>
+    </action>
+
   </package>
 </struts>

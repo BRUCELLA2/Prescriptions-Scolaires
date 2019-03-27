@@ -4,7 +4,6 @@ import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 import generated.authentificationserviceclient.AuthentificationService;
 import generated.authentificationserviceclient.AuthentificationService_Service;
-import generated.authentificationserviceclient.PrescoWsException;
 import generated.authentificationserviceclient.PrescoWsException_Exception;
 import generated.authentificationserviceclient.UserDetailsDto;
 import java.util.Map;
@@ -25,7 +24,6 @@ public class UserAction extends ActionSupport implements SessionAware, ServletRe
   /** User Action logger */
   private static final Log LOG = LogFactory.getLog(UserAction.class);
 
-  // ----- Input
   /** Login of the user. Max size is 30 characters. */
   private String userLogin;
 
