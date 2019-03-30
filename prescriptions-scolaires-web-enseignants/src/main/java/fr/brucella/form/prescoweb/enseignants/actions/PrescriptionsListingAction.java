@@ -78,6 +78,12 @@ public class PrescriptionsListingAction extends ActionSupport implements Session
 
   // ===== Methods =====
 
+  /**
+   * Display the list of prescriptions.
+   *
+   * @return ERROR if error occured.
+   *         SUCCESS otherwise.
+   */
   public String doPrescriptionsListing() {
 
     final PrescriptionService_Service prescriptionService = new PrescriptionService_Service();

@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "AuthentificationService", targetNamespace = "http://services.prescows.form.brucella.fr/", wsdlLocation = "http://prescriptions-scolaires-ws:8080/prescriptions-scolaires-ws-services/services/authentificationService?wsdl")
+@WebServiceClient(name = "AuthentificationService", targetNamespace = "http://services.prescows.form.brucella.fr/", wsdlLocation = "http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/authentificationService?wsdl")
 public class AuthentificationService_Service
     extends Service
 {
@@ -30,7 +30,7 @@ public class AuthentificationService_Service
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://prescriptions-scolaires-ws:8080/prescriptions-scolaires-ws-services/services/authentificationService?wsdl");
+            url = new URL("http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/authentificationService?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

@@ -67,5 +67,58 @@
       <result name="error">/jsp/error.jsp</result>
     </action>
 
+    <!-- "prescriptionDetails" Action -->
+    <action name="prescriptionDetails"
+      class="fr.brucella.form.prescoweb.enseignants.actions.PrescriptionDetailsAction"
+      method="doPrescriptionsDetails">
+      <result name="success">/jsp/prescriptionDetails/prescriptionDetails.jsp</result>
+      <result name="error">/jsp/error.jsp</result>
+    </action>
+
+    <!-- "newPrescription" Action -->
+    <action name="newPrescription"
+      class="fr.brucella.form.prescoweb.enseignants.actions.PrescriptionDetailsAction"
+      method="doNewPrescription">
+      <result name="success">/jsp/prescriptionDetails/prescriptionDetails.jsp</result>
+      <result name="input">/jsp/prescriptionDetails/prescriptionDetails.jsp</result>
+      <result name="error">/jsp/error.jsp</result>
+    </action>
+
+    <!-- "deletePrescription" Action -->
+    <action name="deletePrescription"
+      class="fr.brucella.form.prescoweb.enseignants.actions.PrescriptionDetailsAction"
+      method="doDeletePrescription">
+      <result name="success" type="redirectAction">
+        <param name="actionName">myPrescriptions</param>
+      </result>
+      <result name="error">/jsp/error.jsp</result>
+    </action>
+
+    <!-- "prescriptionCreation" Action -->
+    <action name="prescriptionCreation"
+      class="fr.brucella.form.prescoweb.enseignants.actions.PrescriptionDetailsAction"
+      method="doNewPrescription">
+      <result name="success" type="redirectAction">
+        <param name="actionName">prescriptionDetails</param>
+        <param name="parse">true</param>
+        <param name="prescriptionId">${prescriptionId}</param>
+      </result>
+      <result name="input">/jsp/prescriptionDetails/prescriptionDetails.jsp</result>
+      <result name="error">/jsp/error.jsp</result>
+    </action>
+
+    <!-- "prescriptionModification" Action -->
+    <action name="prescriptionModification"
+      class="fr.brucella.form.prescoweb.enseignants.actions.PrescriptionDetailsAction"
+      method="doPrescriptionModification">
+      <result name="success" type="redirectAction">
+        <param name="actionName">prescriptionDetails</param>
+        <param name="parse">true</param>
+        <param name="prescriptionId">${prescriptionId}</param>
+      </result>
+      <result name="input">/jsp/prescriptionDetails/prescriptionDetails.jsp</result>
+      <result name="error">/jsp/error.jsp</result>
+    </action>
+
   </package>
 </struts>

@@ -9,9 +9,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Classe Java pour prescription complex type.
- * 
+ *
  * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
- * 
+ *
  * <pre>
  * &lt;complexType name="prescription">
  *   &lt;complexContent>
@@ -29,8 +29,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "prescription", propOrder = {
@@ -48,180 +48,180 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class Prescription {
 
-    protected String creationDate;
-    protected Integer epleId;
-    protected Integer prescriptionId;
-    protected String prescriptionName;
-    protected String purchaseDeadline;
-    protected Integer userId;
-    protected Boolean validationStatus;
+  protected String creationDate;
+  protected Integer epleId;
+  protected Integer prescriptionId;
+  protected String prescriptionName;
+  protected String purchaseDeadline;
+  protected Integer userId;
+  protected Boolean validationStatus;
 
-    /**
-     * Obtient la valeur de la propriété creationDate.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getCreationDate() {
-        return creationDate;
-    }
+  /**
+   * Obtient la valeur de la propriété creationDate.
+   *
+   * @return
+   *     possible object is
+   *     {@link String }
+   *
+   */
+  public String getCreationDate() {
+    return creationDate;
+  }
 
-    /**
-     * Définit la valeur de la propriété creationDate.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setCreationDate(String value) {
-        this.creationDate = value;
-    }
+  /**
+   * Définit la valeur de la propriété creationDate.
+   *
+   * @param value
+   *     allowed object is
+   *     {@link String }
+   *
+   */
+  public void setCreationDate(String value) {
+    this.creationDate = value;
+  }
 
-    /**
-     * Obtient la valeur de la propriété epleId.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
-     */
-    public Integer getEpleId() {
-        return epleId;
-    }
+  /**
+   * Obtient la valeur de la propriété epleId.
+   *
+   * @return
+   *     possible object is
+   *     {@link Integer }
+   *
+   */
+  public Integer getEpleId() {
+    return epleId;
+  }
 
-    /**
-     * Définit la valeur de la propriété epleId.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
-     */
-    public void setEpleId(Integer value) {
-        this.epleId = value;
-    }
+  /**
+   * Définit la valeur de la propriété epleId.
+   *
+   * @param value
+   *     allowed object is
+   *     {@link Integer }
+   *
+   */
+  public void setEpleId(Integer value) {
+    this.epleId = value;
+  }
 
-    /**
-     * Obtient la valeur de la propriété prescriptionId.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
-     */
-    public Integer getPrescriptionId() {
-        return prescriptionId;
-    }
+  /**
+   * Obtient la valeur de la propriété prescriptionId.
+   *
+   * @return
+   *     possible object is
+   *     {@link Integer }
+   *
+   */
+  public Integer getPrescriptionId() {
+    return prescriptionId;
+  }
 
-    /**
-     * Définit la valeur de la propriété prescriptionId.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
-     */
-    public void setPrescriptionId(Integer value) {
-        this.prescriptionId = value;
-    }
+  /**
+   * Définit la valeur de la propriété prescriptionId.
+   *
+   * @param value
+   *     allowed object is
+   *     {@link Integer }
+   *
+   */
+  public void setPrescriptionId(Integer value) {
+    this.prescriptionId = value;
+  }
 
-    /**
-     * Obtient la valeur de la propriété prescriptionName.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getPrescriptionName() {
-        return prescriptionName;
-    }
+  /**
+   * Obtient la valeur de la propriété prescriptionName.
+   *
+   * @return
+   *     possible object is
+   *     {@link String }
+   *
+   */
+  public String getPrescriptionName() {
+    return prescriptionName;
+  }
 
-    /**
-     * Définit la valeur de la propriété prescriptionName.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setPrescriptionName(String value) {
-        this.prescriptionName = value;
-    }
+  /**
+   * Définit la valeur de la propriété prescriptionName.
+   *
+   * @param value
+   *     allowed object is
+   *     {@link String }
+   *
+   */
+  public void setPrescriptionName(String value) {
+    this.prescriptionName = value;
+  }
 
-    /**
-     * Obtient la valeur de la propriété purchaseDeadline.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getPurchaseDeadline() {
-        return purchaseDeadline;
-    }
+  /**
+   * Obtient la valeur de la propriété purchaseDeadline.
+   *
+   * @return
+   *     possible object is
+   *     {@link String }
+   *
+   */
+  public String getPurchaseDeadline() {
+    return purchaseDeadline;
+  }
 
-    /**
-     * Définit la valeur de la propriété purchaseDeadline.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setPurchaseDeadline(String value) {
-        this.purchaseDeadline = value;
-    }
+  /**
+   * Définit la valeur de la propriété purchaseDeadline.
+   *
+   * @param value
+   *     allowed object is
+   *     {@link String }
+   *
+   */
+  public void setPurchaseDeadline(String value) {
+    this.purchaseDeadline = value;
+  }
 
-    /**
-     * Obtient la valeur de la propriété userId.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
-     */
-    public Integer getUserId() {
-        return userId;
-    }
+  /**
+   * Obtient la valeur de la propriété userId.
+   *
+   * @return
+   *     possible object is
+   *     {@link Integer }
+   *
+   */
+  public Integer getUserId() {
+    return userId;
+  }
 
-    /**
-     * Définit la valeur de la propriété userId.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
-     */
-    public void setUserId(Integer value) {
-        this.userId = value;
-    }
+  /**
+   * Définit la valeur de la propriété userId.
+   *
+   * @param value
+   *     allowed object is
+   *     {@link Integer }
+   *
+   */
+  public void setUserId(Integer value) {
+    this.userId = value;
+  }
 
-    /**
-     * Obtient la valeur de la propriété validationStatus.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public Boolean isValidationStatus() {
-        return validationStatus;
-    }
+  /**
+   * Obtient la valeur de la propriété validationStatus.
+   *
+   * @return
+   *     possible object is
+   *     {@link Boolean }
+   *
+   */
+  public Boolean isValidationStatus() {
+    return validationStatus;
+  }
 
-    /**
-     * Définit la valeur de la propriété validationStatus.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setValidationStatus(Boolean value) {
-        this.validationStatus = value;
-    }
+  /**
+   * Définit la valeur de la propriété validationStatus.
+   *
+   * @param value
+   *     allowed object is
+   *     {@link Boolean }
+   *
+   */
+  public void setValidationStatus(Boolean value) {
+    this.validationStatus = value;
+  }
 
 }
