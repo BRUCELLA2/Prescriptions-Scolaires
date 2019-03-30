@@ -60,6 +60,23 @@ public class BookDetailsManagerImpl extends AbstractManager implements BookDetai
 
   /** {@inheritDoc} */
   @Override
+  public Book bookInformations(final Integer bookId) throws TechnicalException, FunctionalException {
+
+    if(bookId == null) {
+      LOG.error(messages.getString("bookDetailsManagerImpl.bookInformations.bookIdNull"));
+      throw new FunctionalException(messages.getString("bookDetailsManagerImpl.bookInformations.bookIdNull"));
+    }
+
+    try {
+      return this.getDaoFactory().getBookDao().getBook(bookId);
+    } catch (NotFoundException exception) {
+      LOG.error(exception.getMessage());
+      throw new FunctionalException(exception.getMessage(), exception);
+    }
+  }
+
+  /** {@inheritDoc} */
+  @Override
   public Boolean modifyBook(final Book book) throws TechnicalException, FunctionalException {
 
     if(book == null) {

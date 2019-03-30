@@ -91,7 +91,7 @@ public class PrescriptionDaoImpl extends AbstractDao implements PrescriptionDao 
   public PrescriptionFullDetailsDto getPrescriptionFullDetailsDto(Integer prescriptionId)
       throws TechnicalException, NotFoundException {
 
-    sql ="SELECT prescription.prescription_id, prescription.prescription_name, prescription.creation_date, prescription.user_id, prescription.purchase_deadline, prescription.validation_status, prescription.eple_id, city.city_name, department.department_name, eple.eple_name FROM prescription INNER JOIN eple ON eple.eple_id = prescription.eple_id INNER JOIN department ON department.department_id = eple.department_id INNER JOIN city ON city.city_id = eple.city_id INNER JOIN processing_prescription ON processing_prescription.prescription_id = prescription.prescription_id WHERE prescription.prescription_id = :prescriptionId";
+    sql ="SELECT prescription.prescription_id, prescription.prescription_name, prescription.creation_date, prescription.user_id, prescription.purchase_deadline, prescription.validation_status, prescription.eple_id, city.city_name, department.department_name, eple.eple_name FROM prescription INNER JOIN eple ON eple.eple_id = prescription.eple_id INNER JOIN department ON department.department_id = eple.department_id INNER JOIN city ON city.city_id = eple.city_id LEFT OUTER JOIN processing_prescription ON processing_prescription.prescription_id = prescription.prescription_id WHERE prescription.prescription_id = :prescriptionId";
 
     final MapSqlParameterSource parameterSource = new MapSqlParameterSource();
     parameterSource.addValue("prescriptionId", prescriptionId);

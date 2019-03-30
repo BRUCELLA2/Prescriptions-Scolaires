@@ -23,6 +23,16 @@ public interface BookDetailsManager {
   Integer addBook(final Book book) throws TechnicalException, FunctionalException;
 
   /**
+   * Return the book with the id corresponding.
+   *
+   * @param bookId id of the book.
+   * @return the book with the id corresponding.
+   * @throws TechnicalException - wraps technical exception caused during data access.
+   * @throws FunctionalException - This exception is throw if the bookId is null or if the book is not found.
+   */
+  Book bookInformations(final Integer bookId) throws TechnicalException, FunctionalException;
+
+  /**
    * Modify a book.
    *
    * @param book the book with the updated informations to save in datastore.

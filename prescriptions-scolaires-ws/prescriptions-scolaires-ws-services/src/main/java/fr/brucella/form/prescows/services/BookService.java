@@ -87,6 +87,34 @@ public class BookService extends SpringBeanAutowiringSupport {
   }
 
   /**
+   * Return the book with the id corresponding.
+   *
+   * @param bookId id of the book.
+   * @return the book with the id corresponding.
+   * @throws PrescoWsException - Throws this exception if there is a technical problem or if the book id is null or if the book is not found.
+   */
+  @WebMethod
+  public Book bookInformations(final Integer bookId) throws PrescoWsException {
+
+    if(bookId == null) {
+      LOG.error("bookId null");
+      throw new PrescoWsException(FUNC_ERROR, new PrescoWsFault(CLIENT, "L'identifiant du livre est vide. Impossible d'obtenir les informations du livre."));
+    }
+
+    try {
+      return this.managerFactory.getBookDetailsManager().bookInformations(bookId);
+    } catch (TechnicalException exception) {
+      LOG.error(exception.getMessage());
+      throw new PrescoWsException(
+          TECH_ERROR, exception, new PrescoWsFault(SERVER, exception.getMessage()));
+    } catch (FunctionalException exception) {
+      LOG.error(exception.getMessage());
+      throw new PrescoWsException(
+          FUNC_ERROR, exception, new PrescoWsFault(CLIENT, exception.getMessage()));
+    }
+  }
+
+  /**
    * Modify a book.
    *
    * @param book the book with the updated informations to save in datastore.
