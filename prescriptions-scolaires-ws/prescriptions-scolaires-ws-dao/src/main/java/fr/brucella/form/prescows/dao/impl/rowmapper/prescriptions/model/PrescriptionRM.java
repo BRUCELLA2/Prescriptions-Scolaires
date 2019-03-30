@@ -38,6 +38,7 @@ public class PrescriptionRM implements RowMapper<Prescription> {
     }
     prescription.setValidationStatus(resultSet.getBoolean("validation_status"));
     prescription.setEpleId(resultSet.getInt("eple_id"));
+    prescription.setHeadcount(resultSet.getInt("headcount"));
 
     return prescription;
   }

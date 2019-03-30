@@ -43,6 +43,7 @@ public class PrescriptionFullDetailsDtoRM implements RowMapper<PrescriptionFullD
     prescriptionFullDetailsDto.setCityName(resultSet.getString("city_name"));
     prescriptionFullDetailsDto.setDepartmentName(resultSet.getString("department_name"));
     prescriptionFullDetailsDto.setProcessingPrescriptionList(null);
+    prescriptionFullDetailsDto.setHeadcount(resultSet.getInt("headcount"));
 
     return prescriptionFullDetailsDto;
   }

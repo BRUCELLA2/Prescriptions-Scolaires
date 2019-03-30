@@ -42,6 +42,9 @@ public class Prescription {
   @NotNull(message = "{prescription.epleId.null}")
   private Integer epleId;
 
+  /** headcount of the prescription. Can't be null. */
+  @NotNull(message = "{prescription.headcount.null")
+  private Integer headcount;
 
   // ===== Constructor =====
 
@@ -181,6 +184,24 @@ public class Prescription {
     this.epleId = epleId;
   }
 
+  /**
+   * Gives the headcount of the prescription.
+   *
+   * @return the headcount of the prescription.
+   */
+  public Integer getHeadcount() {
+    return headcount;
+  }
+
+  /**
+   * Set the headcount of the prescription.
+   *
+   * @param headcount the headcount of the prescription.
+   */
+  public void setHeadcount(final Integer headcount) {
+    this.headcount = headcount;
+  }
+
   // ===== Methods =====
 
   /** {@inheritDoc} **/
@@ -194,7 +215,9 @@ public class Prescription {
     sb.append(", purchaseDeadline=").append(purchaseDeadline);
     sb.append(", validationStatus=").append(validationStatus);
     sb.append(", epleId=").append(epleId);
+    sb.append(", headcount=").append(headcount);
     sb.append('}');
     return sb.toString();
   }
+
 }

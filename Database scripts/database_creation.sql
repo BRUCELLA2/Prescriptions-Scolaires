@@ -86,6 +86,7 @@ CREATE TABLE public.prescription (
                 purchase_deadline TIMESTAMP NOT NULL,
                 validation_status BOOLEAN DEFAULT false NOT NULL,
                 eple_id INTEGER NOT NULL,
+                headcount INTEGER DEFAULT 0 NOT NULL,
                 CONSTRAINT prescription_pk PRIMARY KEY (prescription_id)
 );
 

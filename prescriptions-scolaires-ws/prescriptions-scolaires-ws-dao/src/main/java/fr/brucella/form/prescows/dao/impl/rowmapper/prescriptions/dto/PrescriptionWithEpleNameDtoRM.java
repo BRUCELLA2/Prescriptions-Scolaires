@@ -39,6 +39,7 @@ public class PrescriptionWithEpleNameDtoRM implements RowMapper<PrescriptionWith
     prescriptionWithEpleNameDto.setValidationStatus(resultSet.getBoolean("validation_status"));
     prescriptionWithEpleNameDto.setEpleId(resultSet.getInt("eple_id"));
     prescriptionWithEpleNameDto.setEpleName(resultSet.getString("eple_name"));
+    prescriptionWithEpleNameDto.setHeadcount(resultSet.getInt("headcount"));
 
     return prescriptionWithEpleNameDto;
   }

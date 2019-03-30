@@ -91,7 +91,7 @@ public class PrescriptionDaoImpl extends AbstractDao implements PrescriptionDao 
   public PrescriptionFullDetailsDto getPrescriptionFullDetailsDto(Integer prescriptionId)
       throws TechnicalException, NotFoundException {
 
-    sql ="SELECT prescription.prescription_id, prescription.prescription_name, prescription.creation_date, prescription.user_id, prescription.purchase_deadline, prescription.validation_status, prescription.eple_id, city.city_name, department.department_name, eple.eple_name FROM prescription INNER JOIN eple ON eple.eple_id = prescription.eple_id INNER JOIN department ON department.department_id = eple.department_id INNER JOIN city ON city.city_id = eple.city_id LEFT OUTER JOIN processing_prescription ON processing_prescription.prescription_id = prescription.prescription_id WHERE prescription.prescription_id = :prescriptionId";
+    sql ="SELECT prescription.prescription_id, prescription.prescription_name, prescription.creation_date, prescription.user_id, prescription.purchase_deadline, prescription.validation_status, prescription.eple_id, prescription.headcount, city.city_name, department.department_name, eple.eple_name FROM prescription INNER JOIN eple ON eple.eple_id = prescription.eple_id INNER JOIN department ON department.department_id = eple.department_id INNER JOIN city ON city.city_id = eple.city_id LEFT OUTER JOIN processing_prescription ON processing_prescription.prescription_id = prescription.prescription_id WHERE prescription.prescription_id = :prescriptionId";
 
     final MapSqlParameterSource parameterSource = new MapSqlParameterSource();
     parameterSource.addValue("prescriptionId", prescriptionId);
@@ -155,7 +155,7 @@ public class PrescriptionDaoImpl extends AbstractDao implements PrescriptionDao 
   public List<PrescriptionWithEpleNameDto> getPrescriptionWithEpleNameDtoList(final Integer userId)
       throws TechnicalException {
 
-    sql = "SELECT prescription.prescription_id, prescription.prescription_name, prescription.creation_date, prescription.user_id, prescription.purchase_deadline, prescription.validation_status, prescription.eple_id, eple.eple_name FROM prescription INNER JOIN eple ON prescription.eple_id = eple.eple_id WHERE prescription.user_id = :userId";
+    sql = "SELECT prescription.prescription_id, prescription.prescription_name, prescription.creation_date, prescription.user_id, prescription.purchase_deadline, prescription.validation_status, prescription.eple_id, prescription.headcount, eple.eple_name FROM prescription INNER JOIN eple ON prescription.eple_id = eple.eple_id WHERE prescription.user_id = :userId";
 
     final MapSqlParameterSource parameterSource = new MapSqlParameterSource();
     parameterSource.addValue("userId", userId);
@@ -192,7 +192,7 @@ public class PrescriptionDaoImpl extends AbstractDao implements PrescriptionDao 
     final MapSqlParameterSource parameterSource = new MapSqlParameterSource();
 
     final StringBuilder stringBuilder = new StringBuilder();
-    stringBuilder.append("SELECT prescription.prescription_id, prescription.prescription_name, prescription.creation_date, prescription.user_id, prescription.purchase_deadline, prescription.validation_status, prescription.eple_id, city.city_name, department.department_name, eple.eple_name FROM prescription INNER JOIN eple ON eple.eple_id = prescription.eple_id INNER JOIN department ON department.department_id = eple.department_id INNER JOIN city ON city.city_id = eple.city_id LEFT OUTER JOIN processing_prescription ON processing_prescription.prescription_id = prescription.prescription_id WHERE 1=1");
+    stringBuilder.append("SELECT prescription.prescription_id, prescription.prescription_name, prescription.creation_date, prescription.user_id, prescription.purchase_deadline, prescription.validation_status, prescription.eple_id, prescription.headcount, city.city_name, department.department_name, eple.eple_name FROM prescription INNER JOIN eple ON eple.eple_id = prescription.eple_id INNER JOIN department ON department.department_id = eple.department_id INNER JOIN city ON city.city_id = eple.city_id LEFT OUTER JOIN processing_prescription ON processing_prescription.prescription_id = prescription.prescription_id WHERE 1=1");
 
     if (searchCriteriaDto != null) {
       if (searchCriteriaDto.getDepartmentId() != null) {
@@ -279,7 +279,7 @@ public class PrescriptionDaoImpl extends AbstractDao implements PrescriptionDao 
   @Override
   public void updatePrescription(final Prescription prescription) throws TechnicalException, NotFoundException {
 
-    sql = "UPDATE prescription SET prescription_name = :prescriptionName, creation_date = :creationDate, user_id = :userId, purchase_deadline = :purchaseDeadline, validation_status = :validationStatus, eple_id = :epleId WHERE prescription_id = :prescriptionId";
+    sql = "UPDATE prescription SET prescription_name = :prescriptionName, creation_date = :creationDate, user_id = :userId, purchase_deadline = :purchaseDeadline, validation_status = :validationStatus, eple_id = :epleId, headcount = :headcount WHERE prescription_id = :prescriptionId";
 
     final SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(prescription);
 
@@ -316,7 +316,7 @@ public class PrescriptionDaoImpl extends AbstractDao implements PrescriptionDao 
   @Override
   public int insertPrescription(final Prescription prescription) throws TechnicalException {
 
-    sql = "INSERT INTO prescription (prescription_id, prescription_name, creation_date, user_id, purchase_deadline, validation_status, eple_id) VALUES (DEFAULT, :prescriptionName, :creationDate, :userId, :purchaseDeadline, :validationStatus, :epleId)";
+    sql = "INSERT INTO prescription (prescription_id, prescription_name, creation_date, user_id, purchase_deadline, validation_status, eple_id, headcount) VALUES (DEFAULT, :prescriptionName, :creationDate, :userId, :purchaseDeadline, :validationStatus, :epleId, :headcount)";
 
     final KeyHolder keyHolder = new GeneratedKeyHolder();
     final SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(prescription);

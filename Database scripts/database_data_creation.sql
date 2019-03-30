@@ -38,10 +38,10 @@ INSERT INTO public.users_eple (user_id, eple_id)
 		(4, 2);
 
 /* INSERT INTO prescription */
-INSERT INTO public.prescription (prescription_name, creation_date, user_id, purchase_deadline, validation_status, eple_id) 
+INSERT INTO public.prescription (prescription_name, creation_date, user_id, purchase_deadline, validation_status, eple_id, headcount) 
 	VALUES
-		('Cours japonais débutant', '2019-01-15 09:15:00', 2, '2019-09-01 00:00:00', false, 1),
-		('Robot et IA', '2019-03-01 08:00:00', 4, '2019-06-01 00:00:00', false, 2);
+		('Cours japonais débutant', '2019-01-15 09:15:00', 2, '2019-09-01 00:00:00', false, 1, 35),
+		('Robot et IA', '2019-03-01 08:00:00', 4, '2019-06-01 00:00:00', false, 2, 25);
 
 /* INSERT INTO processing_prescription */
 INSERT INTO public.processing_prescription (user_id, prescription_id, processing_status) 
