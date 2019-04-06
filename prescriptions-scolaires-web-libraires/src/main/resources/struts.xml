@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+  "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+  "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+  <package name="default" extends="struts-default">
+
+    <!-- Interceptors -->
+    <interceptors>
+      <interceptor name="loginInterceptor"
+        class="fr.brucella.form.prescoweb.libraires.interceptor.LoginInterceptor" />
+      <interceptor-stack name="loginStack">
+        <interceptor-ref name="loginInterceptor"/>
+        <interceptor-ref name="defaultStack"/>
+      </interceptor-stack>
+    </interceptors>
+
+    <!-- Default Interceptor -->
+    <default-interceptor-ref name="loginStack"/>
+
+    <!-- Default Action -->
+    <default-action-ref name="index"/>
+
+    <!-- Global Results -->
+    <global-results>
+      <result name="error">/jsp/error.jsp</result>
+      <result name="index">/jsp/index.jsp</result>
+    </global-results>
+
+    <!-- "Index" Action -->
+    <action name="index">
+      <result>/jsp/index.jsp</result>
+    </action>
+
+    <!-- "Login" Action -->
+    <action name="login"
+      class="fr.brucella.form.prescoweb.libraires.actions.UserAction"
+      method="doLogin">
+      <result name="success">/jsp/index.jsp</result>
+      <result name="input">/jsp/users/login.jsp</result>
+      <result name="error">/jsp/error.jsp</result>
+    </action>
+
+    <!-- "Logout" Action -->
+    <action name="logout"
+      class="fr.brucella.form.prescoweb.libraires.actions.UserAction"
+      method="doLogout">
+      <result name="success">/jsp/index.jsp</result>
+      <result name="error">/jsp/error.jsp</result>
+    </action>
+
+    <!-- "userModification" Action -->
+    <action name="userModification"
+      class="fr.brucella.form.prescoweb.libraires.actions.UserAction"
+      method="doModification">
+      <result name="success">/jsp/index.jsp</result>
+      <result name="input">/jsp/users/userModification.jsp</result>
+      <result name="error">/jsp/error.jsp</result>
+    </action>
+
+    <!-- "search" Action -->
+    <action name="search"
+      class="fr.brucella.form.prescoweb.libraires.actions.SearchAction"
+      method="doSearch">
+      <result name="success">/jsp/search/search.jsp</result>
+      <result name="input">/jsp/search/search.jsp</result>
+      <result name="error">/jsp/error.jsp</result>
+    </action>
+
+  </package>
+</struts>
