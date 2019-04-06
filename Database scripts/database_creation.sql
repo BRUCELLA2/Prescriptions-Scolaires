@@ -214,20 +214,20 @@ NOT DEFERRABLE;
 ALTER TABLE public.book ADD CONSTRAINT prescriptions_book_fk
 FOREIGN KEY (prescription_id)
 REFERENCES public.prescription (prescription_id)
-ON DELETE NO ACTION
+ON DELETE CASCADE
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
 ALTER TABLE public.processing_prescription ADD CONSTRAINT prescription_processing_prescription_fk
 FOREIGN KEY (prescription_id)
 REFERENCES public.prescription (prescription_id)
-ON DELETE NO ACTION
+ON DELETE CASCADE
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
 ALTER TABLE public.processing_book ADD CONSTRAINT book_processing_book_fk
 FOREIGN KEY (book_id)
 REFERENCES public.book (book_id)
-ON DELETE NO ACTION
+ON DELETE CASCADE
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
