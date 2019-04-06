@@ -124,15 +124,15 @@
                                         <td><s:property value="author"/></td>
                                         <td><s:property value="nameStatus"/></td>
                                         <td>
-                                            <s:a class="btn btn-primary text-center" action="bookModification">
+                                            <s:a class="btn btn-primary text-center" action="bookDetails">
                                                 <s:param name="bookId" value="bookId"/>
-                                                <s:param name="prescriptionId" value="%{prescription.prescriptionId}"/>
                                                 Modifier
                                             </s:a>
                                         </td>
                                         <td>
                                             <s:a class="btn btn-primary text-center" action="deleteBook">
                                                 <s:param name="bookId" value="bookId"/>
+                                                <s:param name="prescriptionId" value="prescriptionId"/>
                                                 Supprimer
                                             </s:a>
                                         </td>
@@ -140,8 +140,8 @@
                                 </s:iterator>
                                 <tr>
                                     <td>
-                                        <s:a class="btn btn-primary text-center" action="newBook">
-                                            <s:param name="prescriptionId" value="%{prescription.prescriptionId}"/>
+                                        <s:a class="btn btn-primary text-center" action="bookCreation">
+                                            <s:param name="prescriptionId" value="prescriptionId"/>
                                             Nouveau livre
                                         </s:a>
                                     </td>

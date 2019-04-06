@@ -6,6 +6,7 @@ import generated.authentificationserviceclient.UserDetailsDto;
 import generated.bookserviceclient.Book;
 import generated.bookserviceclient.BookService;
 import generated.bookserviceclient.BookService_Service;
+import generated.bookserviceclient.PrescoWsException_Exception;
 import generated.prescriptionserviceclient.PrescriptionService;
 import generated.prescriptionserviceclient.PrescriptionService_Service;
 import java.util.Map;
@@ -25,6 +26,8 @@ public class BookDetailsAction extends ActionSupport implements SessionAware, Se
 
   /** User Action logger. */
   private static final Log LOG = LogFactory.getLog(BookDetailsAction.class);
+
+  private static final Integer BOOK_STATUS_DISPO_NON_VERIFIE = 1;
 
   /** The id of the prescription. */
   private Integer prescriptionId;
@@ -186,6 +189,41 @@ public class BookDetailsAction extends ActionSupport implements SessionAware, Se
 
   // ===== Methods =====
 
+  /**
+   * Display details of book.
+   *
+   * @return ERROR if error occurred.
+   *         SUCCESS otherwise.
+   */
+  public String doBookDetails() {
+
+    if(this.bookId == null) {
+      this.addActionError("L'identifiant du livre est absent.");
+      return Action.ERROR;
+    }
+
+    final BookService_Service bookService = new BookService_Service();
+    final BookService bookServicePort = bookService.getBookServicePort();
+
+    try {
+      this.book = bookServicePort.bookInformations(bookId);
+    } catch (PrescoWsException_Exception exception) {
+      LOG.error(exception.getMessage());
+      LOG.error(exception.getFaultInfo().getFault().getFaultString());
+      this.addActionError(exception.getFaultInfo().getFault().getFaultString());
+      return Action.ERROR;
+    }
+
+    return SUCCESS;
+  }
+
+  /**
+   * Modify book.
+   *
+   * @return ERROR if error occurred.
+   *         INPUT if the input information needed are empty or null.
+   *         SUCCESS otherwise.
+   */
   public String doBookModification() {
 
     if(StringUtils.isAllEmpty(this.ean, this.title, this.author) && this.prescriptionId == null && this.bookId == null) {
@@ -209,9 +247,59 @@ public class BookDetailsAction extends ActionSupport implements SessionAware, Se
       this.addActionError("L'identifiant du livre n'a pas été transmis, action abandonnée");
     }
 
-    if(this.prescriptionId == null) {
-      this.addActionError("L'identifiant de la prescription n'a pas été transmis, action abandonnée.");
+    if(this.hasFieldErrors()) {
+      return Action.INPUT;
+    }
+
+    final BookService_Service bookService = new BookService_Service();
+    final BookService bookServicePort = bookService.getBookServicePort();
+
+    try {
+
+      this.book = bookServicePort.bookInformations(bookId);
+      this.book.setEan(this.ean);
+      this.book.setTitle(this.title);
+      this.book.setAuthor(this.author);
+      this.prescriptionId = this.book.getPrescriptionId();
+      bookServicePort.modifyBook(this.book);
+    } catch (PrescoWsException_Exception exception) {
+      LOG.error(exception.getMessage());
+      LOG.error(exception.getFaultInfo().getFault().getFaultString());
+      this.addActionError(exception.getFaultInfo().getFault().getFaultString());
       return Action.ERROR;
+    }
+
+    return Action.SUCCESS;
+  }
+
+  /**
+   * Create a new book.
+   *
+   * @return ERROR if error occurred.
+   *         INPUT if the input information needed are empty or null.
+   *         SUCCESS otherwise
+   */
+  public String doNewBook() {
+
+    if(StringUtils.isAllEmpty(this.ean, this.title, this.author) && this.prescriptionId == null && this.bookId == null) {
+      if(LOG.isDebugEnabled()) {
+        LOG.debug("ean, title, author, prescriptionId = null");
+      }
+      return Action.INPUT;
+    }
+
+    if(StringUtils.isEmpty(this.ean)) {
+      this.addFieldError("ean", "Un livre doit avoir un EAN.");
+    }
+    if(StringUtils.isEmpty(this.title)) {
+      this.addFieldError("title", "Un livre doit avoir un titre.");
+    }
+    if(StringUtils.isEmpty(this.author)) {
+      this.addFieldError("author", "Un livre doit avoir un auteur.");
+    }
+
+    if(this.prescriptionId == null) {
+      this.addActionError("L'identifiant de la prescription n'a pas été transmis, action abandonnée");
     }
 
     if(this.hasFieldErrors()) {
@@ -222,8 +310,50 @@ public class BookDetailsAction extends ActionSupport implements SessionAware, Se
     final BookService bookServicePort = bookService.getBookServicePort();
 
     try {
-      
-      this.book = bookServicePort.modifyBook(this.book);
+
+      this.book = new Book();
+      this.book.setEan(this.ean);
+      this.book.setTitle(this.title);
+      this.book.setAuthor(this.author);
+      this.book.setPrescriptionId(this.prescriptionId);
+      this.book.setBookStatusId(BOOK_STATUS_DISPO_NON_VERIFIE);
+      this.bookId = bookServicePort.makeBook(this.book);
+    } catch (PrescoWsException_Exception exception) {
+      LOG.error(exception.getMessage());
+      LOG.error(exception.getFaultInfo().getFault().getFaultString());
+      this.addActionError(exception.getFaultInfo().getFault().getFaultString());
+      return Action.ERROR;
     }
+
+    return Action.SUCCESS;
+  }
+
+  /**
+   * Delete book.
+   *
+   * @return delete book.
+   */
+  public String doDeleteBook() {
+
+    LOG.error("ID delete : " + this.prescriptionId);
+    if(this.bookId == null) {
+      LOG.error("L'identifiant du livre est absent. Echec de la suppression.");
+      this.addActionError("L'identifiant du livre est absent. Echec de la suppression.");
+      return Action.ERROR;
+    }
+
+    final BookService_Service bookService = new BookService_Service();
+    final BookService bookServicePort = bookService.getBookServicePort();
+
+    try {
+      bookServicePort.deleteBook(this.bookId);
+    } catch (PrescoWsException_Exception exception) {
+      LOG.error(exception.getMessage());
+      LOG.error(exception.getFaultInfo().getFault().getFaultString());
+      this.addActionError(exception.getFaultInfo().getFault().getFaultString());
+      return Action.ERROR;
+    }
+
+    return Action.SUCCESS;
   }
 }

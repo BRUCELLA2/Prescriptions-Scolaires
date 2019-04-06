@@ -120,5 +120,51 @@
       <result name="error">/jsp/error.jsp</result>
     </action>
 
+    <!-- "bookDetails" Action -->
+    <action name="bookDetails"
+      class="fr.brucella.form.prescoweb.enseignants.actions.BookDetailsAction"
+      method="doBookDetails">
+      <result name="success">/jsp/prescriptionDetails/bookDetails.jsp</result>
+      <result name="error">/jsp/error.jsp</result>
+    </action>
+
+    <!-- "bookModification" Action -->
+    <action name="bookModification"
+      class="fr.brucella.form.prescoweb.enseignants.actions.BookDetailsAction"
+      method="doBookModification">
+      <result name="success" type="redirectAction">
+        <param name="actionName">prescriptionDetails</param>
+        <param name="parse">true</param>
+        <param name="prescriptionId">${prescriptionId}</param>
+      </result>
+      <result name="input">/jsp/prescriptionDetails/bookDetails.jsp</result>
+      <result name="error">/jsp/error.jsp</result>
+    </action>
+
+    <!-- "bookCreation" Action -->
+    <action name="bookCreation"
+      class="fr.brucella.form.prescoweb.enseignants.actions.BookDetailsAction"
+      method="doNewBook">
+      <result name="success" type="redirectAction">
+        <param name="actionName">prescriptionDetails</param>
+        <param name="parse">true</param>
+        <param name="prescriptionId">${prescriptionId}</param>
+      </result>
+      <result name="input">/jsp/prescriptionDetails/bookDetails.jsp</result>
+      <result name="error">/jsp/error.jsp</result>
+    </action>
+
+    <!-- "deleteBook" Action -->
+    <action name="deleteBook"
+      class="fr.brucella.form.prescoweb.enseignants.actions.BookDetailsAction"
+      method="doDeleteBook">
+      <result name="success" type="redirectAction">
+        <param name="actionName">prescriptionDetails</param>
+        <param name="parse">true</param>
+        <param name="prescriptionId">${prescriptionId}</param>
+      </result>
+      <result name="error">/jsp/error.jsp</result>
+    </action>
+
   </package>
 </struts>

@@ -70,7 +70,7 @@
 
                 <div class="form-group row justify-content-around">
                     <div class="col-sm-6">
-                        <label for="author" class="mr-sm-2">EAN : </label>
+                        <label for="author" class="mr-sm-2">Auteur(s) : </label>
                         <input type="text"
                                class="form-control is-invalid mb-2 mr-sm-2"
                                id="author"
@@ -82,6 +82,7 @@
                 </div>
                 <div class="text-center">
                     <s:if test="%{bookId eq null}">
+                        <s:hidden name="prescriptionId" value="%{prescriptionId}" />
                         <button type="submit" class="btn btn-primary">Enregistrer</button>
                     </s:if>
                     <s:else>
