@@ -323,7 +323,7 @@ public class PrescriptionDetailsAction extends ActionSupport implements SessionA
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
     this.prescription.setCreationDate(formatter.format(LocalDateTime.now()));
     this.prescription.setValidationStatus(false);
-    //this.prescription.setHeadcount(this.headcount);
+    this.prescription.setHeadcount(this.headcount);
 
 
     final PrescriptionService_Service prescriptionService = new PrescriptionService_Service();
@@ -385,7 +385,7 @@ public class PrescriptionDetailsAction extends ActionSupport implements SessionA
       this.prescription.setPrescriptionName(this.prescriptionName);
       this.prescription.setEpleId(this.epleId);
       this.prescription.setPurchaseDeadline(dateStringConversionToFrenchDate(this.purchaseDeadline));
-      //this.prescription.setHeadcount(this.headcount);
+      this.prescription.setHeadcount(this.headcount);
 
       prescriptionServicePort.modifyPrescription(this.prescription);
     } catch (PrescoWsException_Exception exception) {

@@ -74,6 +74,21 @@ public interface BookService {
      * 
      * @param arg0
      * @return
+     *     returns generated.bookserviceclient.Book
+     * @throws PrescoWsException_Exception
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "bookInformations", targetNamespace = "http://services.prescows.form.brucella.fr/", className = "generated.bookserviceclient.BookInformations")
+    @ResponseWrapper(localName = "bookInformationsResponse", targetNamespace = "http://services.prescows.form.brucella.fr/", className = "generated.bookserviceclient.BookInformationsResponse")
+    public Book bookInformations(@WebParam(name = "arg0", targetNamespace = "") Integer arg0)
+        throws PrescoWsException_Exception
+    ;
+
+    /**
+     * 
+     * @param arg0
+     * @return
      *     returns java.util.List<generated.bookserviceclient.BookFullDetailsDto>
      * @throws PrescoWsException_Exception
      */

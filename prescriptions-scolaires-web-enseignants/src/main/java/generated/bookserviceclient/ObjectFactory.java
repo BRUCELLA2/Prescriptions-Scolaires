@@ -30,11 +30,13 @@ public class ObjectFactory {
     private final static QName _BookSearchingResponse_QNAME = new QName("http://services.prescows.form.brucella.fr/", "bookSearchingResponse");
     private final static QName _MakeBook_QNAME = new QName("http://services.prescows.form.brucella.fr/", "makeBook");
     private final static QName _BookWithStatusListForPrescription_QNAME = new QName("http://services.prescows.form.brucella.fr/", "bookWithStatusListForPrescription");
+    private final static QName _BookInformations_QNAME = new QName("http://services.prescows.form.brucella.fr/", "bookInformations");
     private final static QName _BookWithStatusListForPrescriptionResponse_QNAME = new QName("http://services.prescows.form.brucella.fr/", "bookWithStatusListForPrescriptionResponse");
     private final static QName _BookFullDetailsListForPrescriptionResponse_QNAME = new QName("http://services.prescows.form.brucella.fr/", "bookFullDetailsListForPrescriptionResponse");
     private final static QName _ModifyBookResponse_QNAME = new QName("http://services.prescows.form.brucella.fr/", "modifyBookResponse");
     private final static QName _ChangeBookStatusResponse_QNAME = new QName("http://services.prescows.form.brucella.fr/", "changeBookStatusResponse");
     private final static QName _MakeBookResponse_QNAME = new QName("http://services.prescows.form.brucella.fr/", "makeBookResponse");
+    private final static QName _BookInformationsResponse_QNAME = new QName("http://services.prescows.form.brucella.fr/", "bookInformationsResponse");
     private final static QName _BookSearching_QNAME = new QName("http://services.prescows.form.brucella.fr/", "bookSearching");
     private final static QName _ChangeBookStatus_QNAME = new QName("http://services.prescows.form.brucella.fr/", "changeBookStatus");
     private final static QName _BookFullDetailsListForPrescription_QNAME = new QName("http://services.prescows.form.brucella.fr/", "bookFullDetailsListForPrescription");
@@ -53,6 +55,14 @@ public class ObjectFactory {
      */
     public ModifyBookResponse createModifyBookResponse() {
         return new ModifyBookResponse();
+    }
+
+    /**
+     * Create an instance of {@link BookInformationsResponse }
+     * 
+     */
+    public BookInformationsResponse createBookInformationsResponse() {
+        return new BookInformationsResponse();
     }
 
     /**
@@ -149,6 +159,14 @@ public class ObjectFactory {
      */
     public MakeBook createMakeBook() {
         return new MakeBook();
+    }
+
+    /**
+     * Create an instance of {@link BookInformations }
+     * 
+     */
+    public BookInformations createBookInformations() {
+        return new BookInformations();
     }
 
     /**
@@ -270,6 +288,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link BookInformations }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://services.prescows.form.brucella.fr/", name = "bookInformations")
+    public JAXBElement<BookInformations> createBookInformations(BookInformations value) {
+        return new JAXBElement<BookInformations>(_BookInformations_QNAME, BookInformations.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link BookWithStatusListForPrescriptionResponse }{@code >}}
      * 
      */
@@ -312,6 +339,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://services.prescows.form.brucella.fr/", name = "makeBookResponse")
     public JAXBElement<MakeBookResponse> createMakeBookResponse(MakeBookResponse value) {
         return new JAXBElement<MakeBookResponse>(_MakeBookResponse_QNAME, MakeBookResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link BookInformationsResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://services.prescows.form.brucella.fr/", name = "bookInformationsResponse")
+    public JAXBElement<BookInformationsResponse> createBookInformationsResponse(BookInformationsResponse value) {
+        return new JAXBElement<BookInformationsResponse>(_BookInformationsResponse_QNAME, BookInformationsResponse.class, null, value);
     }
 
     /**

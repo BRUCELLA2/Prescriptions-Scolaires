@@ -126,6 +126,7 @@
                                         <td>
                                             <s:a class="btn btn-primary text-center" action="bookModification">
                                                 <s:param name="bookId" value="bookId"/>
+                                                <s:param name="prescriptionId" value="%{prescription.prescriptionId}"/>
                                                 Modifier
                                             </s:a>
                                         </td>
@@ -140,6 +141,7 @@
                                 <tr>
                                     <td>
                                         <s:a class="btn btn-primary text-center" action="newBook">
+                                            <s:param name="prescriptionId" value="%{prescription.prescriptionId}"/>
                                             Nouveau livre
                                         </s:a>
                                     </td>
