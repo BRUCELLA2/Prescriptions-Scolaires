@@ -3,6 +3,7 @@ package fr.brucella.form.prescows.dao.contracts.dao.eples;
 import fr.brucella.form.prescows.entity.eples.model.City;
 import fr.brucella.form.prescows.entity.exceptions.NotFoundException;
 import fr.brucella.form.prescows.entity.exceptions.TechnicalException;
+import java.util.List;
 
 /**
  * Interface for City Data Access Object.
@@ -20,6 +21,14 @@ public interface CityDao {
    * @throws NotFoundException - This exception is throws if there is no technical exception and the city is not found.
    */
   City getCity(final Integer cityId) throws TechnicalException, NotFoundException;
+
+  /**
+   * Gives the list of the cities from the datastore.
+   *
+   * @return cities list.
+   * @throws TechnicalException - wraps technical exception caused during data access.
+   */
+  List<City> getCityList() throws TechnicalException;
 
   /**
    * Update an existing city in the datastore.

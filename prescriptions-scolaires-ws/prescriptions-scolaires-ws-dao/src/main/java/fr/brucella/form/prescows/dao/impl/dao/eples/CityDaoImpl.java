@@ -6,6 +6,7 @@ import fr.brucella.form.prescows.dao.impl.rowmapper.eples.model.CityRM;
 import fr.brucella.form.prescows.entity.eples.model.City;
 import fr.brucella.form.prescows.entity.exceptions.NotFoundException;
 import fr.brucella.form.prescows.entity.exceptions.TechnicalException;
+import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.dao.DataAccessException;
@@ -64,6 +65,27 @@ public class CityDaoImpl extends AbstractDao implements CityDao {
       }
       LOG.error(exception.getMessage());
       throw new NotFoundException(messages.getString("cityDao.getCity.notFound"), exception);
+    } catch (PermissionDeniedDataAccessException exception) {
+      LOG.error(exception.getMessage());
+      throw new TechnicalException(messages.getString(PERMISSION_DENIED), exception);
+    } catch (DataAccessResourceFailureException exception) {
+      LOG.error(exception.getMessage());
+      throw new TechnicalException(messages.getString(DATA_ACCESS_RESOURCE_FAILURE), exception);
+    } catch (DataAccessException exception) {
+      LOG.error(exception.getMessage());
+      throw new TechnicalException(messages.getString(DATA_ACCESS), exception);
+    }
+  }
+
+  @Override
+  public List<City> getCityList() throws TechnicalException {
+
+    sql = "SELECT * FROM city";
+
+    final RowMapper<City> cityRowMapper = new CityRM();
+
+    try {
+      return this.getNamedJdbcTemplate().query(sql, cityRowMapper);
     } catch (PermissionDeniedDataAccessException exception) {
       LOG.error(exception.getMessage());
       throw new TechnicalException(messages.getString(PERMISSION_DENIED), exception);

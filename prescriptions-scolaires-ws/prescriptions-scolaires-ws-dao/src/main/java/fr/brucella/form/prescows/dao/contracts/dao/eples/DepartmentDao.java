@@ -3,6 +3,7 @@ package fr.brucella.form.prescows.dao.contracts.dao.eples;
 import fr.brucella.form.prescows.entity.eples.model.Department;
 import fr.brucella.form.prescows.entity.exceptions.NotFoundException;
 import fr.brucella.form.prescows.entity.exceptions.TechnicalException;
+import java.util.List;
 
 /**
  * Interface for Department Data Access Object.
@@ -20,6 +21,14 @@ public interface DepartmentDao {
    * @throws NotFoundException - This exception is throws if there is no technical exception and the department is not found.
    */
   Department getDepartment(final Integer departmentId) throws TechnicalException, NotFoundException;
+
+  /**
+   * Gives the list of department from the datastore.
+   *
+   * @return departments list.
+   * @throws TechnicalException - wraps technical exception caused during data access.
+   */
+  List<Department> getDepartmentList() throws TechnicalException;
 
   /**
    * Update an existing department in the datastore.

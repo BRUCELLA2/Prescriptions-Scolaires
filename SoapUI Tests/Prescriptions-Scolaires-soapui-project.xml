@@ -1090,7 +1090,176 @@
          <arg0>1</arg0>
       </ser:bookInformations>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/BookService/bookInformations"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite id="5cd0f346-cc1d-4b82-aa44-5b35520da28d" name="TestSuite AuthentificationService"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="7b5da303-24c4-465e-a6c1-89e12b6ef546" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase login" searchProperties="true"><con:settings/><con:testStep type="request" id="7fdc243c-c912-4f9a-b6fb-7dedb23dc8ca" name="login - passing test"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>AuthentificationServiceSoapBinding</con:interface><con:operation>login</con:operation><con:request name="login - passing test" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="bd4b64a8-ac9a-4b90-93fc-5cc227dda5e8"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/authentificationService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/BookService/bookInformations"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="e7203a10-2dba-400c-9258-81690e38d51e" wsaVersion="NONE" name="UtilityServiceSoapBinding" type="wsdl" bindingName="{http://services.prescows.form.brucella.fr/}UtilityServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/utilityService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/utilityService?wsdl"><con:part><con:url>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/utilityService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="UtilityService" targetNamespace="http://services.prescows.form.brucella.fr/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.prescows.form.brucella.fr/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://services.prescows.form.brucella.fr/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="getCityList" type="tns:getCityList"/>
+      <xs:element name="getCityListResponse" type="tns:getCityListResponse"/>
+      <xs:element name="getDepartmentList" type="tns:getDepartmentList"/>
+      <xs:element name="getDepartmentListResponse" type="tns:getDepartmentListResponse"/>
+      <xs:element name="getEpleList" type="tns:getEpleList"/>
+      <xs:element name="getEpleListResponse" type="tns:getEpleListResponse"/>
+      <xs:complexType name="getCityList">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="getCityListResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:city"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="city">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cityId" type="xs:int"/>
+          <xs:element minOccurs="0" name="cityName" type="xs:string"/>
+          <xs:element minOccurs="0" name="departmentId" type="xs:int"/>
+          <xs:element minOccurs="0" name="zipCode" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="prescoWsFault">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="faultCode" type="xs:string"/>
+          <xs:element minOccurs="0" name="faultString" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getDepartmentList">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="getDepartmentListResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:department"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="department">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="code" type="xs:string"/>
+          <xs:element minOccurs="0" name="departmentId" type="xs:int"/>
+          <xs:element minOccurs="0" name="departmentName" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getEpleList">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="getEpleListResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:eple"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="eple">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cityId" type="xs:int"/>
+          <xs:element minOccurs="0" name="departmentId" type="xs:int"/>
+          <xs:element minOccurs="0" name="epleId" type="xs:int"/>
+          <xs:element minOccurs="0" name="epleName" type="xs:string"/>
+          <xs:element minOccurs="0" name="rne" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="PrescoWsException" type="tns:PrescoWsException"/>
+      <xs:complexType name="PrescoWsException">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="fault" type="tns:prescoWsFault"/>
+          <xs:element minOccurs="0" name="message" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getCityList">
+    <wsdl:part element="tns:getCityList" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getDepartmentListResponse">
+    <wsdl:part element="tns:getDepartmentListResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getDepartmentList">
+    <wsdl:part element="tns:getDepartmentList" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getEpleList">
+    <wsdl:part element="tns:getEpleList" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="PrescoWsException">
+    <wsdl:part element="tns:PrescoWsException" name="PrescoWsException"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getEpleListResponse">
+    <wsdl:part element="tns:getEpleListResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCityListResponse">
+    <wsdl:part element="tns:getCityListResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="UtilityService">
+    <wsdl:operation name="getCityList">
+      <wsdl:input message="tns:getCityList" name="getCityList"></wsdl:input>
+      <wsdl:output message="tns:getCityListResponse" name="getCityListResponse"></wsdl:output>
+      <wsdl:fault message="tns:PrescoWsException" name="PrescoWsException"></wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getDepartmentList">
+      <wsdl:input message="tns:getDepartmentList" name="getDepartmentList"></wsdl:input>
+      <wsdl:output message="tns:getDepartmentListResponse" name="getDepartmentListResponse"></wsdl:output>
+      <wsdl:fault message="tns:PrescoWsException" name="PrescoWsException"></wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getEpleList">
+      <wsdl:input message="tns:getEpleList" name="getEpleList"></wsdl:input>
+      <wsdl:output message="tns:getEpleListResponse" name="getEpleListResponse"></wsdl:output>
+      <wsdl:fault message="tns:PrescoWsException" name="PrescoWsException"></wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="UtilityServiceSoapBinding" type="tns:UtilityService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getCityList">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getCityList">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getCityListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="PrescoWsException">
+        <soap:fault name="PrescoWsException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getDepartmentList">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getDepartmentList">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getDepartmentListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="PrescoWsException">
+        <soap:fault name="PrescoWsException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getEpleList">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getEpleList">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getEpleListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="PrescoWsException">
+        <soap:fault name="PrescoWsException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UtilityService">
+    <wsdl:port binding="tns:UtilityServiceSoapBinding" name="UtilityServicePort">
+      <soap:address location="http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/utilityService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/utilityService</con:endpoint></con:endpoints><con:operation id="e5a51de1-c035-47d8-a239-2cd18e09d7e1" isOneWay="false" action="" name="getDepartmentList" bindingOperationName="getDepartmentList" type="Request-Response" outputName="getDepartmentListResponse" inputName="getDepartmentList" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="a0f11173-1ac3-4966-b39a-a5d06500e7f2" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/utilityService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:getDepartmentList/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/UtilityService/getDepartmentList"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="15a48350-bdb5-442c-97d4-a2bc9fcdca82" isOneWay="false" action="" name="getCityList" bindingOperationName="getCityList" type="Request-Response" outputName="getCityListResponse" inputName="getCityList" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="aae97788-0c85-4612-81ae-6dcdcf82a64b" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/utilityService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:getCityList/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/UtilityService/getCityList"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="471d922f-32e8-4184-af8e-4f3c4e374c3d" isOneWay="false" action="" name="getEpleList" bindingOperationName="getEpleList" type="Request-Response" outputName="getEpleListResponse" inputName="getEpleList" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d5518e06-7e16-451e-a093-cd3a0b005fc4" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/utilityService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:getEpleList/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/UtilityService/getEpleList"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite id="5cd0f346-cc1d-4b82-aa44-5b35520da28d" name="TestSuite AuthentificationService"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="7b5da303-24c4-465e-a6c1-89e12b6ef546" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase login" searchProperties="true"><con:settings/><con:testStep type="request" id="7fdc243c-c912-4f9a-b6fb-7dedb23dc8ca" name="login - passing test"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>AuthentificationServiceSoapBinding</con:interface><con:operation>login</con:operation><con:request name="login - passing test" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="bd4b64a8-ac9a-4b90-93fc-5cc227dda5e8"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/authentificationService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
    <soapenv:Header/>
    <soapenv:Body>
       <ser:login>
@@ -2692,4 +2861,21 @@ declare namespace ns1='http://services.prescows.form.brucella.fr/';
       <ser:bookInformations>
       </ser:bookInformations>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="f991bce3-e782-4642-b338-65a4d1ceef1f" name="SOAP Response"/><con:assertion type="Simple Contains" id="740fcd5c-ad37-4811-9cac-d0934f071093" name="Contains"><con:configuration><token>PrescoWsException</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Schema Compliance" id="434acfb1-9ca8-4e77-b3cc-d980513a459e" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="Not SOAP Fault Assertion" id="a9169829-a650-4ffa-8729-03acf46c84a1" name="SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/BookService/bookInformations"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties><con:property><con:name>bookId</con:name><con:value>1</con:value></con:property><con:property><con:name>not bookId</con:name><con:value>555</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="f991bce3-e782-4642-b338-65a4d1ceef1f" name="SOAP Response"/><con:assertion type="Simple Contains" id="740fcd5c-ad37-4811-9cac-d0934f071093" name="Contains"><con:configuration><token>PrescoWsException</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Schema Compliance" id="434acfb1-9ca8-4e77-b3cc-d980513a459e" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="Not SOAP Fault Assertion" id="a9169829-a650-4ffa-8729-03acf46c84a1" name="SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/BookService/bookInformations"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties><con:property><con:name>bookId</con:name><con:value>1</con:value></con:property><con:property><con:name>not bookId</con:name><con:value>555</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:testSuite id="8641a026-dd4c-44c2-81b1-bf11fc43727c" name="TestSuite UtilityService"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="6114aac3-26ac-4eed-9d85-f6a866886f92" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase getDepartment" searchProperties="true"><con:settings/><con:testStep type="request" id="3746812f-92b1-4f60-81c2-8275a4df4032" name="getDepartmentList - passing test"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>UtilityServiceSoapBinding</con:interface><con:operation>getDepartmentList</con:operation><con:request name="getDepartmentList - passing test" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="662983d4-a31b-4b8a-908c-ae77dd45728f"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/utilityService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:getDepartmentList/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="aadc6dfc-e4ae-4034-842f-f475d8064e5f" name="SOAP Response"/><con:assertion type="SOAP Fault Assertion" id="6f54abd0-44f4-472d-aa0e-61f45c17cf4d" name="Not SOAP Fault"/><con:assertion type="Schema Compliance" id="020e5dad-4853-4d74-b85e-6cb04a06c5e0" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="Simple Contains" id="aa0e078e-4ac2-4a49-991f-636b4ff0ef14" name="Contains"><con:configuration><token>&lt;return></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/UtilityService/getDepartmentList"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="5059303f-9a79-4f90-ac55-31e5ff22e477" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase getCityList" searchProperties="true"><con:settings/><con:testStep type="request" id="7edcd185-5aba-4880-bc7e-627d9ee08486" name="getCityList - passing test"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>UtilityServiceSoapBinding</con:interface><con:operation>getCityList</con:operation><con:request name="getCityList - passing test" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="56a4107c-d213-4bb0-a89c-cce2cbd4feb9"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/utilityService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:getCityList/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="118e1797-aad0-4c25-a81b-83376da0d053" name="SOAP Response"/><con:assertion type="Schema Compliance" id="5addd242-83c1-413c-a575-a43091d0c958" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="SOAP Fault Assertion" id="784e7aa3-e78e-426b-a038-a293ca11bead" name="Not SOAP Fault"/><con:assertion type="Simple Contains" id="cd48d59d-6cb4-4f1a-9be0-a29d6aae07dc" name="Contains"><con:configuration><token>&lt;return>
+</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/UtilityService/getCityList"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="663c804c-901b-4893-b57d-636ab2a0cbdc" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase getEpleLIst" searchProperties="true"><con:settings/><con:testStep type="request" id="ecbea01c-c0d8-416c-855c-881206732752" name="getEpleList - passing test"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>UtilityServiceSoapBinding</con:interface><con:operation>getEpleList</con:operation><con:request name="getEpleList - passing test" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="c03c003d-e60a-4e8d-8d12-4a74401a9f34"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services/utilityService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.prescows.form.brucella.fr/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:getEpleList/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="2fd68ebb-8199-44c9-aa11-0a86f88888c0" name="SOAP Response"/><con:assertion type="Schema Compliance" id="37a09f37-05f9-444b-b145-808e6cdca99e" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="SOAP Fault Assertion" id="ea08e163-7880-4d40-9870-9e95727bce02" name="Not SOAP Fault"/><con:assertion type="Simple Contains" id="1fef2ba4-421a-49a2-a2f2-f9b6310ab482" name="Contains"><con:configuration><token>&lt;return>
+</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.prescows.form.brucella.fr/UtilityService/getEpleList"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

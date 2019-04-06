@@ -35,6 +35,12 @@
     serviceBean="#alertService" />
   <bean id="alertService" class="fr.brucella.form.prescows.services.AlertService" />
 
+  <!-- Utility Service -->
+  <jaxws:server
+    serviceClass="fr.brucella.form.prescows.services.UtilityService" address="/utilityService"
+    serviceBean="#utilityService" />
+  <bean id="utilityService" class="fr.brucella.form.prescows.services.UtilityService" />
+
   <!-- Spring context files import -->
   <import
     resource="classpath:/fr/brucella/form/prescows/services/servicesContext.xml"/>

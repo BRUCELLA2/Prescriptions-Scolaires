@@ -6,6 +6,7 @@ import fr.brucella.form.prescows.business.contracts.managers.prescription.BookDe
 import fr.brucella.form.prescows.business.contracts.managers.prescription.BookListingManager;
 import fr.brucella.form.prescows.business.contracts.managers.prescription.PrescriptionDetailsManager;
 import fr.brucella.form.prescows.business.contracts.managers.prescription.PrescriptionListingManager;
+import fr.brucella.form.prescows.business.contracts.managers.utility.UtilityManager;
 
 /**
  * Interface for Manager Factory.
@@ -98,4 +99,18 @@ public interface ManagerFactory {
    * @param alertManager the AlertManager.
    */
   void setAlertManager(final AlertManager alertManager);
+
+  /**
+   * Gives the UtilityManager.
+   *
+   * @return the UtilityManager.
+   */
+  UtilityManager getUtilityManager();
+
+  /**
+   * Set the UtilityManager.
+   *
+   * @param utilityManager the UtilityManager.
+   */
+  void setUtilityManager(final UtilityManager utilityManager);
 }

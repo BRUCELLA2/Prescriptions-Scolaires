@@ -3,6 +3,7 @@ package fr.brucella.form.prescows.dao.contracts.dao.eples;
 import fr.brucella.form.prescows.entity.eples.model.Eple;
 import fr.brucella.form.prescows.entity.exceptions.NotFoundException;
 import fr.brucella.form.prescows.entity.exceptions.TechnicalException;
+import java.util.List;
 
 /**
  * Interface for Eple Data Access Object.
@@ -20,6 +21,14 @@ public interface EpleDao {
    * @throws NotFoundException - This exception is throws if there is no technical exception and the eple is not found.
    */
   Eple getEple(final Integer epleId) throws TechnicalException, NotFoundException;
+
+  /**
+   * Gives the list of eples from the datastore.
+   *
+   * @return the list of eples
+   * @throws TechnicalException - wraps technical exception caused during data access.
+   */
+  List<Eple> getEpleList() throws TechnicalException;
 
   /**
    * Update an existing eple in the datastore.

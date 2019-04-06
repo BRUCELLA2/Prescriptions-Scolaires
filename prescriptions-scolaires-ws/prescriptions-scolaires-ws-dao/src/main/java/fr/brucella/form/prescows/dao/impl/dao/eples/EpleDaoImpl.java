@@ -6,6 +6,7 @@ import fr.brucella.form.prescows.dao.impl.rowmapper.eples.model.EpleRM;
 import fr.brucella.form.prescows.entity.eples.model.Eple;
 import fr.brucella.form.prescows.entity.exceptions.NotFoundException;
 import fr.brucella.form.prescows.entity.exceptions.TechnicalException;
+import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.dao.DataAccessException;
@@ -65,6 +66,28 @@ public class EpleDaoImpl extends AbstractDao implements EpleDao {
       }
       LOG.error(exception.getMessage());
       throw new NotFoundException(messages.getString("epleDao.getEple.notFound"), exception);
+    } catch (PermissionDeniedDataAccessException exception) {
+      LOG.error(exception.getMessage());
+      throw new TechnicalException(messages.getString(PERMISSION_DENIED), exception);
+    } catch (DataAccessResourceFailureException exception) {
+      LOG.error(exception.getMessage());
+      throw new TechnicalException(messages.getString(DATA_ACCESS_RESOURCE_FAILURE), exception);
+    } catch (DataAccessException exception) {
+      LOG.error(exception.getMessage());
+      throw new TechnicalException(messages.getString(DATA_ACCESS), exception);
+    }
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  public List<Eple> getEpleList() throws TechnicalException {
+
+    sql = "SELECT * FROM eple";
+
+    final RowMapper<Eple> epleRowMapper = new EpleRM();
+
+    try {
+      return this.getNamedJdbcTemplate().query(sql, epleRowMapper);
     } catch (PermissionDeniedDataAccessException exception) {
       LOG.error(exception.getMessage());
       throw new TechnicalException(messages.getString(PERMISSION_DENIED), exception);

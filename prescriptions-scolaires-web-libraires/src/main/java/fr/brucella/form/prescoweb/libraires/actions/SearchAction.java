@@ -54,5 +54,5 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
 
   // ----- Getters and Setters
 
-  
+
 }

@@ -7,6 +7,7 @@ import fr.brucella.form.prescows.business.contracts.managers.prescription.BookDe
 import fr.brucella.form.prescows.business.contracts.managers.prescription.BookListingManager;
 import fr.brucella.form.prescows.business.contracts.managers.prescription.PrescriptionDetailsManager;
 import fr.brucella.form.prescows.business.contracts.managers.prescription.PrescriptionListingManager;
+import fr.brucella.form.prescows.business.contracts.managers.utility.UtilityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -36,6 +37,9 @@ public class ManagerFactoryImpl implements ManagerFactory {
   /** Alert Manager. */
   @Autowired private AlertManager alertManager;
 
+  /** Utility Manager. */
+  @Autowired private UtilityManager utilityManager;
+
 
   // ===== Constructor =====
 
@@ -46,75 +50,87 @@ public class ManagerFactoryImpl implements ManagerFactory {
 
   // ===== Getters and Setters =====
 
-  /** Defaut constructor */
+  /** {@inheritDoc} */
   @Override
   public AuthentificationManager getAuthentificationManager() {
-    return authentificationManager;
+    return this.authentificationManager;
   }
 
-  /** Defaut constructor */
+  /** {@inheritDoc} */
   @Override
   public void setAuthentificationManager(final AuthentificationManager authentificationManager) {
-
+    this.authentificationManager = authentificationManager;
   }
 
-  /** Defaut constructor */
+  /** {@inheritDoc} */
   @Override
   public BookDetailsManager getBookDetailsManager() {
-    return bookDetailsManager;
+    return this.bookDetailsManager;
   }
 
-  /** Defaut constructor */
+  /** {@inheritDoc} */
   @Override
   public void setBookDetailsManager(final BookDetailsManager bookDetailsManager) {
-
+    this.bookDetailsManager = bookDetailsManager;
   }
 
-  /** Defaut constructor */
+  /** {@inheritDoc} */
   @Override
   public BookListingManager getBookListingManager() {
-    return bookListingManager;
+    return this.bookListingManager;
   }
 
-  /** Defaut constructor */
+  /** {@inheritDoc} */
   @Override
   public void setBookListingManager(final BookListingManager bookListingManager) {
-
+    this.bookListingManager = bookListingManager;
   }
 
-  /** Defaut constructor */
+  /** {@inheritDoc} */
   @Override
   public PrescriptionDetailsManager getPrescriptionDetailsManager() {
-    return prescriptionDetailsManager;
+    return this.prescriptionDetailsManager;
   }
 
-  /** Defaut constructor */
+  /** {@inheritDoc} */
   @Override
   public void setPrescriptionDetailsManager(final PrescriptionDetailsManager prescriptionDetailsManager) {
-
+    this.prescriptionDetailsManager = prescriptionDetailsManager;
   }
 
-  /** Defaut constructor */
+  /** {@inheritDoc} */
   @Override
   public PrescriptionListingManager getPrescriptionListingManager() {
-    return prescriptionListingManager;
+    return this.prescriptionListingManager;
   }
 
-  /** Defaut constructor */
+  /** {@inheritDoc} */
   @Override
   public void setPrescriptionListingManager(final PrescriptionListingManager prescriptionListingManager) {
-
+    this.prescriptionListingManager = prescriptionListingManager;
   }
 
-  /** Defaut constructor */
+  /** {@inheritDoc} */
   @Override
   public AlertManager getAlertManager() {
-    return alertManager;
+    return this.alertManager;
   }
 
-  /** Defaut constructor */
+  /** {@inheritDoc} */
   @Override
   public void setAlertManager(final AlertManager alertManager) {
+    this.alertManager = alertManager;
+  }
 
+  /** {@inheritDoc} */
+  @Override
+  public UtilityManager getUtilityManager() {
+    return this.utilityManager;
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  public void setUtilityManager(final UtilityManager utilityManager) {
+    this.utilityManager = utilityManager;
   }
 }
