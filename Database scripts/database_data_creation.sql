@@ -46,7 +46,7 @@ INSERT INTO public.prescription (prescription_name, creation_date, user_id, purc
 /* INSERT INTO processing_prescription */
 INSERT INTO public.processing_prescription (user_id, prescription_id, processing_status) 
 	VALUES
-		(1, 1, false);
+		(1, 1, true);
 
 
 /* INSERT INTO book_status */
