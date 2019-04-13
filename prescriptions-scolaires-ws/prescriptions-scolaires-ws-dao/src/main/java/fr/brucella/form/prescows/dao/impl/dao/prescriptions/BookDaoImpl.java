@@ -186,7 +186,7 @@ public class BookDaoImpl extends AbstractDao implements BookDao {
     final MapSqlParameterSource parameterSource = new MapSqlParameterSource();
 
     final StringBuilder stringBuilder = new StringBuilder();
-    stringBuilder.append("SELECT book.book_id, book.ean, book.title, book.author, book.comments, book.email_teacher_send, book.email_send_date, book.book_status_id, book.prescription_id, book_status.book_status_name, prescription.purchase_deadline FROM book INNER JOIN book_status ON book.book_status_id = book_status.book_status_id INNER JOIN prescription ON prescription.prescription_id = book.prescription_id INNER JOIN eple on eple.eple_id = prescription.eple_id INNER JOIN department ON department.department_id = eple.department_id INNER JOIN city ON city.city_id = eple.city_id INNER JOIN processing_book ON processing_book.book_id = book.book_id WHERE 1=1");
+    stringBuilder.append("SELECT book.book_id, book.ean, book.title, book.author, book.comments, book.email_teacher_send, book.email_send_date, book.book_status_id, book.prescription_id, book_status.book_status_name, prescription.purchase_deadline FROM book INNER JOIN book_status ON book.book_status_id = book_status.book_status_id INNER JOIN prescription ON prescription.prescription_id = book.prescription_id INNER JOIN eple on eple.eple_id = prescription.eple_id INNER JOIN department ON department.department_id = eple.department_id INNER JOIN city ON city.city_id = eple.city_id LEFT OUTER JOIN processing_book ON processing_book.book_id = book.book_id WHERE 1=1");
 
     if(searchCriteriaDto != null) {
       if(searchCriteriaDto.getDepartmentId() != null) {
@@ -207,12 +207,13 @@ public class BookDaoImpl extends AbstractDao implements BookDao {
       }
       if(searchCriteriaDto.getProcessing() != null && searchCriteriaDto.getUserId() != null) {
         if(searchCriteriaDto.getProcessing() == false) {
-          stringBuilder.append(" AND processing_book.book_id = book.book_id and processing_book.user_id = :userId and processing_book.processing_status = :processingStatus");
+          stringBuilder.append(" AND NOT EXISTS (SELECT * FROM processing_book WHERE processing_book.book_id = book.book_id and processing_book.user_id = :userId and processing_book.processing_status = true");
           parameterSource.addValue("userId", searchCriteriaDto.getUserId());
           parameterSource.addValue("processingStatus", searchCriteriaDto.getProcessing());
         }
       }
     }
+    stringBuilder.append(" ORDER BY book.ean");
     sql = stringBuilder.toString();
     final RowMapper<BookFullDetailsDto> bookFullDetailsDtoRowMapper = new BookFullDetailsDtoRM();
 
