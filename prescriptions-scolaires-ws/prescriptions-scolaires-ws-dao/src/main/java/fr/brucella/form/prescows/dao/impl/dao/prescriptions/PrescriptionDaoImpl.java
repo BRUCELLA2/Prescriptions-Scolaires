@@ -214,7 +214,7 @@ public class PrescriptionDaoImpl extends AbstractDao implements PrescriptionDao 
       if (searchCriteriaDto.getProcessing() != null && searchCriteriaDto.getUserId() != null) {
         if (searchCriteriaDto.getProcessing() == false) {
           stringBuilder.append(
-              " AND NOT EXISTS (SELECT * FROM processing_prescription WHERE processing_prescription.user_id = :userId and processing_prescription.prescription_id = prescription.prescription_id and processing_prescription.processing_status = true");
+              " AND NOT EXISTS (SELECT * FROM processing_prescription WHERE processing_prescription.user_id = :userId and processing_prescription.prescription_id = prescription.prescription_id and processing_prescription.processing_status = true)");
           parameterSource.addValue("userId", searchCriteriaDto.getUserId());
           parameterSource.addValue("processingStatus", searchCriteriaDto.getProcessing());
         }

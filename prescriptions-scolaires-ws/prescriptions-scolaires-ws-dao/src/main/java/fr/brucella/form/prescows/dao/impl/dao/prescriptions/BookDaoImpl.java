@@ -207,7 +207,7 @@ public class BookDaoImpl extends AbstractDao implements BookDao {
       }
       if(searchCriteriaDto.getProcessing() != null && searchCriteriaDto.getUserId() != null) {
         if(searchCriteriaDto.getProcessing() == false) {
-          stringBuilder.append(" AND NOT EXISTS (SELECT * FROM processing_book WHERE processing_book.book_id = book.book_id and processing_book.user_id = :userId and processing_book.processing_status = true");
+          stringBuilder.append(" AND NOT EXISTS (SELECT * FROM processing_book WHERE processing_book.book_id = book.book_id and processing_book.user_id = :userId and processing_book.processing_status = true)");
           parameterSource.addValue("userId", searchCriteriaDto.getUserId());
           parameterSource.addValue("processingStatus", searchCriteriaDto.getProcessing());
         }
