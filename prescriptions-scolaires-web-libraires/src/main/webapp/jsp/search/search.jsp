@@ -89,12 +89,12 @@
                         </select>
                     </div>
                     <div class="col-sm-4">
-                        <label for="purchaseDeadline" class="mr-sm-2">Prescription effective à partir du :</label>
+                        <label for="deadline" class="mr-sm-2">Prescription effective à partir du :</label>
                         <input type="date"
                                class="form-control mb-2 mr-sm-2"
-                               id="purchaseDeadline"
-                               name="purchaseDeadline"
-                                value='<s:property value="purchaseDeadline"/>'>
+                               id="deadline"
+                               name="deadline"
+                                value='<s:property value="deadline"/>'>
                     </div>
                 </div>
 
@@ -164,35 +164,58 @@
                                 </td>
                                 <td class="text-center">
                                     <s:if test="bookStatusId == 2">
-                                        <s:a class="btn btn-primary text-center" action="setAvailable">
-                                            <s:param name="bookId" value="bookId"/>Disponible
-                                        </s:a>
+                                        <div class="btn btn-primary text-center">
+                                            Disponible
+                                        </div>
                                     </s:if>
                                     <s:else>
                                         <s:a class="btn btn-secondary text-center" action="setAvailable">
-                                            <s:param name="bookId" value="bookId"/>Disponible
+                                            <s:param name="bookId" value="bookId"/>
+                                            <s:param name="deadline" value="deadline"/>
+                                            <s:param name="cityId" value="cityId"/>
+                                            <s:param name="epleRne" value="epleRne"/>
+                                            <s:param name="bookView" value="bookView"/>
+                                            <s:param name="processed" value="processed"/>
+                                            <s:param name="departmentId" value="departmentId"/>
+                                            Disponible
                                         </s:a>
                                     </s:else>
 
                                     <s:if test="bookStatusId == 3">
-                                        <s:a class="btn btn-primary text-center" action="setNotAvailable">
-                                            <s:param name="prescriptionId" value="prescriptionId"/>Indisponible
-                                        </s:a>
+                                        <div class="btn btn-primary text-center">
+                                            Indisponible
+                                        </div>
                                     </s:if>
                                     <s:else>
                                         <s:a class="btn btn-secondary text-center" action="setNotAvailable">
-                                            <s:param name="prescriptionId" value="prescriptionId"/>Indisponible
+                                            <s:param name="bookId" value="bookId"/>
+                                            <s:param name="bookId" value="bookId"/>
+                                            <s:param name="deadline" value="deadline"/>
+                                            <s:param name="cityId" value="cityId"/>
+                                            <s:param name="epleRne" value="epleRne"/>
+                                            <s:param name="bookView" value="bookView"/>
+                                            <s:param name="processed" value="processed"/>
+                                            <s:param name="departmentId" value="departmentId"/>
+                                            Indisponible
                                         </s:a>
                                     </s:else>
 
                                     <s:if test="bookStatusId == 4">
-                                        <s:a class="btn btn-primary text-center" action="setdepleted">
-                                            <s:param name="prescriptionId" value="prescriptionId"/>Épuisé
-                                        </s:a>
+                                        <div class="btn btn-primary text-center">
+                                            Épuisé
+                                        </div>
                                     </s:if>
                                     <s:else>
-                                        <s:a class="btn btn-secondary text-center" action="setdepleted">
-                                            <s:param name="prescriptionId" value="prescriptionId"/>Épuisé
+                                        <s:a class="btn btn-secondary text-center" action="setDepleted">
+                                            <s:param name="bookId" value="bookId"/>
+                                            <s:param name="bookId" value="bookId"/>
+                                            <s:param name="deadline" value="deadline"/>
+                                            <s:param name="cityId" value="cityId"/>
+                                            <s:param name="epleRne" value="epleRne"/>
+                                            <s:param name="bookView" value="bookView"/>
+                                            <s:param name="processed" value="processed"/>
+                                            <s:param name="departmentId" value="departmentId"/>
+                                            Épuisé
                                         </s:a>
                                     </s:else>
                                 </td>

@@ -51,13 +51,16 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
   private String epleRne;
 
   /** The purchase deadline of the prescription. */
-  private String purchaseDeadline;
+  private String deadline;
 
   /** String indicating if the option "processed" is active. */
   private String processed;
 
   /** String indicating if the view show prescription or books of prescriptions. */
   private String bookView;
+
+  /** Id of the book. */
+  private Integer bookId;
 
   /** List of prescriptions with full details. */
   private List<PrescriptionFullDetailsDto> prescriptionsList;
@@ -161,17 +164,17 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
    *
    * @return the purchase deadline of the prescription.
    */
-  public String getPurchaseDeadline() {
-    return this.purchaseDeadline;
+  public String getDeadline() {
+    return this.deadline;
   }
 
   /**
    * Set the purchase deadline of the prescription.
    *
-   * @param purchaseDeadline the purchase deadline of the prescription.
+   * @param deadline the purchase deadline of the prescription.
    */
-  public void setPurchaseDeadline(final String purchaseDeadline) {
-    this.purchaseDeadline = purchaseDeadline;
+  public void setDeadline(final String deadline) {
+    this.deadline = deadline;
   }
 
   /**
@@ -208,6 +211,24 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
    */
   public void setBookView(final String bookView) {
     this.bookView = bookView;
+  }
+
+  /**
+   * Give the id of the book.
+   *
+   * @return id of the book.
+   */
+  public Integer getBookId() {
+    return this.bookId;
+  }
+
+  /**
+   * Set the id of the book.
+   *
+   * @param bookId the id of the book.
+   */
+  public void setBookId(final Integer bookId) {
+    this.bookId = bookId;
   }
 
   /**
@@ -333,9 +354,11 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
    */
   public String doSearch() {
 
-    if(this.departmentId == null && this.cityId == null && StringUtils.isAllEmpty(this.epleRne, this.purchaseDeadline)) {
+    if(this.departmentId == null && this.cityId == null && StringUtils.isAllEmpty(this.epleRne, this.deadline)) {
       return Action.INPUT;
     }
+
+    LOG.error("purchase : " + this.deadline);
 
     UserDetailsDto userDetailsDto = (UserDetailsDto) this.session.get("userLog");
 
@@ -355,8 +378,8 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
       } else {
         searchCriteriaDtoBook.setProcessing(true);
       }
-      if(!StringUtils.isEmpty(this.purchaseDeadline)) {
-        searchCriteriaDtoBook.setPurchaseDeadline(dateStringConversionToFrenchDate(this.purchaseDeadline));
+      if(!StringUtils.isEmpty(this.deadline)) {
+        searchCriteriaDtoBook.setPurchaseDeadline(dateStringConversionToFrenchDate(this.deadline));
       } else {
         searchCriteriaDtoBook.setPurchaseDeadline(null);
       }
@@ -389,8 +412,8 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
       } else {
         searchCriteriaDtoPrescription.setProcessing(true);
       }
-      if(!StringUtils.isEmpty(this.purchaseDeadline)) {
-        searchCriteriaDtoPrescription.setPurchaseDeadline(dateStringConversionToFrenchDate(this.purchaseDeadline));
+      if(!StringUtils.isEmpty(this.deadline)) {
+        searchCriteriaDtoPrescription.setPurchaseDeadline(dateStringConversionToFrenchDate(this.deadline));
       } else {
         searchCriteriaDtoPrescription.setPurchaseDeadline(null);
       }
@@ -409,6 +432,77 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
     }
 
     return Action.SUCCESS;
+  }
+
+  public String doSetAvailable() {
+
+    if(this.bookId == null) {
+      LOG.error("L'identifiant du livre est absent");
+      this.addActionError("L'identifiant du livre est absent. Echec du changement de status");
+      return Action.ERROR;
+    }
+
+    BookService_Service bookService = new BookService_Service();
+    BookService bookServicePort = bookService.getBookServicePort();
+    try {
+      bookServicePort.changeBookStatus(this.bookId, 2);
+    } catch (generated.bookserviceclient.PrescoWsException_Exception exception) {
+      LOG.error(exception.getMessage());
+      LOG.error(exception.getFaultInfo().getFault().getFaultString());
+      this.addActionError(exception.getFaultInfo().getFault().getFaultString());
+      return Action.ERROR;
+    }
+
+    return Action.SUCCESS;
+  }
+
+  public String doSetNotAvailable() {
+
+    if(this.bookId == null) {
+      LOG.error("L'identifiant du livre est absent");
+      this.addActionError("L'identifiant du livre est absent. Echec du changement de status");
+      return Action.ERROR;
+    }
+
+    BookService_Service bookService = new BookService_Service();
+    BookService bookServicePort = bookService.getBookServicePort();
+    try {
+      bookServicePort.changeBookStatus(this.bookId, 3);
+    } catch (generated.bookserviceclient.PrescoWsException_Exception exception) {
+      LOG.error(exception.getMessage());
+      LOG.error(exception.getFaultInfo().getFault().getFaultString());
+      this.addActionError(exception.getFaultInfo().getFault().getFaultString());
+      return Action.ERROR;
+    }
+
+    return Action.SUCCESS;
+  }
+
+  public String doSetDepleted() {
+
+    if(this.bookId == null) {
+      LOG.error("L'identifiant du livre est absent");
+      this.addActionError("L'identifiant du livre est absent. Echec du changement de status");
+      return Action.ERROR;
+    }
+
+    BookService_Service bookService = new BookService_Service();
+    BookService bookServicePort = bookService.getBookServicePort();
+    try {
+      bookServicePort.changeBookStatus(this.bookId, 4);
+    } catch (generated.bookserviceclient.PrescoWsException_Exception exception) {
+      LOG.error(exception.getMessage());
+      LOG.error(exception.getFaultInfo().getFault().getFaultString());
+      this.addActionError(exception.getFaultInfo().getFault().getFaultString());
+      return Action.ERROR;
+    }
+
+    return Action.SUCCESS;
+  }
+
+  public String doSetProcessedBook() {
+    // @TODO
+    return Action.ERROR;
   }
 
   /**

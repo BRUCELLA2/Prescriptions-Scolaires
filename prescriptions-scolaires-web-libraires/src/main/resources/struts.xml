@@ -68,5 +68,69 @@
       <result name="error">/jsp/error.jsp</result>
     </action>
 
+    <!-- "setAvailable" Action -->
+    <action name="setAvailable"
+      class="fr.brucella.form.prescoweb.libraires.actions.SearchAction"
+      method="doSetAvailable">
+      <result name="success" type="redirectAction">
+        <param name="actionName">search</param>
+        <param name="departmentId">${departmentId}</param>
+        <param name="cityId">${cityId}</param>
+        <param name="epleRne">${epleRne}</param>
+        <param name="deadline">${deadline}</param>
+        <param name="processed">${processed}</param>
+        <param name="bookView">${bookView}</param>
+      </result>
+      <result name="error">/jsp/error.jsp</result>
+    </action>
+
+    <!-- "setNotAvailable" Action -->
+    <action name="setNotAvailable"
+      class="fr.brucella.form.prescoweb.libraires.actions.SearchAction"
+      method="doSetNotAvailable">
+      <result name="success" type="redirectAction">
+        <param name="actionName">search</param>
+        <param name="departmentId">${departmentId}</param>
+        <param name="cityId">${cityId}</param>
+        <param name="epleRne">${epleRne}</param>
+        <param name="deadline">${deadline}</param>
+        <param name="processed">${processed}</param>
+        <param name="bookView">${bookView}</param>
+      </result>
+      <result name="error">/jsp/error.jsp</result>
+    </action>
+
+    <!-- "setDepleted" Action -->
+    <action name="setDepleted"
+      class="fr.brucella.form.prescoweb.libraires.actions.SearchAction"
+      method="doSetDepleted">
+      <result name="success" type="redirectAction">
+        <param name="actionName">search</param>
+        <param name="departmentId">${departmentId}</param>
+        <param name="cityId">${cityId}</param>
+        <param name="epleRne">${epleRne}</param>
+        <param name="deadline">${deadline}</param>
+        <param name="processed">${processed}</param>
+        <param name="bookView">${bookView}</param>
+      </result>
+      <result name="error">/jsp/error.jsp</result>
+    </action>
+
+    <!-- "setDepleted" Action -->
+    <action name="setProcessedBook"
+      class="fr.brucella.form.prescoweb.libraires.actions.SearchAction"
+      method="doSetProcessedBook">
+      <result name="success" type="redirectAction">
+        <param name="actionName">search</param>
+        <param name="departmentId">${departmentId}</param>
+        <param name="cityId">${cityId}</param>
+        <param name="epleRne">${epleRne}</param>
+        <param name="deadline">${deadline}</param>
+        <param name="processed">${processed}</param>
+        <param name="bookView">${bookView}</param>
+      </result>
+      <result name="error">/jsp/error.jsp</result>
+    </action>
+
   </package>
 </struts>
