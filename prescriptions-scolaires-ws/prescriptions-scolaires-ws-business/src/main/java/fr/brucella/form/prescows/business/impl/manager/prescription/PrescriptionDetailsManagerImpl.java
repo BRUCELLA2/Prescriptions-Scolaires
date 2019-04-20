@@ -110,25 +110,29 @@ public class PrescriptionDetailsManagerImpl extends AbstractManager implements P
 
   /** {@inheritDoc} */
   @Override
-  public Boolean prescriptionProcessed(final Integer prescriptionId, Integer userId)
+  public Boolean prescriptionProcessed(final Integer prescriptionId, final Integer userId, final Boolean prescriptionProcessed)
       throws TechnicalException, FunctionalException {
 
-    if(prescriptionId == null || userId == null) {
-      LOG.error(messages.getString("PrescriptionDetailsManager.prescriptionProcessed.prescriptionIdOrUserIdNull"));
-      throw new FunctionalException(messages.getString("PrescriptionDetailsManager.prescriptionProcessed.prescriptionIdOrUserIdNull"));
+    if(prescriptionId == null || userId == null || prescriptionProcessed == null) {
+      LOG.error(messages.getString("PrescriptionDetailsManager.prescriptionProcessed.prescriptionIdOrUserIdOrPrescriptionProcessedNull"));
+      throw new FunctionalException(messages.getString("PrescriptionDetailsManager.prescriptionProcessed.prescriptionIdOrUserIdOrPrescriptionProcessedNull"));
     }
 
+    ProcessingPrescription processingPrescription;
+
     try {
-      final ProcessingPrescription processingPrescription = new ProcessingPrescription();
+      processingPrescription = this.getDaoFactory().getProcessingPrescriptionDao().getProcessingPrescription(userId, prescriptionId);
+      processingPrescription.setProcessingStatus(prescriptionProcessed);
+      this.getDaoFactory().getProcessingPrescriptionDao().updateProcessingPrescription(processingPrescription);
+    } catch (NotFoundException exception) {
+      processingPrescription = new ProcessingPrescription();
       processingPrescription.setUserId(userId);
       processingPrescription.setPrescriptionId(prescriptionId);
-      processingPrescription.setProcessingStatus(true);
-      this.getDaoFactory().getProcessingPrescriptionDao().updateProcessingPrescription(processingPrescription);
-      return true;
-    } catch (NotFoundException exception) {
-      LOG.error(exception.getMessage());
-      throw new FunctionalException(exception.getMessage(), exception);
+      processingPrescription.setProcessingStatus(prescriptionProcessed);
+      this.getDaoFactory().getProcessingPrescriptionDao().insertProcessingPrescription(processingPrescription);
     }
+
+    return true;
   }
 
   /** {@inheritDoc} */

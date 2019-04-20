@@ -5,7 +5,11 @@ import fr.brucella.form.prescows.business.impl.manager.AbstractManager;
 import fr.brucella.form.prescows.entity.exceptions.FunctionalException;
 import fr.brucella.form.prescows.entity.exceptions.NotFoundException;
 import fr.brucella.form.prescows.entity.exceptions.TechnicalException;
+import fr.brucella.form.prescows.entity.prescriptions.dto.BookWithStatusDto;
 import fr.brucella.form.prescows.entity.prescriptions.model.Book;
+import fr.brucella.form.prescows.entity.prescriptions.model.ProcessingBook;
+import fr.brucella.form.prescows.entity.prescriptions.model.ProcessingPrescription;
+import java.util.List;
 import java.util.Set;
 import javax.validation.ConstraintViolation;
 import org.apache.commons.logging.Log;
@@ -149,5 +153,80 @@ public class BookDetailsManagerImpl extends AbstractManager implements BookDetai
       LOG.error(exception.getMessage());
       throw new FunctionalException(exception.getMessage(), exception);
     }
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  public Boolean bookProcessed(
+      final Integer bookId,
+      final Integer userId,
+      final Boolean bookProcessed,
+      final Integer prescriptionId)
+      throws TechnicalException, FunctionalException {
+
+    if (bookId == null || userId == null || bookProcessed == null || prescriptionId == null) {
+      LOG.error(
+          messages.getString(
+              "bookDetailsManagerImpl.bookProcessed.bookIdOrUserIdOrBookProcessedNull"));
+      throw new FunctionalException(
+          messages.getString(
+              "bookDetailsManagerImpl.bookProcessed.bookIdOrUserIdOrBookProcessedNull"));
+    }
+
+    ProcessingBook processingBook;
+
+    try {
+      processingBook =
+          this.getDaoFactory().getProcessingBookDao().getProcessingBook(userId, bookId);
+      processingBook.setProcessingStatus(bookProcessed);
+      this.getDaoFactory().getProcessingBookDao().updateProcessingBook(processingBook);
+    } catch (NotFoundException exception) {
+      processingBook = new ProcessingBook();
+      processingBook.setUserId(userId);
+      processingBook.setBookId(bookId);
+      processingBook.setProcessingStatus(bookProcessed);
+      this.getDaoFactory().getProcessingBookDao().insertProcessingBook(processingBook);
+    }
+
+    List<BookWithStatusDto> books =
+        this.getDaoFactory().getBookDao().getBookWithStatusListPrescription(prescriptionId);
+    if (!books.isEmpty()) {
+      Boolean prescriptionProcessed = true;
+      for (BookWithStatusDto book : books) {
+        try {
+          if (!this.getDaoFactory()
+              .getProcessingBookDao()
+              .getProcessingBook(userId, book.getBookId())
+              .getProcessingStatus()) {
+            prescriptionProcessed = false;
+          }
+        } catch (NotFoundException e) {
+          prescriptionProcessed = false;
+        }
+      }
+
+      ProcessingPrescription processingPrescription;
+
+      try {
+        processingPrescription =
+            this.getDaoFactory()
+                .getProcessingPrescriptionDao()
+                .getProcessingPrescription(userId, prescriptionId);
+        processingPrescription.setProcessingStatus(prescriptionProcessed);
+        this.getDaoFactory()
+            .getProcessingPrescriptionDao()
+            .updateProcessingPrescription(processingPrescription);
+      } catch (NotFoundException exception) {
+        processingPrescription = new ProcessingPrescription();
+        processingPrescription.setUserId(userId);
+        processingPrescription.setPrescriptionId(prescriptionId);
+        processingPrescription.setProcessingStatus(prescriptionProcessed);
+        this.getDaoFactory()
+            .getProcessingPrescriptionDao()
+            .insertProcessingPrescription(processingPrescription);
+      }
+
+    }
+    return true;
   }
 }

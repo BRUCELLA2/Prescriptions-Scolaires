@@ -295,4 +295,60 @@ public class BookService extends SpringBeanAutowiringSupport {
           FUNC_ERROR, exception, new PrescoWsFault(CLIENT, exception.getMessage()));
     }
   }
+
+  /**
+   * Change the processed status for the book for the user.
+   * If all book of the prescription are processed for the user, prescription is set processed for the user too otherwise set to false.
+   *
+   * @param userId id of the user.
+   * @param bookId id of the book.
+   * @param bookProcessed true if the book is processed.
+   * @param prescriptionId  id of the prescriptionId
+   * @return true if change is ok. Throws exception if not.
+   * @throws PrescoWsException - Throws this exception if there is a technical problem.
+   *                             Throws this exception if the bookId is null.
+   *                             Throws this exception if the userId is null.
+   *                             Throws this exception if the bookProcessed is null.
+   *                             Throws this exception if the prescriptionId is null.
+   */
+  @WebMethod
+  public boolean setBookProcessed(final Integer userId, final Integer bookId, final Boolean bookProcessed, final Integer prescriptionId) throws PrescoWsException {
+
+    if(userId == null && bookId == null && prescriptionId == null && bookProcessed == null) {
+      LOG.error("userId null and bookId and prescriptionId and bookProcessed null");
+      throw new PrescoWsException(FUNC_ERROR, new PrescoWsFault(CLIENT, "L'identifiant du livre, l'identifiant de l'utilisateur, l'identifiant de la prescription et le statut de traitement sont vides. Mise à jour du statut de traitement du livre impossible."));
+    }
+
+    if(bookId == null) {
+      LOG.error("bookId null");
+      throw new PrescoWsException(FUNC_ERROR, new PrescoWsFault(CLIENT, "L'identifiant du livre est vide. Mise à jour du statut de traitement du livre impossible."));
+    }
+
+    if(userId == null) {
+      LOG.error("userId null");
+      throw new PrescoWsException(FUNC_ERROR, new PrescoWsFault(CLIENT, "L'identifiant de l'utilisateur est vide. Mise à jour du statut de traitement du livre impossible."));
+    }
+
+    if(prescriptionId == null) {
+      LOG.error("prescriptionId null");
+      throw new PrescoWsException(FUNC_ERROR, new PrescoWsFault(CLIENT, "L'identifiant de la prescription est vide. Mise à jour du statut de traitement du livre impossible."));
+    }
+
+    if(bookProcessed == null) {
+      LOG.error("bookProcessed null");
+      throw new PrescoWsException(FUNC_ERROR, new PrescoWsFault(CLIENT, "Le statut de traitement est vide. Mise à jour du statut de traitement du livre impossible."));
+    }
+
+    try {
+      return this.managerFactory.getBookDetailsManager().bookProcessed(bookId, userId, bookProcessed, prescriptionId);
+    } catch (TechnicalException exception) {
+      LOG.error(exception.getMessage());
+      throw new PrescoWsException(
+          TECH_ERROR, exception, new PrescoWsFault(SERVER, exception.getMessage()));
+    } catch (FunctionalException exception) {
+      LOG.error(exception.getMessage());
+      throw new PrescoWsException(
+          FUNC_ERROR, exception, new PrescoWsFault(CLIENT, exception.getMessage()));
+    }
+  }
 }

@@ -64,4 +64,17 @@ public interface BookDetailsManager {
    */
   Boolean changeBookStatus(final Integer bookId, final Integer bookStatusId)
       throws TechnicalException, FunctionalException;
+
+  /**
+   * Change the book processed status for the book and the user. If all books of the prescription related to the book are processed, processed prescription for the user is set to true, else to false.
+   *
+   * @param bookId id of the book.
+   * @param userId id of the user.
+   * @param bookProcessed true if the book is processed, false otherwise.
+   * @param prescriptionId id of the prescription.
+   * @return true if the update is a success. Throws exception if not.
+   * @throws TechnicalException - wraps technical exception caused during data access.
+   * @throws FunctionalException - Throws this exception if the userId or the bookId or the bookProcessed are null.
+   */
+  Boolean bookProcessed(final Integer bookId, final Integer userId, final Boolean bookProcessed, final Integer prescriptionId) throws TechnicalException, FunctionalException;
 }

@@ -152,7 +152,7 @@ public class PrescriptionService extends SpringBeanAutowiringSupport {
    * @throws PrescoWsException - Throws this exception if there is a technical problem and if the ProcessingPrescription is not found.
    */
   @WebMethod
-  public boolean prescriptionProcessed(final Integer prescriptionId, final Integer userId) throws PrescoWsException {
+  public boolean prescriptionProcessed(final Integer prescriptionId, final Integer userId, final Boolean prescriptionProcessed) throws PrescoWsException {
 
     if(prescriptionId == null && userId == null) {
       LOG.error("PrescriptionId and userId null");
@@ -168,7 +168,7 @@ public class PrescriptionService extends SpringBeanAutowiringSupport {
     }
 
     try {
-      return this.managerFactory.getPrescriptionDetailsManager().prescriptionProcessed(prescriptionId, userId);
+      return this.managerFactory.getPrescriptionDetailsManager().prescriptionProcessed(prescriptionId, userId, prescriptionProcessed);
     } catch (TechnicalException exception) {
       LOG.error(exception.getMessage());
       throw new PrescoWsException(

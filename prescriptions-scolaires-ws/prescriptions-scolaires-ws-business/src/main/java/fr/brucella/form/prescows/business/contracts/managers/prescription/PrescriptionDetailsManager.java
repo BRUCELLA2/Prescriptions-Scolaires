@@ -48,11 +48,12 @@ public interface PrescriptionDetailsManager {
    *
    * @param prescriptionId id of the prescription.
    * @param userId id of the user.
-   * @return true if delete is a success. Throws exception if not.
+   * @param prescriptionProcessed true if the prescription is processed, false otherwise.
+   * @return true if update is a success. Throws exception if not.
    * @throws TechnicalException - wraps technical exception caused during data access.
-   * @throws FunctionalException - Throws this exception if the userId or the prescriptionId are null or if the ProcessingPrescription is not found.
+   * @throws FunctionalException - Throws this exception if the userId or the prescriptionId are null.
    */
-  Boolean prescriptionProcessed(final Integer prescriptionId, final Integer userId) throws TechnicalException, FunctionalException;
+  Boolean prescriptionProcessed(final Integer prescriptionId, final Integer userId, final Boolean prescriptionProcessed) throws TechnicalException, FunctionalException;
 
   /**
    * Return the prescription with the full details with the specified id.
