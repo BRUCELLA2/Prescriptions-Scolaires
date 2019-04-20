@@ -90,7 +90,7 @@ public class BookDaoImpl extends AbstractDao implements BookDao {
   public List<BookWithStatusDto> getBookWithStatusListPrescription(final Integer prescriptionId)
       throws TechnicalException {
 
-    sql = "SELECT book.book_id, book.ean, book.title, book.author, book.comments, book.email_teacher_send, book.email_send_date, book.book_status_id, book.prescription_id, book_status.book_status_name FROM book INNER JOIN book_status ON book.book_status_id = book_status.book_status_id WHERE book.prescription_id = :prescriptionId";
+    sql = "SELECT book.book_id, book.ean, book.title, book.author, book.comments, book.email_teacher_send, book.email_send_date, book.book_status_id, book.prescription_id, book_status.book_status_name FROM book INNER JOIN book_status ON book.book_status_id = book_status.book_status_id WHERE book.prescription_id = :prescriptionId ORDER BY book.ean";
 
     final MapSqlParameterSource parameterSource = new MapSqlParameterSource();
     parameterSource.addValue("prescriptionId", prescriptionId);
@@ -119,7 +119,7 @@ public class BookDaoImpl extends AbstractDao implements BookDao {
   @Override
   public List<BookFullDetailsDto> getBookFullDetailsListPrescription(final Integer prescriptionId) throws TechnicalException {
 
-    sql = "SELECT book.book_id, book.ean, book.title, book.author, book.comments, book.email_teacher_send, book.email_send_date, book.book_status_id, book.prescription_id, book_status.book_status_name, prescription.purchase_deadline, prescription.headcount, eple.eple_name FROM book INNER JOIN book_status ON book.book_status_id = book_status.book_status_id INNER JOIN prescription ON prescription.prescription_id = book.prescription_id INNER JOIN eple ON eple.eple_id = prescription.eple_id WHERE book.prescription_id = :prescriptionId";
+    sql = "SELECT book.book_id, book.ean, book.title, book.author, book.comments, book.email_teacher_send, book.email_send_date, book.book_status_id, book.prescription_id, book_status.book_status_name, prescription.purchase_deadline, prescription.headcount, eple.eple_name FROM book INNER JOIN book_status ON book.book_status_id = book_status.book_status_id INNER JOIN prescription ON prescription.prescription_id = book.prescription_id INNER JOIN eple ON eple.eple_id = prescription.eple_id WHERE book.prescription_id = :prescriptionId ORDER BY book.ean";
 
     final MapSqlParameterSource parameterSource = new MapSqlParameterSource();
     parameterSource.addValue("prescriptionId", prescriptionId);
