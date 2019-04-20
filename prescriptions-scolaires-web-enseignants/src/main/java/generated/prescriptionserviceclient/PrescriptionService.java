@@ -103,6 +103,7 @@ public interface PrescriptionService {
 
     /**
      * 
+     * @param arg2
      * @param arg1
      * @param arg0
      * @return
@@ -114,7 +115,8 @@ public interface PrescriptionService {
     @RequestWrapper(localName = "prescriptionProcessed", targetNamespace = "http://services.prescows.form.brucella.fr/", className = "generated.prescriptionserviceclient.PrescriptionProcessed")
     @ResponseWrapper(localName = "prescriptionProcessedResponse", targetNamespace = "http://services.prescows.form.brucella.fr/", className = "generated.prescriptionserviceclient.PrescriptionProcessedResponse")
     public boolean prescriptionProcessed(@WebParam(name = "arg0", targetNamespace = "") Integer arg0,
-        @WebParam(name = "arg1", targetNamespace = "") Integer arg1)
+        @WebParam(name = "arg1", targetNamespace = "") Integer arg1,
+        @WebParam(name = "arg2", targetNamespace = "") Boolean arg2)
         throws PrescoWsException_Exception
     ;
 

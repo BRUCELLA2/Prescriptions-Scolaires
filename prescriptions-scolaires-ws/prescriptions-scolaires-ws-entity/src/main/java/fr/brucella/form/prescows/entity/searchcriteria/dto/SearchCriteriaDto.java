@@ -126,7 +126,7 @@ public class SearchCriteriaDto {
    *
    * @param processing if the seach item is processed.
    */
-  public void setProcessing(Boolean processing) {
+  public void setProcessing(final Boolean processing) {
     this.processing = processing;
   }
 
@@ -144,7 +144,7 @@ public class SearchCriteriaDto {
    *
    * @param userId
    */
-  public void setUserId(Integer userId) {
+  public void setUserId(final Integer userId) {
     this.userId = userId;
   }
 

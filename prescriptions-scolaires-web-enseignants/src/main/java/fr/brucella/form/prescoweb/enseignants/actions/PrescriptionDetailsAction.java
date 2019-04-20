@@ -34,7 +34,7 @@ import org.apache.struts2.interceptor.SessionAware;
 public class PrescriptionDetailsAction extends ActionSupport implements SessionAware, ServletRequestAware {
 
   /** User Action logger. */
-  private static final Log LOG = LogFactory.getLog(UserAction.class);
+  private static final Log LOG = LogFactory.getLog(PrescriptionDetailsAction.class);
 
   /** The id of the prescription. */
   private Integer prescriptionId;
@@ -71,7 +71,8 @@ public class PrescriptionDetailsAction extends ActionSupport implements SessionA
 
   /** Default constructor. */
   public PrescriptionDetailsAction() {
-    // This constructor is intentionally empty. Nothing special is needed here.
+
+    super();
   }
 
 
@@ -109,7 +110,7 @@ public class PrescriptionDetailsAction extends ActionSupport implements SessionA
    *
    * @param prescription the prescription with full details.
    */
-  public void setPrescription(Prescription prescription) {
+  public void setPrescription(final Prescription prescription) {
     this.prescription = prescription;
   }
 
@@ -217,14 +218,32 @@ public class PrescriptionDetailsAction extends ActionSupport implements SessionA
    *
    * @param booksList the list of books for the prescription.
    */
-  public void setBooksList(List<BookWithStatusDto> booksList) {
+  public void setBooksList(final List<BookWithStatusDto> booksList) {
     this.booksList = booksList;
+  }
+
+  /**
+   * Give the Http Servlet Request.
+   *
+   * @return the Http Servlet Request.
+   */
+  public HttpServletRequest getServletRequest() {
+    return this.servletRequest;
   }
 
   /** Set the Http Servlet Request. */
   @Override
   public void setServletRequest(final HttpServletRequest request) {
     this.servletRequest = request;
+  }
+
+  /**
+   * Give the user's HTTP session attributes.
+   *
+   * @return the user's HTTP session attributes.
+   */
+  public Map<String, Object> getSession() {
+    return session;
   }
 
   /** Set the user's HTTP session attributes. */
@@ -253,8 +272,6 @@ public class PrescriptionDetailsAction extends ActionSupport implements SessionA
 
     final PrescriptionService_Service prescriptionService = new PrescriptionService_Service();
     final PrescriptionService prescriptionServicePort = prescriptionService.getPrescriptionServicePort();
-    final BookService_Service bookService = new BookService_Service();
-    final BookService bookServicePort = bookService.getBookServicePort();
 
     try {
       this.setPrescription(prescriptionServicePort.getPrescriptionFullDetailsDto(this.prescriptionId));
@@ -266,6 +283,9 @@ public class PrescriptionDetailsAction extends ActionSupport implements SessionA
     }
 
     this.purchaseDeadline = dateStringConversionToEnglishDate(prescription.getPurchaseDeadline());
+
+    final BookService_Service bookService = new BookService_Service();
+    final BookService bookServicePort = bookService.getBookServicePort();
 
     try {
       this.setBooksList(bookServicePort.bookWithStatusListForPrescription(this.prescriptionId));
@@ -320,7 +340,7 @@ public class PrescriptionDetailsAction extends ActionSupport implements SessionA
     this.prescription.setEpleId(this.epleId);
     this.prescription.setPurchaseDeadline(dateStringConversionToFrenchDate(this.purchaseDeadline));
     this.prescription.setUserId(userDetailsDto.getUserId());
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+    final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
     this.prescription.setCreationDate(formatter.format(LocalDateTime.now()));
     this.prescription.setValidationStatus(false);
     this.prescription.setHeadcount(this.headcount);
@@ -435,18 +455,16 @@ public class PrescriptionDetailsAction extends ActionSupport implements SessionA
    */
   private String dateStringConversionToFrenchDate(final String stringDate) {
 
-    DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    DateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-    String inputDateStr = stringDate + " 00:00:00";
+    final DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    final DateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+    final String inputDateStr = stringDate + " 00:00:00";
     Date date = null;
     try {
       date = inputFormat.parse(inputDateStr);
     } catch (ParseException e) {
-      e.printStackTrace();
+      LOG.error(e.getMessage());
     }
-    String outputDateStr = outputFormat.format(date);
-
-    return outputDateStr;
+    return outputFormat.format(date);
   }
 
   /**
@@ -457,17 +475,16 @@ public class PrescriptionDetailsAction extends ActionSupport implements SessionA
    */
   private String dateStringConversionToEnglishDate(final String stringDate) {
 
-    DateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
-    DateFormat inputFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-    String inputDateStr = stringDate;
+    final DateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+    final DateFormat inputFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+    final String inputDateStr = stringDate;
     Date date = null;
     try {
       date = inputFormat.parse(inputDateStr);
     } catch (ParseException e) {
-      e.printStackTrace();
+      LOG.error(e.getMessage());
     }
-    String outputDateStr = outputFormat.format(date);
-
-    return outputDateStr;
+    return outputFormat.format(date);
   }
+
 }

@@ -26,6 +26,7 @@ public class ObjectFactory {
 
     private final static QName _DeleteBookResponse_QNAME = new QName("http://services.prescows.form.brucella.fr/", "deleteBookResponse");
     private final static QName _DeleteBook_QNAME = new QName("http://services.prescows.form.brucella.fr/", "deleteBook");
+    private final static QName _SetBookProcessed_QNAME = new QName("http://services.prescows.form.brucella.fr/", "setBookProcessed");
     private final static QName _PrescoWsException_QNAME = new QName("http://services.prescows.form.brucella.fr/", "PrescoWsException");
     private final static QName _BookSearchingResponse_QNAME = new QName("http://services.prescows.form.brucella.fr/", "bookSearchingResponse");
     private final static QName _MakeBook_QNAME = new QName("http://services.prescows.form.brucella.fr/", "makeBook");
@@ -33,6 +34,7 @@ public class ObjectFactory {
     private final static QName _BookInformations_QNAME = new QName("http://services.prescows.form.brucella.fr/", "bookInformations");
     private final static QName _BookWithStatusListForPrescriptionResponse_QNAME = new QName("http://services.prescows.form.brucella.fr/", "bookWithStatusListForPrescriptionResponse");
     private final static QName _BookFullDetailsListForPrescriptionResponse_QNAME = new QName("http://services.prescows.form.brucella.fr/", "bookFullDetailsListForPrescriptionResponse");
+    private final static QName _SetBookProcessedResponse_QNAME = new QName("http://services.prescows.form.brucella.fr/", "setBookProcessedResponse");
     private final static QName _ModifyBookResponse_QNAME = new QName("http://services.prescows.form.brucella.fr/", "modifyBookResponse");
     private final static QName _ChangeBookStatusResponse_QNAME = new QName("http://services.prescows.form.brucella.fr/", "changeBookStatusResponse");
     private final static QName _MakeBookResponse_QNAME = new QName("http://services.prescows.form.brucella.fr/", "makeBookResponse");
@@ -55,6 +57,14 @@ public class ObjectFactory {
      */
     public ModifyBookResponse createModifyBookResponse() {
         return new ModifyBookResponse();
+    }
+
+    /**
+     * Create an instance of {@link SetBookProcessedResponse }
+     * 
+     */
+    public SetBookProcessedResponse createSetBookProcessedResponse() {
+        return new SetBookProcessedResponse();
     }
 
     /**
@@ -127,6 +137,14 @@ public class ObjectFactory {
      */
     public DeleteBook createDeleteBook() {
         return new DeleteBook();
+    }
+
+    /**
+     * Create an instance of {@link SetBookProcessed }
+     * 
+     */
+    public SetBookProcessed createSetBookProcessed() {
+        return new SetBookProcessed();
     }
 
     /**
@@ -252,6 +270,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SetBookProcessed }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://services.prescows.form.brucella.fr/", name = "setBookProcessed")
+    public JAXBElement<SetBookProcessed> createSetBookProcessed(SetBookProcessed value) {
+        return new JAXBElement<SetBookProcessed>(_SetBookProcessed_QNAME, SetBookProcessed.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link PrescoWsException }{@code >}}
      * 
      */
@@ -312,6 +339,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://services.prescows.form.brucella.fr/", name = "bookFullDetailsListForPrescriptionResponse")
     public JAXBElement<BookFullDetailsListForPrescriptionResponse> createBookFullDetailsListForPrescriptionResponse(BookFullDetailsListForPrescriptionResponse value) {
         return new JAXBElement<BookFullDetailsListForPrescriptionResponse>(_BookFullDetailsListForPrescriptionResponse_QNAME, BookFullDetailsListForPrescriptionResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SetBookProcessedResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://services.prescows.form.brucella.fr/", name = "setBookProcessedResponse")
+    public JAXBElement<SetBookProcessedResponse> createSetBookProcessedResponse(SetBookProcessedResponse value) {
+        return new JAXBElement<SetBookProcessedResponse>(_SetBookProcessedResponse_QNAME, SetBookProcessedResponse.class, null, value);
     }
 
     /**

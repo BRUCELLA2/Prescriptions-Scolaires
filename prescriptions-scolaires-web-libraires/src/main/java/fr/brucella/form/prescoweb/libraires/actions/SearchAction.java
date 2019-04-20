@@ -38,8 +38,17 @@ import org.apache.struts2.interceptor.SessionAware;
  */
 public class SearchAction extends ActionSupport implements SessionAware, ServletRequestAware {
 
-  /** Search Action logger */
+  /** Search Action logger. */
   private static final Log LOG = LogFactory.getLog(SearchAction.class);
+
+  /** String "false". */
+  private static final String FALSE = "false";
+
+  /** String "true". */
+  private static final String TRUE = "true";
+
+  /** String "userLog" */
+  private static final String USERLOG = "userLog";
 
   /** Id of the department. */
   private Integer departmentId;
@@ -94,6 +103,8 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
 
   /** Default constructor. */
   public SearchAction() {
+
+    super();
 
     final UtilityService_Service utilityService = new UtilityService_Service();
     final UtilityService utilityServicePort = utilityService.getUtilityServicePort();
@@ -260,7 +271,7 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
    *
    * @return the processed book status for user.
    */
-  public String isProcessedBookStatusForUser() {
+  public String getProcessedBookStatusForUser() {
     return processedBookStatusForUser;
   }
 
@@ -357,7 +368,7 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
   /**
    * Set the list of the eple.
    *
-   * @param epleList
+   * @param epleList the list of the eple.
    */
   public void setEpleList(final List<Eple> epleList) {
     this.epleList = epleList;
@@ -400,27 +411,27 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
       return Action.INPUT;
     }
 
-    UserDetailsDto userDetailsDto = (UserDetailsDto) this.session.get("userLog");
+    UserDetailsDto userDetailsDto = (UserDetailsDto) this.session.get(USERLOG);
 
-    if(StringUtils.equals(this.bookView, "true")) {
-      final generated.bookserviceclient.SearchCriteriaDto searchCriteriaDtoBook = new SearchCriteriaDto();
+    if(StringUtils.equals(this.bookView, TRUE)) {
+      final SearchCriteriaDto searchCriteriaDtoBook = new SearchCriteriaDto();
 
       searchCriteriaDtoBook.setDepartmentId(this.departmentId);
       searchCriteriaDtoBook.setCityId(this.cityId);
-      if(!StringUtils.isEmpty(this.epleRne)){
-        searchCriteriaDtoBook.setRne(this.epleRne);
-      } else {
+      if (StringUtils.isEmpty(this.epleRne)) {
         searchCriteriaDtoBook.setRne(null);
+      } else {
+        searchCriteriaDtoBook.setRne(this.epleRne);
       }
-      if(StringUtils.equals(this.processed, "false")) {
+      if(StringUtils.equals(this.processed, FALSE)) {
         searchCriteriaDtoBook.setProcessing(false);
       } else {
         searchCriteriaDtoBook.setProcessing(true);
       }
-      if(!StringUtils.isEmpty(this.deadline)) {
-        searchCriteriaDtoBook.setPurchaseDeadline(dateStringConversionToFrenchDate(this.deadline));
-      } else {
+      if (StringUtils.isEmpty(this.deadline)) {
         searchCriteriaDtoBook.setPurchaseDeadline(null);
+      } else {
+        searchCriteriaDtoBook.setPurchaseDeadline(dateStringConversionToFrenchDate(this.deadline));
       }
       searchCriteriaDtoBook.setUserId(userDetailsDto.getUserId());
 
@@ -440,27 +451,27 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
 
       searchCriteriaDtoPrescription.setDepartmentId(this.departmentId);
       searchCriteriaDtoPrescription.setCityId(this.cityId);
-      if(!StringUtils.isEmpty(this.epleRne)) {
-        searchCriteriaDtoPrescription.setRne(this.epleRne);
-      } else {
+      if (StringUtils.isEmpty(this.epleRne)) {
         searchCriteriaDtoPrescription.setRne(null);
+      } else {
+        searchCriteriaDtoPrescription.setRne(this.epleRne);
       }
 
-      if(StringUtils.equals(this.processed, "false")) {
+      if(StringUtils.equals(this.processed, FALSE)) {
         searchCriteriaDtoPrescription.setProcessing(false);
       } else {
         searchCriteriaDtoPrescription.setProcessing(true);
       }
-      if(!StringUtils.isEmpty(this.deadline)) {
-        searchCriteriaDtoPrescription.setPurchaseDeadline(dateStringConversionToFrenchDate(this.deadline));
-      } else {
+      if (StringUtils.isEmpty(this.deadline)) {
         searchCriteriaDtoPrescription.setPurchaseDeadline(null);
+      } else {
+        searchCriteriaDtoPrescription.setPurchaseDeadline(dateStringConversionToFrenchDate(this.deadline));
       }
       searchCriteriaDtoPrescription.setUserId(userDetailsDto.getUserId());
 
       try {
-        PrescriptionService_Service prescriptionService = new PrescriptionService_Service();
-        PrescriptionService prescriptionServicePort = prescriptionService.getPrescriptionServicePort();
+        final PrescriptionService_Service prescriptionService = new PrescriptionService_Service();
+        final PrescriptionService prescriptionServicePort = prescriptionService.getPrescriptionServicePort();
         this.prescriptionsList = prescriptionServicePort.searchPrescription(searchCriteriaDtoPrescription);
       } catch (generated.prescriptionserviceclient.PrescoWsException_Exception exception) {
         LOG.error(exception.getMessage());
@@ -473,6 +484,11 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
     return Action.SUCCESS;
   }
 
+  /**
+   * Prescriptions details.
+   *
+   * @return ERROR if error occurred. SUCCESS otherwise.
+   */
   public String doPrescriptionDetails() {
 
     if(this.prescriptionId == null) {
@@ -481,10 +497,8 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
       return Action.ERROR;
     }
 
-    UserDetailsDto userDetailsDto = (UserDetailsDto) this.session.get("userLog");
-
-    BookService_Service bookService = new BookService_Service();
-    BookService bookServicePort = bookService.getBookServicePort();
+    final BookService_Service bookService = new BookService_Service();
+    final BookService bookServicePort = bookService.getBookServicePort();
 
     try {
       this.booksList = bookServicePort.bookFullDetailsListForPrescription(this.prescriptionId);
@@ -498,6 +512,11 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
     return Action.SUCCESS;
   }
 
+  /**
+   * Set a book available.
+   *
+   * @return ERROR if error occurred. SUCCESS otherwise.
+   */
   public String doSetAvailable() {
 
     if(this.bookId == null) {
@@ -506,8 +525,8 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
       return Action.ERROR;
     }
 
-    BookService_Service bookService = new BookService_Service();
-    BookService bookServicePort = bookService.getBookServicePort();
+    final BookService_Service bookService = new BookService_Service();
+    final BookService bookServicePort = bookService.getBookServicePort();
     try {
       bookServicePort.changeBookStatus(this.bookId, 2);
     } catch (generated.bookserviceclient.PrescoWsException_Exception exception) {
@@ -520,6 +539,11 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
     return Action.SUCCESS;
   }
 
+  /**
+   * Set a book not available.
+   *
+   * @return ERROR if error occurred. SUCCESS otherwise.
+   */
   public String doSetNotAvailable() {
 
     if(this.bookId == null) {
@@ -528,8 +552,8 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
       return Action.ERROR;
     }
 
-    BookService_Service bookService = new BookService_Service();
-    BookService bookServicePort = bookService.getBookServicePort();
+    final BookService_Service bookService = new BookService_Service();
+    final BookService bookServicePort = bookService.getBookServicePort();
     try {
       bookServicePort.changeBookStatus(this.bookId, 3);
     } catch (generated.bookserviceclient.PrescoWsException_Exception exception) {
@@ -542,6 +566,11 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
     return Action.SUCCESS;
   }
 
+  /**
+   * Set a book depleted.
+   *
+   * @return ERROR if error occurred. SUCCESS otherwise.
+   */
   public String doSetDepleted() {
 
     if(this.bookId == null) {
@@ -550,8 +579,8 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
       return Action.ERROR;
     }
 
-    BookService_Service bookService = new BookService_Service();
-    BookService bookServicePort = bookService.getBookServicePort();
+    final BookService_Service bookService = new BookService_Service();
+    final BookService bookServicePort = bookService.getBookServicePort();
     try {
       bookServicePort.changeBookStatus(this.bookId, 4);
     } catch (generated.bookserviceclient.PrescoWsException_Exception exception) {
@@ -564,6 +593,11 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
     return Action.SUCCESS;
   }
 
+  /**
+   * Set a book processed for the user.
+   *
+   * @return ERROR if error occurred. SUCCESS otherwise.
+   */
   public String doSetProcessedBook() {
 
     if(this.bookId == null) {
@@ -585,16 +619,16 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
     }
 
     boolean bookProcessed;
-    if(StringUtils.equals(this.processedBookStatusForUser, "true")) {
+    if(StringUtils.equals(this.processedBookStatusForUser, TRUE)) {
       bookProcessed = true;
     } else {
       bookProcessed = false;
     }
 
-    UserDetailsDto userDetailsDto = (UserDetailsDto) this.session.get("userLog");
+    final UserDetailsDto userDetailsDto = (UserDetailsDto) this.session.get(USERLOG);
 
-    BookService_Service bookService = new BookService_Service();
-    BookService bookServicePort = bookService.getBookServicePort();
+    final BookService_Service bookService = new BookService_Service();
+    final BookService bookServicePort = bookService.getBookServicePort();
     try {
       bookServicePort.setBookProcessed(userDetailsDto.getUserId(), this.bookId, bookProcessed, this.prescriptionId);
     } catch (generated.bookserviceclient.PrescoWsException_Exception exception) {
@@ -615,14 +649,14 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
    */
   public String checkBookProcessedForUser(final BookFullDetailsDto book) {
 
-    UserDetailsDto userDetailsDto = (UserDetailsDto) this.session.get("userLog");
+    final UserDetailsDto userDetailsDto = (UserDetailsDto) this.session.get(USERLOG);
 
-    for(ProcessingBook processingBook : book.getProcessingBookList()) {
+    for(final ProcessingBook processingBook : book.getProcessingBookList()) {
       if(userDetailsDto.getUserId().equals(processingBook.getUserId()) && processingBook.isProcessingStatus()){
-        return "true";
+        return TRUE;
       }
     }
-    return "false";
+    return FALSE;
   }
 
   /**
@@ -633,11 +667,11 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
    */
   public String checkPrescriptionProcessedForUser(final PrescriptionFullDetailsDto prescription) {
 
-    UserDetailsDto userDetailsDto = (UserDetailsDto) this.session.get("userLog");
+    final UserDetailsDto userDetailsDto = (UserDetailsDto) this.session.get(USERLOG);
 
-    for(ProcessingPrescription processingPrescription : prescription.getProcessingPrescriptionList()) {
+    for(final ProcessingPrescription processingPrescription : prescription.getProcessingPrescriptionList()) {
       if(userDetailsDto.getUserId().equals(processingPrescription.getUserId()) && processingPrescription.isProcessingStatus()) {
-        return "true";
+        return TRUE;
       }
     }
     return "false";
@@ -650,7 +684,7 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
    */
   public String getDepartmentName() {
 
-    for(Department department : departmentList) {
+    for(final Department department : departmentList) {
       if(department.getDepartmentId().equals(this.departmentId)) {
         return department.getDepartmentName();
       }
@@ -665,7 +699,7 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
    */
   public String getCityName() {
 
-    for(City city : cityList) {
+    for(final City city : cityList) {
       if(city.getCityId().equals(this.cityId)) {
         return city.getCityName();
       }
@@ -680,7 +714,7 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
    */
   public String getEpleName() {
 
-    for(Eple eple : epleList) {
+    for(final Eple eple : epleList) {
       if(StringUtils.equals(eple.getRne(), this.epleRne)) {
         return eple.getEpleName();
       }
@@ -696,18 +730,16 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
    */
   private String dateStringConversionToFrenchDate(final String stringDate) {
 
-    DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    DateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-    String inputDateStr = stringDate + " 00:00:00";
+    final DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    final DateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+    final String inputDateStr = stringDate + " 00:00:00";
     Date date = null;
     try {
       date = inputFormat.parse(inputDateStr);
     } catch (ParseException e) {
       e.printStackTrace();
     }
-    String outputDateStr = outputFormat.format(date);
-
-    return outputDateStr;
+    return outputFormat.format(date);
   }
 
   /**
@@ -727,8 +759,6 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
     } catch (ParseException e) {
       e.printStackTrace();
     }
-    String outputDateStr = outputFormat.format(date);
-
-    return outputDateStr;
+    return outputFormat.format(date);
   }
 }

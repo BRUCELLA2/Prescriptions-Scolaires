@@ -2,13 +2,10 @@ package fr.brucella.form.prescoweb.enseignants.actions;
 
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
-import generated.authentificationserviceclient.UserDetailsDto;
 import generated.bookserviceclient.Book;
 import generated.bookserviceclient.BookService;
 import generated.bookserviceclient.BookService_Service;
 import generated.bookserviceclient.PrescoWsException_Exception;
-import generated.prescriptionserviceclient.PrescriptionService;
-import generated.prescriptionserviceclient.PrescriptionService_Service;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
@@ -27,6 +24,7 @@ public class BookDetailsAction extends ActionSupport implements SessionAware, Se
   /** User Action logger. */
   private static final Log LOG = LogFactory.getLog(BookDetailsAction.class);
 
+  /** Integer for the book status "disponibilité non vérifié". */
   private static final Integer BOOK_STATUS_DISPO_NON_VERIFIE = 1;
 
   /** The id of the prescription. */
@@ -58,7 +56,7 @@ public class BookDetailsAction extends ActionSupport implements SessionAware, Se
 
   /** Default constructor. */
   public BookDetailsAction() {
-    // This constructor is intentionally empty. Nothing special is needed here.
+    super();
   }
 
 
@@ -173,10 +171,28 @@ public class BookDetailsAction extends ActionSupport implements SessionAware, Se
     this.author = author;
   }
 
+  /**
+   * Give the Http Servlet Request.
+   *
+   * @return the Http Servlet Request.
+   */
+  public HttpServletRequest getServletRequest() {
+    return this.servletRequest;
+  }
+
   /** Set the Http Servlet Request. */
   @Override
   public void setServletRequest(final HttpServletRequest request) {
     this.servletRequest = request;
+  }
+
+  /**
+   * Give the user's HTTP session attributes.
+   *
+   * @return the user's HTTP session attributes.
+   */
+  public Map<String, Object> getSession() {
+    return session;
   }
 
   /** Set the user's HTTP session attributes. */
@@ -335,7 +351,6 @@ public class BookDetailsAction extends ActionSupport implements SessionAware, Se
    */
   public String doDeleteBook() {
 
-    LOG.error("ID delete : " + this.prescriptionId);
     if(this.bookId == null) {
       LOG.error("L'identifiant du livre est absent. Echec de la suppression.");
       this.addActionError("L'identifiant du livre est absent. Echec de la suppression.");

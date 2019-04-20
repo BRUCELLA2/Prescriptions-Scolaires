@@ -52,7 +52,7 @@ public class UserAction extends ActionSupport implements SessionAware, ServletRe
 
   /** Default constructor. */
   public UserAction() {
-    // This constructor is intentionally empty. Nothing special is needed here.
+    super();
   }
 
   // ----- Getters and Setters
@@ -161,14 +161,33 @@ public class UserAction extends ActionSupport implements SessionAware, ServletRe
    *
    * @param userEmail the user email.
    */
-  public void setUserEmail(String userEmail) {
+  public void setUserEmail(final String userEmail) {
     this.userEmail = userEmail;
   }
+
+  /**
+   * Give the Http Servlet Request.
+   *
+   * @return the Http Servlet Request.
+   */
+  public HttpServletRequest getServletRequest() {
+    return this.servletRequest;
+  }
+
 
   /** Set the Http Servlet Request. */
   @Override
   public void setServletRequest(final HttpServletRequest request) {
     this.servletRequest = request;
+  }
+
+  /**
+   * Give the user's HTTP session attributes.
+   *
+   * @return the user's HTTP session attributes.
+   */
+  public Map<String, Object> getSession() {
+    return session;
   }
 
   /** Set the user's HTTP session attributes. */

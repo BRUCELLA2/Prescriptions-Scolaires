@@ -88,7 +88,7 @@ public class PrescriptionDaoImpl extends AbstractDao implements PrescriptionDao 
 
   /** {@inheritDoc} */
   @Override
-  public PrescriptionFullDetailsDto getPrescriptionFullDetailsDto(Integer prescriptionId)
+  public PrescriptionFullDetailsDto getPrescriptionFullDetailsDto(final Integer prescriptionId)
       throws TechnicalException, NotFoundException {
 
     sql ="SELECT prescription.prescription_id, prescription.prescription_name, prescription.creation_date, prescription.user_id, prescription.purchase_deadline, prescription.validation_status, prescription.eple_id, prescription.headcount, city.city_name, department.department_name, eple.eple_name FROM prescription INNER JOIN eple ON eple.eple_id = prescription.eple_id INNER JOIN department ON department.department_id = eple.department_id INNER JOIN city ON city.city_id = eple.city_id LEFT OUTER JOIN processing_prescription ON processing_prescription.prescription_id = prescription.prescription_id WHERE prescription.prescription_id = :prescriptionId";
@@ -182,7 +182,7 @@ public class PrescriptionDaoImpl extends AbstractDao implements PrescriptionDao 
 
   /** {@inheritDoc} */
   @Override
-  public List<PrescriptionFullDetailsDto> getSearchPrescriptionFullDetailsList(SearchCriteriaDto searchCriteriaDto)
+  public List<PrescriptionFullDetailsDto> getSearchPrescriptionFullDetailsList(final SearchCriteriaDto searchCriteriaDto)
       throws TechnicalException {
 
     if(LOG.isDebugEnabled()) {
@@ -191,7 +191,7 @@ public class PrescriptionDaoImpl extends AbstractDao implements PrescriptionDao 
 
     final MapSqlParameterSource parameterSource = new MapSqlParameterSource();
 
-    final StringBuilder stringBuilder = new StringBuilder();
+    final StringBuilder stringBuilder = new StringBuilder(750);
     stringBuilder.append("SELECT prescription.prescription_id, prescription.prescription_name, prescription.creation_date, prescription.user_id, prescription.purchase_deadline, prescription.validation_status, prescription.eple_id, prescription.headcount, city.city_name, department.department_name, eple.eple_name FROM prescription INNER JOIN eple ON eple.eple_id = prescription.eple_id INNER JOIN department ON department.department_id = eple.department_id INNER JOIN city ON city.city_id = eple.city_id LEFT OUTER JOIN processing_prescription ON processing_prescription.prescription_id = prescription.prescription_id WHERE 1=1");
 
     if (searchCriteriaDto != null) {
@@ -212,7 +212,7 @@ public class PrescriptionDaoImpl extends AbstractDao implements PrescriptionDao 
         parameterSource.addValue("purchaseDeadline", searchCriteriaDto.getPurchaseDeadline());
       }
       if (searchCriteriaDto.getProcessing() != null && searchCriteriaDto.getUserId() != null) {
-        if (searchCriteriaDto.getProcessing() == false) {
+        if (!searchCriteriaDto.getProcessing()) {
           stringBuilder.append(
               " AND NOT EXISTS (SELECT * FROM processing_prescription WHERE processing_prescription.user_id = :userId and processing_prescription.prescription_id = prescription.prescription_id and processing_prescription.processing_status = true)");
           parameterSource.addValue("userId", searchCriteriaDto.getUserId());
@@ -256,7 +256,7 @@ public class PrescriptionDaoImpl extends AbstractDao implements PrescriptionDao 
       final RowMapper<ProcessingPrescription> processingPrescriptionRowMapper = new ProcessingPrescriptionRM();
 
       try {
-        List<ProcessingPrescription> processingPrescriptionList = getNamedJdbcTemplate().query(sql, processingParameterSource, processingPrescriptionRowMapper);
+        final List<ProcessingPrescription> processingPrescriptionList = getNamedJdbcTemplate().query(sql, processingParameterSource, processingPrescriptionRowMapper);
         if(processingPrescriptionList.isEmpty()) {
           prescriptionFullDetailsDto.setProcessingPrescriptionList(new ArrayList<>());
         } else {

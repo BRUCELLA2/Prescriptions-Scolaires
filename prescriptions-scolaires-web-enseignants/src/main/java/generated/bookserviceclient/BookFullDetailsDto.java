@@ -20,6 +20,8 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;extension base="{http://services.prescows.form.brucella.fr/}book">
  *       &lt;sequence>
  *         &lt;element name="bookStatusName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="epleName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="headcount" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="processingBookList" type="{http://services.prescows.form.brucella.fr/}processingBook" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="purchaseDeadline" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
@@ -33,6 +35,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "bookFullDetailsDto", propOrder = {
     "bookStatusName",
+    "epleName",
+    "headcount",
     "processingBookList",
     "purchaseDeadline"
 })
@@ -41,6 +45,8 @@ public class BookFullDetailsDto
 {
 
     protected String bookStatusName;
+    protected String epleName;
+    protected Integer headcount;
     @XmlElement(nillable = true)
     protected List<ProcessingBook> processingBookList;
     protected String purchaseDeadline;
@@ -67,6 +73,54 @@ public class BookFullDetailsDto
      */
     public void setBookStatusName(String value) {
         this.bookStatusName = value;
+    }
+
+    /**
+     * Obtient la valeur de la propriété epleName.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getEpleName() {
+        return epleName;
+    }
+
+    /**
+     * Définit la valeur de la propriété epleName.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setEpleName(String value) {
+        this.epleName = value;
+    }
+
+    /**
+     * Obtient la valeur de la propriété headcount.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getHeadcount() {
+        return headcount;
+    }
+
+    /**
+     * Définit la valeur de la propriété headcount.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setHeadcount(Integer value) {
+        this.headcount = value;
     }
 
     /**

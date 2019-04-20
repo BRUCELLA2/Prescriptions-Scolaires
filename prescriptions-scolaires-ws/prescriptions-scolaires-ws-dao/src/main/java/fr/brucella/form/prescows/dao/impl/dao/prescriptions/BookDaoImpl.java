@@ -176,7 +176,7 @@ public class BookDaoImpl extends AbstractDao implements BookDao {
 
   /** {@inheritDoc} */
   @Override
-  public List<BookFullDetailsDto> getSearchBookFullDetailsList(SearchCriteriaDto searchCriteriaDto)
+  public List<BookFullDetailsDto> getSearchBookFullDetailsList(final SearchCriteriaDto searchCriteriaDto)
       throws TechnicalException {
 
     if(LOG.isDebugEnabled()) {
@@ -185,7 +185,7 @@ public class BookDaoImpl extends AbstractDao implements BookDao {
 
     final MapSqlParameterSource parameterSource = new MapSqlParameterSource();
 
-    final StringBuilder stringBuilder = new StringBuilder();
+    final StringBuilder stringBuilder = new StringBuilder(760);
     stringBuilder.append("SELECT book.book_id, book.ean, book.title, book.author, book.comments, book.email_teacher_send, book.email_send_date, book.book_status_id, book.prescription_id, book_status.book_status_name, prescription.purchase_deadline, prescription.headcount, eple.eple_name FROM book INNER JOIN book_status ON book.book_status_id = book_status.book_status_id INNER JOIN prescription ON prescription.prescription_id = book.prescription_id INNER JOIN eple on eple.eple_id = prescription.eple_id INNER JOIN department ON department.department_id = eple.department_id INNER JOIN city ON city.city_id = eple.city_id LEFT OUTER JOIN processing_book ON processing_book.book_id = book.book_id WHERE 1=1");
 
     if(searchCriteriaDto != null) {
@@ -206,7 +206,7 @@ public class BookDaoImpl extends AbstractDao implements BookDao {
         parameterSource.addValue("purchaseDeadline", searchCriteriaDto.getPurchaseDeadline());
       }
       if(searchCriteriaDto.getProcessing() != null && searchCriteriaDto.getUserId() != null) {
-        if(searchCriteriaDto.getProcessing() == false) {
+        if(!searchCriteriaDto.getProcessing()) {
           stringBuilder.append(" AND NOT EXISTS (SELECT * FROM processing_book WHERE processing_book.book_id = book.book_id and processing_book.user_id = :userId and processing_book.processing_status = true)");
           parameterSource.addValue("userId", searchCriteriaDto.getUserId());
           parameterSource.addValue("processingStatus", searchCriteriaDto.getProcessing());
@@ -248,7 +248,7 @@ public class BookDaoImpl extends AbstractDao implements BookDao {
       final RowMapper<ProcessingBook> processingBookRowMapper = new ProcessingBookRM();
 
       try {
-        List<ProcessingBook> processingBookList = getNamedJdbcTemplate().query(sql, processingParameterSource, processingBookRowMapper);
+        final List<ProcessingBook> processingBookList = getNamedJdbcTemplate().query(sql, processingParameterSource, processingBookRowMapper);
         if(processingBookList.isEmpty()) {
           bookFullDetailsDto.setProcessingBookList(new ArrayList<>());
         } else {
