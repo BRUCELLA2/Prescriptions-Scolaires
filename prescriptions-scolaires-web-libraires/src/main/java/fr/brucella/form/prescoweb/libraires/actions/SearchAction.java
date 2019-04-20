@@ -473,6 +473,31 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
     return Action.SUCCESS;
   }
 
+  public String doPrescriptionDetails() {
+
+    if(this.prescriptionId == null) {
+      LOG.error("L'identifiant de la prescription est incorrect");
+      this.addActionError("L'identifiant de la prescription est incorrect");
+      return Action.ERROR;
+    }
+
+    UserDetailsDto userDetailsDto = (UserDetailsDto) this.session.get("userLog");
+
+    BookService_Service bookService = new BookService_Service();
+    BookService bookServicePort = bookService.getBookServicePort();
+
+    try {
+      this.booksList = bookServicePort.bookFullDetailsListForPrescription(this.prescriptionId);
+    } catch (generated.bookserviceclient.PrescoWsException_Exception exception) {
+      LOG.error(exception.getMessage());
+      LOG.error(exception.getFaultInfo().getFault().getFaultString());
+      this.addActionError(exception.getFaultInfo().getFault().getFaultString());
+      return Action.ERROR;
+    }
+
+    return Action.SUCCESS;
+  }
+
   public String doSetAvailable() {
 
     if(this.bookId == null) {

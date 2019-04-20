@@ -292,7 +292,15 @@
                                     <c:out value="${stdDatum}"/></td>
                                 <td>
                                     <s:a class="btn btn-primary text-center" action="prescriptionDetails">
-                                        <s:param name="prescriptionId" value="prescriptionId"/>Détails
+                                        <s:param name="prescriptionId" value="prescriptionId"/>
+                                        <s:param name="processedBookStatusForUser" value="true" />
+                                        <s:param name="deadline" value="deadline"/>
+                                        <s:param name="cityId" value="cityId"/>
+                                        <s:param name="epleRne" value="epleRne"/>
+                                        <s:param name="bookView" value="bookView"/>
+                                        <s:param name="processed" value="processed"/>
+                                        <s:param name="departmentId" value="departmentId"/>
+                                        Détails
                                     </s:a>
 
                                 </td>

@@ -116,7 +116,7 @@
       <result name="error">/jsp/error.jsp</result>
     </action>
 
-    <!-- "setDepleted" Action -->
+    <!-- "setProcessedBook" Action -->
     <action name="setProcessedBook"
       class="fr.brucella.form.prescoweb.libraires.actions.SearchAction"
       method="doSetProcessedBook">
@@ -129,6 +129,100 @@
         <param name="processed">${processed}</param>
         <param name="bookView">${bookView}</param>
       </result>
+      <result name="error">/jsp/error.jsp</result>
+    </action>
+
+    <!-- "prescriptionDetails" Action -->
+    <action name="prescriptionDetails"
+      class="fr.brucella.form.prescoweb.libraires.actions.SearchAction"
+      method="doPrescriptionDetails">
+      <result name="success">/jsp/search/prescription_details.jsp</result>
+      <result name="error">/jsp/error.jsp</result>
+    </action>
+
+    <!-- "detailsSetAvailable" Action -->
+    <action name="detailsSetAvailable"
+      class="fr.brucella.form.prescoweb.libraires.actions.SearchAction"
+      method="doSetAvailable">
+      <result name="success" type="redirectAction">
+        <param name="actionName">prescriptionDetails</param>
+        <param name="departmentId">${departmentId}</param>
+        <param name="cityId">${cityId}</param>
+        <param name="epleRne">${epleRne}</param>
+        <param name="deadline">${deadline}</param>
+        <param name="processed">${processed}</param>
+        <param name="bookView">${bookView}</param>
+        <param name="prescriptionId">${prescriptionId}</param>
+      </result>
+      <result name="error">/jsp/error.jsp</result>
+    </action>
+
+    <!-- "detailsSetNotAvailable" Action -->
+    <action name="detailsSetNotAvailable"
+      class="fr.brucella.form.prescoweb.libraires.actions.SearchAction"
+      method="doSetNotAvailable">
+      <result name="success" type="redirectAction">
+        <param name="actionName">prescriptionDetails</param>
+        <param name="departmentId">${departmentId}</param>
+        <param name="cityId">${cityId}</param>
+        <param name="epleRne">${epleRne}</param>
+        <param name="deadline">${deadline}</param>
+        <param name="processed">${processed}</param>
+        <param name="bookView">${bookView}</param>
+        <param name="prescriptionId">${prescriptionId}</param>
+      </result>
+      <result name="error">/jsp/error.jsp</result>
+    </action>
+
+    <!-- "detailsSetDepleted" Action -->
+    <action name="detailsSetDepleted"
+      class="fr.brucella.form.prescoweb.libraires.actions.SearchAction"
+      method="doSetDepleted">
+      <result name="success" type="redirectAction">
+        <param name="actionName">prescriptionDetails</param>
+        <param name="departmentId">${departmentId}</param>
+        <param name="cityId">${cityId}</param>
+        <param name="epleRne">${epleRne}</param>
+        <param name="deadline">${deadline}</param>
+        <param name="processed">${processed}</param>
+        <param name="bookView">${bookView}</param>
+        <param name="prescriptionId">${prescriptionId}</param>
+      </result>
+      <result name="error">/jsp/error.jsp</result>
+    </action>
+
+    <!-- "detailsSetProcessedBook" Action -->
+    <action name="detailsSetProcessedBook"
+      class="fr.brucella.form.prescoweb.libraires.actions.SearchAction"
+      method="doSetProcessedBook">
+      <result name="success" type="redirectAction">
+        <param name="actionName">prescriptionDetails</param>
+        <param name="departmentId">${departmentId}</param>
+        <param name="cityId">${cityId}</param>
+        <param name="epleRne">${epleRne}</param>
+        <param name="deadline">${deadline}</param>
+        <param name="processed">${processed}</param>
+        <param name="bookView">${bookView}</param>
+        <param name="prescriptionId">${prescriptionId}</param>
+      </result>
+      <result name="error">/jsp/error.jsp</result>
+    </action>
+
+    <!-- "detailsSetProcessedBook" Action -->
+    <action name="detailsSearch"
+      class="fr.brucella.form.prescoweb.libraires.actions.SearchAction"
+      method="doSearch">
+      <result name="input" type="redirectAction">
+        <param name="actionName">search</param>
+        <param name="departmentId">${departmentId}</param>
+        <param name="cityId">${cityId}</param>
+        <param name="epleRne">${epleRne}</param>
+        <param name="deadline">${deadline}</param>
+        <param name="processed">${processed}</param>
+        <param name="bookView">${bookView}</param>
+        <param name="prescriptionId">${prescriptionId}</param>
+      </result>
+      <result name="success">/jsp/search/search.jsp</result>
       <result name="error">/jsp/error.jsp</result>
     </action>
 
