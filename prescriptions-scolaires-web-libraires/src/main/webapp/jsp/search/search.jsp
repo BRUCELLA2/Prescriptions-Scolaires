@@ -103,7 +103,7 @@
                     <div class="col-sm-11">
                         <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="processed" value="false" name="processed"
-                            <s:if test="processed.equals('true')">
+                            <s:if test="processed.equals('false')">
                                    checked="checked"
                             </s:if>
                             >
@@ -145,7 +145,9 @@
                             <th>EAN</th>
                             <th>Titre</th>
                             <th>Auteur</th>
+                            <th>Etablissement</th>
                             <th>Prescription pour le :</th>
+                            <th>Effectif</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -156,12 +158,14 @@
                                 <td><s:property value="ean"/> </td>
                                 <td><s:property value="title"/></td>
                                 <td><s:property value="author"/></td>
+                                <td><s:property value="epleName"/></td>
                                 <td class="text-center">
                                     <fmt:parseDate value="${purchaseDeadline}"
                                                    pattern="dd-MM-yyyy HH:mm:ss" var="parsedDate" type="BOTH" />
                                     <fmt:formatDate value="${parsedDate}" var="stdDatum" type="date" pattern="dd/MM/yyyy" />
                                     <c:out value="${stdDatum}"/>
                                 </td>
+                                <th><s:property value="headcount"/></th>
                                 <td class="text-center">
                                     <s:if test="bookStatusId == 2">
                                         <div class="btn btn-primary text-center">
@@ -189,7 +193,6 @@
                                     <s:else>
                                         <s:a class="btn btn-secondary text-center" action="setNotAvailable">
                                             <s:param name="bookId" value="bookId"/>
-                                            <s:param name="bookId" value="bookId"/>
                                             <s:param name="deadline" value="deadline"/>
                                             <s:param name="cityId" value="cityId"/>
                                             <s:param name="epleRne" value="epleRne"/>
@@ -208,7 +211,6 @@
                                     <s:else>
                                         <s:a class="btn btn-secondary text-center" action="setDepleted">
                                             <s:param name="bookId" value="bookId"/>
-                                            <s:param name="bookId" value="bookId"/>
                                             <s:param name="deadline" value="deadline"/>
                                             <s:param name="cityId" value="cityId"/>
                                             <s:param name="epleRne" value="epleRne"/>
@@ -223,12 +225,30 @@
                                     <s:set var="processedBook" value="%{checkBookProcessedForUser(#books)}"/>
                                     <s:if test="#processedBook">
                                         <s:a class="btn btn-primary text-center" action="setProcessedBook">
-                                            <s:param name="bookId" value="bookId"/>Traité
+                                            <s:param name="bookId" value="bookId"/>
+                                            <s:param name="processedBookStatusForUser" value="false" />
+                                            <s:param name="prescriptionId" value="prescriptionId" />
+                                            <s:param name="deadline" value="deadline"/>
+                                            <s:param name="cityId" value="cityId"/>
+                                            <s:param name="epleRne" value="epleRne"/>
+                                            <s:param name="bookView" value="bookView"/>
+                                            <s:param name="processed" value="processed"/>
+                                            <s:param name="departmentId" value="departmentId"/>
+                                            Traité
                                         </s:a>
                                     </s:if>
                                     <s:else>
                                         <s:a class="btn btn-primary text-center" action="setProcessedBook">
-                                            <s:param name="bookId" value="bookId"/>Non Traité
+                                            <s:param name="bookId" value="bookId"/>
+                                            <s:param name="processedBookStatusForUser" value="true" />
+                                            <s:param name="prescriptionId" value="prescriptionId" />
+                                            <s:param name="deadline" value="deadline"/>
+                                            <s:param name="cityId" value="cityId"/>
+                                            <s:param name="epleRne" value="epleRne"/>
+                                            <s:param name="bookView" value="bookView"/>
+                                            <s:param name="processed" value="processed"/>
+                                            <s:param name="departmentId" value="departmentId"/>
+                                            Non Traité
                                         </s:a>
                                     </s:else>
                                 </td>
@@ -263,7 +283,7 @@
                                 <td><s:property value="prescriptionName"/></td>
                                 <td><s:property value="departmentName"/></td>
                                 <td><s:property value="cityName"/></td>
-                                <td><s:property value="epleRne"/></td>
+                                <td><s:property value="epleName"/></td>
                                 <td><s:property value="headcount"/></td>
                                 <td class="text-center">
                                     <fmt:parseDate value="${purchaseDeadline}"

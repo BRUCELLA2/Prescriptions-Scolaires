@@ -62,6 +62,12 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
   /** Id of the book. */
   private Integer bookId;
 
+  /** Id of the prescription. */
+  private Integer prescriptionId;
+
+  /** The processed book status for user. */
+  private String processedBookStatusForUser;
+
   /** List of prescriptions with full details. */
   private List<PrescriptionFullDetailsDto> prescriptionsList;
 
@@ -232,6 +238,42 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
   }
 
   /**
+   * Give the id of the prescription.
+   *
+   * @return id of the prescription.
+   */
+  public Integer getPrescriptionId() {
+    return this.prescriptionId;
+  }
+
+  /**
+   * Set the id of the prescription.
+   *
+   * @param prescriptionId id of the prescription.
+   */
+  public void setPrescriptionId(final Integer prescriptionId) {
+    this.prescriptionId = prescriptionId;
+  }
+
+  /**
+   * Give the processed book status for user.
+   *
+   * @return the processed book status for user.
+   */
+  public String isProcessedBookStatusForUser() {
+    return processedBookStatusForUser;
+  }
+
+  /**
+   * Set the the processed book status for user.
+   *
+   * @param processedBookStatusForUser the the processed book status for user.
+   */
+  public void setProcessedBookStatusForUser(final String processedBookStatusForUser) {
+    this.processedBookStatusForUser = processedBookStatusForUser;
+  }
+
+  /**
    * Give the list of prescriptions with full details.
    *
    * @return the list of prescriptions with full details.
@@ -358,11 +400,8 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
       return Action.INPUT;
     }
 
-    LOG.error("purchase : " + this.deadline);
-
     UserDetailsDto userDetailsDto = (UserDetailsDto) this.session.get("userLog");
 
-    LOG.error("eple : " + this.epleRne);
     if(StringUtils.equals(this.bookView, "true")) {
       final generated.bookserviceclient.SearchCriteriaDto searchCriteriaDtoBook = new SearchCriteriaDto();
 
@@ -501,8 +540,46 @@ public class SearchAction extends ActionSupport implements SessionAware, Servlet
   }
 
   public String doSetProcessedBook() {
-    // @TODO
-    return Action.ERROR;
+
+    if(this.bookId == null) {
+      LOG.error("L'identifiant du livre est incorrect");
+      this.addActionError("L'identifiant du livre est incorrect");
+      return Action.ERROR;
+    }
+
+    if(this.prescriptionId == null) {
+      LOG.error("L'identifiant de la prescription est incorrect");
+      this.addActionError("L'identifiant de la prescription est incorrect");
+      return Action.ERROR;
+    }
+
+    if(this.processedBookStatusForUser == null) {
+      LOG.error("Le status du traitement du livre est incorrect");
+      this.addActionError("Le status du traitement du livre est incorrect");
+      return Action.ERROR;
+    }
+
+    boolean bookProcessed;
+    if(StringUtils.equals(this.processedBookStatusForUser, "true")) {
+      bookProcessed = true;
+    } else {
+      bookProcessed = false;
+    }
+
+    UserDetailsDto userDetailsDto = (UserDetailsDto) this.session.get("userLog");
+
+    BookService_Service bookService = new BookService_Service();
+    BookService bookServicePort = bookService.getBookServicePort();
+    try {
+      bookServicePort.setBookProcessed(userDetailsDto.getUserId(), this.bookId, bookProcessed, this.prescriptionId);
+    } catch (generated.bookserviceclient.PrescoWsException_Exception exception) {
+      LOG.error(exception.getMessage());
+      LOG.error(exception.getFaultInfo().getFault().getFaultString());
+      this.addActionError(exception.getFaultInfo().getFault().getFaultString());
+      return Action.ERROR;
+    }
+
+    return Action.SUCCESS;
   }
 
   /**
