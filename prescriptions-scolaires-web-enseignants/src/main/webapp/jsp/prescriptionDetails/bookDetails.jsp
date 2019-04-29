@@ -57,7 +57,7 @@
                     </div>
 
                     <div class="col-sm-6">
-                        <label for="title" class="mr-sm-2">EAN : </label>
+                        <label for="title" class="mr-sm-2">Titre : </label>
                         <input type="text"
                                class="form-control is-invalid mb-2 mr-sm-2"
                                id="title"

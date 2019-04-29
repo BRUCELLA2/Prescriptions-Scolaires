@@ -6,7 +6,9 @@ import fr.brucella.form.prescows.entity.exceptions.FunctionalException;
 import fr.brucella.form.prescows.entity.exceptions.NotFoundException;
 import fr.brucella.form.prescows.entity.exceptions.TechnicalException;
 import fr.brucella.form.prescows.entity.prescriptions.dto.BookWithStatusDto;
+import fr.brucella.form.prescows.entity.prescriptions.dto.PrescriptionFullDetailsDto;
 import fr.brucella.form.prescows.entity.prescriptions.model.Book;
+import fr.brucella.form.prescows.entity.prescriptions.model.Prescription;
 import fr.brucella.form.prescows.entity.prescriptions.model.ProcessingBook;
 import fr.brucella.form.prescows.entity.prescriptions.model.ProcessingPrescription;
 import java.util.List;
@@ -26,6 +28,9 @@ public class BookDetailsManagerImpl extends AbstractManager implements BookDetai
 
   /** Book Detail Manager logger. */
   private static final Log LOG = LogFactory.getLog(BookDetailsManagerImpl.class);
+
+  /** id for book status not check */
+  private static final Integer BOOK_STATUS_NOT_CHECK = 1;
 
 
   // ===== Constructor =====
@@ -59,7 +64,24 @@ public class BookDetailsManagerImpl extends AbstractManager implements BookDetai
           messages.getString("bookDetailsManagerImpl.addBook.constraints"));
     }
 
-    return this.getDaoFactory().getBookDao().insertBook(book);
+    Integer bookId = this.getDaoFactory().getBookDao().insertBook(book);
+
+    try {
+      PrescriptionFullDetailsDto prescription = this.getDaoFactory().getPrescriptionDao().getPrescriptionFullDetailsDto(book.getPrescriptionId());
+      prescription.setValidationStatus(false);
+      this.getDaoFactory().getPrescriptionDao().updatePrescription(prescription);
+
+      for(ProcessingPrescription processingPrescription : prescription.getProcessingPrescriptionList()) {
+        if(processingPrescription.getProcessingStatus()) {
+          processingPrescription.setProcessingStatus(false);
+          this.getDaoFactory().getProcessingPrescriptionDao().updateProcessingPrescription(processingPrescription);
+        }
+      }
+    } catch (NotFoundException e) {
+      LOG.debug(messages.getString("bookDetailsManagerImpl.addBook.prescriptionNotFound"));
+    }
+
+    return bookId;
   }
 
   /** {@inheritDoc} */
@@ -148,7 +170,23 @@ public class BookDetailsManagerImpl extends AbstractManager implements BookDetai
       final Book book = this.getDaoFactory().getBookDao().getBook(bookId);
       book.setBookStatusId(bookStatusId);
       this.getDaoFactory().getBookDao().updateBook(book);
+
+      /* Check if the all books of the prescription are checked. Change the prescription validation status. */
+      List<BookWithStatusDto> booksListPrescription = this.getDaoFactory().getBookDao().getBookWithStatusListPrescription(book.getPrescriptionId());
+
+      boolean prescriptionFullCheck = true;
+      for(Book bookPrescription : booksListPrescription) {
+        if(bookPrescription.getBookStatusId().equals(BOOK_STATUS_NOT_CHECK)) {
+          prescriptionFullCheck = false;
+        }
+      }
+
+      Prescription prescription = this.getDaoFactory().getPrescriptionDao().getPrescription(book.getPrescriptionId());
+      prescription.setValidationStatus(prescriptionFullCheck);
+      this.getDaoFactory().getPrescriptionDao().updatePrescription(prescription);
+
       return true;
+
     } catch (NotFoundException exception) {
       LOG.error(exception.getMessage());
       throw new FunctionalException(exception.getMessage(), exception);

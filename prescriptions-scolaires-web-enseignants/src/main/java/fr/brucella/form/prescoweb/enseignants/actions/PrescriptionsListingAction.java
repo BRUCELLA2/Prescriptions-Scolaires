@@ -23,7 +23,7 @@ import org.apache.struts2.interceptor.SessionAware;
 public class PrescriptionsListingAction extends ActionSupport implements SessionAware, ServletRequestAware {
 
   /** User Action logger */
-  private static final Log LOG = LogFactory.getLog(UserAction.class);
+  private static final Log LOG = LogFactory.getLog(PrescriptionsListingAction.class);
 
   /** The list of prescriptions with eple name. */
   private List<PrescriptionWithEpleNameDto> prescriptionsList;
@@ -39,7 +39,7 @@ public class PrescriptionsListingAction extends ActionSupport implements Session
 
   /** Default constructor. */
   public PrescriptionsListingAction() {
-    // This constructor is intentionally empty. Nothing special is needed here.
+    super();
   }
 
 
@@ -69,12 +69,20 @@ public class PrescriptionsListingAction extends ActionSupport implements Session
     this.servletRequest = request;
   }
 
+  /**
+   * Give the user's HTTP session attributes.
+   *
+   * @return the user's HTTP session attributes.
+   */
+  public Map<String, Object> getSession() {
+    return session;
+  }
+
   /** Set the user's HTTP session attributes. */
   @Override
   public void setSession(final Map<String, Object> session) {
     this.session = session;
   }
-
 
   // ===== Methods =====
 
