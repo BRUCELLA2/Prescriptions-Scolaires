@@ -32,4 +32,36 @@ This project needs :
 For production requirement details for each server look at document.pdf in Documentation folder.
 
 ## Set-up
-TO DO
+### Database
+
+Scripts for database and data creation are in "Database scripts" folder. 
+Database user configuration is set in the docker-compose.yml. if you change this configuration, don't forgot to change it in the context.xml in META-INF for the Modern Library Web Services application.
+
+In the Docker folder use this command :
+* docker-compose -p presco up -d database
+
+In database server, change port configuration in postgresql.conf. Set it to :
+port = 5432
+
+### Prescriptions Scolaires Webservices
+
+In the Docker folder use this command :
+* docker-compose -p presco up -d web-service
+
+### Prescriptions Scolaires Enseignants
+
+In the Docker folder use this command :
+* docker-compose -p presco up -d web-enseignants
+
+### Prescriptions Scolaires Libraires
+
+In the Docker folder use this command :
+* docker-compose -p presco up -d web-libraires
+
+## Running Prescriptions Scolaires 
+
+Prescriptions Scolaires Webservices wsdls can be view here : http://0.0.0.0:8080/prescriptions-scolaires-ws-services/services
+
+Prescriptions Scolaires Enseignants will running on : http://0.0.0.0:8082/prescriptions-scolaires-web-enseignants/
+
+Prescriptions Scolaires Libraires will running on : http://0.0.0.0:8081/prescriptions-scolaires-web-libraires/
